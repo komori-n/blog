@@ -26,7 +26,7 @@ jobs:
           # extended: true
 
       - name: Build
-        run: hugo --minify
+        run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v3
