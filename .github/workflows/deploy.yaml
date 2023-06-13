@@ -1,10 +1,13 @@
 name: Deploy
+
 on:
   push:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
@@ -15,20 +18,23 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: "0.110.0"
           # extended: true
-      - name: Setup GitHub Pages
-        id: pages
-        uses: actions/configure-pages@v3
+
       - name: Build
-        run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --minify
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v3
       - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v1
         with:
           path: "public/"
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
