@@ -26,11 +26,13 @@ jobs:
           hugo-version: '0.110.0'
           # extended: true
 
+      - name: Setup GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v3
+
       - name: Build
         run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v3
       - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v1
         with:
