@@ -30,7 +30,7 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Build
-        run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo -D --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v1
