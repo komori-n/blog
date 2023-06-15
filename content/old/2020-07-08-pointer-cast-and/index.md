@@ -23,7 +23,7 @@ url: pointer-cast-and/
 
 ## 問題設定
 
-```
+```c
 void event1(int32_t* param) {
   uint8_t data = (uint8_t)*param;
   printf("%"PRId8"\n", data);  // PRId8：uint8_tのフォーマット指定子
@@ -36,7 +36,7 @@ void event2(int32_t* param) {
 
 上のような`int32_t*`を引数に取るイベント関数を考える。この関数たちに`uint8_t`の値を渡したい場合、それぞれ次のように書く。
 
-```
+```c
 // 渡したいデータ
 uint8_t data = 96;
 
@@ -59,7 +59,7 @@ Big Endianだと本当にバグるのか実験してみた。
 
 Big Endianで動くコンピュータが手元にないので、qemuで仮想環境を作った。wslで以下のコマンドを打てば、Windowsでも簡単にBig Endian環境でテストができる。
 
-```
+```sh
 sudo apt-get install gcc-multilib-mips-linux-gnu gcc-mips-linux-gnu qemu-user
 mips-linux-gnu-gcc test.c -o test -static
 qemu-mips ./test
@@ -69,7 +69,7 @@ qemu-mips ./test
 
 この環境で
 
-```
+```c
 event1(&param1);
 event2(&param2);
 
@@ -79,7 +79,7 @@ event2(&param1);
 
 を実行すると、結果は
 
-```
+```sh
 96
 96
 239
