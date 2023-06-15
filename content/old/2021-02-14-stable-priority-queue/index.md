@@ -3,8 +3,7 @@ author: komori-n
 draft: true
 categories:
   - プログラミング
-change-canonical:
-  - https://komorinfo.com/blog/post-979/
+canonical: https://komorinfo.com/blog/post-979/
 date: "2021-02-14T22:44:15+09:00"
 guid: https://komorinfo.com/blog/?p=979
 id: 979

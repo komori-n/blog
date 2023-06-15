@@ -5,8 +5,7 @@ author: komori-n
 draft: true
 categories:
   - プログラミング
-change-canonical:
-  - https://komorinfo.com/blog/post-1099/
+canonical: https://komorinfo.com/blog/post-1099/
 date: "2021-04-12T23:10:54+09:00"
 guid: https://komorinfo.com/blog/?p=1099
 id: 1099

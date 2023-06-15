@@ -3,8 +3,7 @@ author: komori-n
 draft: true
 categories:
   - Programming
-change-canonical:
-  - https://komorinfo.com/blog/en/sfinae-constraints-2/
+canonical: https://komorinfo.com/blog/en/sfinae-constraints-2/
 date: "2022-07-11T18:30:47+09:00"
 guid: https://komorinfo.com/blog/?p=1724
 id: 1724

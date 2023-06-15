@@ -3,8 +3,7 @@ author: komori-n
 draft: true
 categories:
   - プログラミング
-change-canonical:
-  - https://komorinfo.com/blog/pointer-and-big-endian/
+canonical: https://komorinfo.com/blog/pointer-and-big-endian/
 date: "2020-07-08T19:31:21+09:00"
 guid: https://komorinfo.com/blog/?p=56
 id: 56
@@ -17,6 +16,7 @@ tags:
   - QEMU
 title: ポインタのキャストでエンディアンを意識しないとバグる例
 url: pointer-cast-and/
+description: C言語でエンディアンの異なる環境で挙動が代わる例について解説する。
 ---
 
 常識だと思っていたことがあまり知られていなかったっぽいのでメモを兼ねて共有する。
