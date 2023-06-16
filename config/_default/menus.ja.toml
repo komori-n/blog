@@ -1,9 +1,11 @@
 [[main]]
-    name = "C/C++"
+    name = "カテゴリ"
+    pageRef = "categories"
     weight = 20
 
 [[main]]
-    name = "Rust"
+    name = "タグ"
+    pageRef = "tags"
     weight = 20
 
 [[subnavigation]]

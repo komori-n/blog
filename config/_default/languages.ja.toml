@@ -15,9 +15,13 @@ title = "[wip] コウモリのちょーおんぱ"
 
 [author]
   name = "komori-n"
-  # image = "img/icon.png"
-#  headline = "I'm only human"
-#  bio = "A little bit about you"
+  image = "img/author.png"
+  headline = "組み込みソフトエンジニアです"
+  # bio = "A little bit about you"
+  links = [
+    { github = "https://github.com/komori-n" },
+    { linkedin = "https://linkedin.com/in/toshinori-tsuboi" },
+  ]
 #   links = [
 #     { email = "mailto:hello@your_domain.com" },
 #     { link = "https://link-to-some-website.com/" },
