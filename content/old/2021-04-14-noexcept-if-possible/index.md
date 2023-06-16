@@ -1,28 +1,23 @@
 ---
-add-keywords:
-  - move constructor, noexcept
 author: komori-n
 draft: true
 categories:
   - プログラミング
 date: "2021-04-14T21:34:37+09:00"
-guid: https://komorinfo.com/blog/?p=1106
-id: 1106
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /noexcept-if-possible/
 tags:
   - C/C++
+  - noexcept
 title: 他関数に応じてnoexceptにしたりしなかったりする
-url: noexcept-if-possible/
+relpermalink: blog/noexcept-if-possible/
+url: blog/noexcept-if-possible/
+description: noexcept演算子とnoexcept例外使用について
 ---
 
 noexcept例外仕様とnoexcept演算子の話。
 
 C++で関数を定義するとき、参照している関数がnoexceptなら定義する関数もnoexceptにしたいことがある。
 
-```
+```cpp
 int hoge(Piyo p) noexcept /*<- fuga(p)次第*/ {
     return fuga(p);
 }
@@ -30,7 +25,7 @@ int hoge(Piyo p) noexcept /*<- fuga(p)次第*/ {
 
 このような場合、以下のように書く。
 
-```
+```cpp
 int hoge(Piyo p) noexcept(noexcept(fuga(p))) {
     return fuga(p);
 }
@@ -40,7 +35,7 @@ int hoge(Piyo p) noexcept(noexcept(fuga(p))) {
 
 ちなみに、これがムーブコンストラクタや代入演算子であれば、type_traitsを用いることで少しだけ見やすい形で書き直せる。
 
-```
+```cpp
 Hoge::Hoge(Fuga&& fuga) noexcept(std::is_nothrow_move_constructible<Fuga>::value)  // Fugaがnoexceptでmove構築可能ならこのメソッドもnoexcept
     : fuga_(std::move(fuga)) {}
 ```

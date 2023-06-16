@@ -27,6 +27,8 @@ WordPress版から移行お試し中。
   - 壊れたfootnoteを直す
   - 見るに堪えない記事をそっと消す
   - QEMUのような頻度の低いタグを消す
+  - 短い記事はtipsに入れる
+  - relpermalink と url を設定してURLが変わらないようにする
 - お行儀よく多言語対応する
 - Aboutページを書く
 - Authorページを書く

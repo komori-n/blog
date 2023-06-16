@@ -15,6 +15,7 @@ repos:
     rev: 6fd1ced85fc139abd7f5ab4f3d78dab37592cd5e
     hooks:
       - id: prettier
+        exclude: layouts
 
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 3.0.0

@@ -2,23 +2,20 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
-  - ポエム
+  - tips
 date: "2020-12-13T17:20:05+09:00"
-guid: https://komorinfo.com/blog/?p=660
-id: 660
-image: https://komorinfo.com/wp-content/uploads/2020/11/ダウンロード.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/11/ダウンロード.png
-permalink: /toggl-report-to-line-notify/
 tags:
   - Python
   - Toggl Track
 title: togglの日報をLINEに送る
-url: toggl-report-to-line-notify/
+relpermalink: blog/toggl-report-to-line-notify/
+url: blog/toggl-report-to-line-notify/
+description: togglの結果を毎日LINEに飛ばし、日々の時間の使い方の確認ができるようにする。
 ---
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized">![](https://komorinfo.com/wp-content/uploads/2020/12/image-3-633x1024.png)</figure></div>## 目的
+![完成品](image-3.png)
+
+## 目的
 
 最近、人生の時間の浪費が激しい。[Toggl Track](https://track.toggl.com/timer)で時間の追跡はできているものの、2週に1回ぐらいしか確認しないので、時間の浪費改善にはあまり役に立っていない。
 
@@ -28,9 +25,9 @@ url: toggl-report-to-line-notify/
 
 [Toggl Reports API](https://github.com/toggl/toggl_api_docs/blob/master/reports.md#toggl-reports-api-v2) を用いてToggl Trackの作業記録を取ってくる。詳細な使い方は公式のリファレンスページが詳しい。
 
-使用方法はとても簡単。以下のように、GETを打つだけで作業記録を取ってくることができる<span class="easy-footnote-margin-adjust" id="easy-footnote-1-660"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/toggl-report-to-line-notify/#easy-footnote-bottom-1-660 "改行なしのjsonは視認性が悪いので、<code>jq</code>コマンドを通している")</span>。
+使用方法はとても簡単。以下のように、GETを打つだけで作業記録を取ってくることができる。
 
-```
+```sh
 $ curl -u ${API_TOKEN}:api_token -X GET "https://api.track.toggl.com/reports/api/v2/summary?workspace_id=${WORKSPACE_ID}&user_agent=${MAIL_ADDR}" | jq
 {
   "total_grand": 139728000,
@@ -70,28 +67,34 @@ $ curl -u ${API_TOKEN}:api_token -X GET "https://api.track.toggl.com/reports/api
  ...（省略）
 ```
 
-ここで、`API_TOKEN`はtogglから自分の記録を取ってくるために必要なトークンで、 <https://track.toggl.com/profile> にて確認できる。また、`WORKSPACE_ID`はワークスペース固有のIDで、ProjectsのURL（track.toggl.com/projects/${WORKSPACE_ID}/list）から確認できる。`MAIL_ADDR`には使用者を特定できる情報（メールアドレス等）を記載する<span class="easy-footnote-margin-adjust" id="easy-footnote-2-660"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/toggl-report-to-line-notify/#easy-footnote-bottom-2-660 "APIの使い方が間違っている場合、Toggl側からお叱りのメールが飛んでくるらしい")</span>。
+ここで、`API_TOKEN`はtogglから自分の記録を取ってくるために必要なトークンで、 <https://track.toggl.com/profile> にて確認できる。また、`WORKSPACE_ID`はワークスペース固有のIDで、ProjectsのURL（track.toggl.com/projects/${WORKSPACE_ID}/list）から確認できる。`MAIL_ADDR`には使用者を特定できる情報（メールアドレス等）を記載する[^1]。
+
+[^1]: APIの使い方が間違っている場合、Toggl側からお叱りのメールが飛んでくるらしい"
 
 レスポンスはjson形式で返ってくる。各project、各entryの記録時間が階層化されて返ってくる。`time`の単位はミリ秒である。URLのクエリ文字列に`since=XXXX-XX-XX`や`until=XXXX-XX-XX`を指定することで検索期間を変えることもできる（デフォルトは過去7日間）。
 
 ## LINEに通知を送る
 
-LINE botをゼロから作ってもよいが、今回は簡単のために [LINE Notify](https://notify-bot.line.me/ja/) を用いる<span class="easy-footnote-margin-adjust" id="easy-footnote-3-660"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/toggl-report-to-line-notify/#easy-footnote-bottom-3-660 "LINE botを作るためには<a rel="noreferrer noopener" href="https://developers.line.biz/ja/" target="_blank">LINE Developer</a>の登録でけっこう手間がかかる")</span>。LINE Notifyは手軽にLINEにメッセージを送るためのツールで、1分程度で登録できてLINEへ通知を飛ばせるようになる。
+LINE botをゼロから作ってもよいが、今回は簡単のために [LINE Notify](https://notify-bot.line.me/ja/) を用いる[^2]。LINE Notifyは手軽にLINEにメッセージを送るためのツールで、1分程度で登録できてLINEへ通知を飛ばせるようになる。
+
+[^2]: LINE botを作るためには[LINE Developer](https://developers.line.biz/ja/)の登録でけっこう手間がかかる
 
 発行したtokenを携えてPOSTを打つと、LINEにメッセージが飛んでいく。`curl`を使う場合、以下のように使用する。
 
-```
+```sh
 $ curl -X POST -H "Authorization: Bearer ${TOKEN}" -F "message=Hello World" https://notify-api.line.me/api/notify
 {"status":200,"message":"ok"}
 ```
 
 POSTを叩くと、LINE Notify作成時に選択したroomに通知が飛んでいく。
 
-<div class="wp-block-image"><figure class="aligncenter size-medium">![](https://komorinfo.com/wp-content/uploads/2020/12/image-2-300x56.png)</figure></div>## togglレポートをLINEに送りつける
+![botの応答](image-2.png)
+
+## togglレポートをLINEに送りつける
 
 以上を踏まえ、今日のTogglでの作業記録をLINEに通知するコードを書いた。コードの全文を以下に示す。
 
-```
+```python
 import requests
 import datetime
 import urllib
@@ -190,11 +193,13 @@ if __name__ == "__main__":
 
 環境変数`LINE_TOKEN`, `TOGGL_TOKEN`, `WORKSPACE_ID`は各自の環境に合わせて予め設定しておく必要がある。
 
-基本的には、Togglから取ってきたjsonを文字列に変換し、LINE notifyに投げるだけである。通知内容を見やすくするために、projectごと、entryごとにそれぞれ降順になるように文字列を並び替えている<span class="easy-footnote-margin-adjust" id="easy-footnote-4-660"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/toggl-report-to-line-notify/#easy-footnote-bottom-4-660 "2億年ぶりにpython書いたらすべてを忘却していて悲しい気持ちになった")</span>。
+基本的には、Togglから取ってきたjsonを文字列に変換し、LINE notifyに投げるだけである。通知内容を見やすくするために、projectごと、entryごとにそれぞれ降順になるように文字列を並び替えている。
 
 上記のスクリプトを実行すると、今日のAPI実行までにつけた作業記録がLINEに送られる。
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized">![](https://komorinfo.com/wp-content/uploads/2020/12/image-3-633x1024.png)</figure></div>## 定期実行
+![実行結果](image-3.png)
+
+## 定期実行
 
 上記のスクリプトをherokuで定期実行させる。[Herokuでお天気Pythonの定期実行](https://qiita.com/seigo-pon/items/ca9951dac0b7fa29cce0) を参考に、作ったアプリをherokuにあげてheroku schedulerに登録する。
 
@@ -202,7 +207,9 @@ herokuへのデプロイは参考サイトの通りにやるだけなので割�
 
 herokuアプリを定期実行させるためには、Heroku Schedulerを用いる。毎日7:00 AM(JST)/2:00 PM(JST)に通知してほしい場合は以下のように設定する。herokuに設定する時刻はUTCであることに注意。
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2020/12/image-1.png)</figure>herokuサーバーはUTCで動いているので、0:00 AM – 8:59 AM(JST)にプログラムが実行された場合、`datetime.date.today()`で得られる日付が1日ずれるので注意。今回のプログラムでは、7:00 AM(JST)は前日、2:00 PM(JST)は当日の集計結果をそれぞれ送って欲しいので、特に修正の必要はない<span class="easy-footnote-margin-adjust" id="easy-footnote-5-660"></span><span class="easy-footnote">[<sup>5</sup>](https://komorinfo.com/blog/toggl-report-to-line-notify/#easy-footnote-bottom-5-660 "良い子はちゃんと時差を考慮してプログラムを書きましょう")</span>。
+![](image-1.png)
+
+herokuサーバーはUTCで動いているので、0:00 AM – 8:59 AM(JST)にプログラムが実行された場合、`datetime.date.today()`で得られる日付が1日ずれるので注意。今回のプログラムでは、7:00 AM(JST)は前日、2:00 PM(JST)は当日の集計結果をそれぞれ送って欲しいので、特に修正の必要はない。
 
 ## 使ってみた感想
 

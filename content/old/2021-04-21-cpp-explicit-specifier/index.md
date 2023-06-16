@@ -1,21 +1,16 @@
 ---
-add-keywords:
-  - コンストラクタ, constructor
 author: komori-n
 draft: true
 categories:
   - プログラミング
 date: "2021-04-21T21:16:32+09:00"
-guid: https://komorinfo.com/blog/?p=1109
-id: 1109
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /cpp-explicit-specifier/
 tags:
   - C/C++
+  - コンストラクタ
 title: c++のexplicit指定子の使い方まとめ
-url: cpp-explicit-specifier/
+relpermalink: blog/cpp-explicit-specifier/
+url: blog/cpp-explicit-specifier/
+description: c++におけるexplicit指定しの使い方についての簡単なまとめ。
 ---
 
 c++のexplicit指定子（explicit specifier）の使い方をググってもいい感じの情報にはたどり着けなかったのでメモ。
@@ -29,7 +24,7 @@ c++のexplicit指定子（explicit specifier）の使い方をググってもい
 
 それぞれコードで示すと以下のようになる。
 
-```
+```cpp
 class Test {
 public:
     explicit Test(int) {}
@@ -55,7 +50,7 @@ ina main() {
 
 たったこれだけの機能だが、プログラマが気づきづらいミスを未然に防ぐことができる。`explicit` をつけることは「違う型の値を同一視しない」と言い換えられる。これのせいでコードの記述量が増えてしまう場合もあるが、知らないうちに型が変わっているという心配をしなくて済むようになる。
 
-```
+```cpp
 //... 上のコードと同様のクラス定義
 
 Test operator+(Test lhs, Test rhs);
@@ -83,7 +78,7 @@ c++11では、explicit関連で2つの大きな変更があった。型変換演
 
 型変換演算子は、以下のように直感に反する変換が行われることが多々あった。
 
-```
+```cpp
 class Test {
 public:
     operator bool() const;
@@ -98,7 +93,7 @@ int main() {
 
 explicit指定子を用いることで、このような型変換演算子の暗黙の型変換を抑制することができる。
 
-```
+```cpp
 class Test {
 public:
     explicit operator bool() const;
@@ -115,9 +110,11 @@ c++11以降で型変換演算子を定義する場合、よっぽど特別な理
 
 ### 2個以上引数を取るコンストラクタ
 
-c++11以降では一様初期化<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1109"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/cpp-explicit-specifier/#easy-footnote-bottom-1-1109 "コンストラクタ呼び出しを集合体初期化と同様に <code>{}</code> で行える構文のこと。詳しくは<a href="https://cpprefjp.github.io/lang/cpp11/uniform_initialization.html">一様初期化 &#8211; cpprefjp C++日本語リファレンス</a> を参照。")</span>が可能になったことに伴い、2個以上引数を取るようなコンストラクタにもexplicitがつけられるようになった<span class="easy-footnote-margin-adjust" id="easy-footnote-2-1109"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/cpp-explicit-specifier/#easy-footnote-bottom-2-1109 "説明の都合上省略したが、引数が0個のコンストラクタへもexplicitを付与することができる。実際、c++11ではstd::pairのデフォルトコンストラクタにexplicitがついている。")</span>。
+c++11以降では一様初期化が可能になったことに伴い、2個以上引数を取るようなコンストラクタにもexplicitがつけられるようになった[^1]。
 
-```
+[^1]: 説明の都合上省略したが、引数が0個のコンストラクタへもexplicitを付与することができる。実際、c++11ではstd::pairのデフォルトコンストラクタにexplicitがついている。
+
+```cpp
 class Test {
 public:
     explicit Test(int, int) {}
@@ -143,7 +140,7 @@ ina main() {
 
 2個以上の引数を取るコンストラクタについて `explicit` を付与するかどうかは個人の感覚に依るところが大きいと思う。実際、[Google Coding Style](http://google%20c++%20style%20guide/) では特に規定がされていない。判断基準は「`return {a, b}` と書けたほうがよいか？」ということだけである。
 
-```
+```cpp
 Test hoge() {
     return {33, 4};  // このように書きたいなら Test(int, int) にexplictをつけない
                      // 常に Test{33, 4} と書かせたいなら explicitをつける
@@ -156,7 +153,7 @@ Test hoge() {
 
 c++11時点の標準ライブラリでは `std::tuple` のコンストラクタには `explicit` がついている一方で、`std::pair` には `explicit` がついていかった。それにより、以下に示すようにコードの挙動が一貫していなかった。
 
-```
+```cpp
 std::pair<int, int> hoge(void) {
     return {334, 264};  // OK: pair(int&&, int&&) は explicit ではない
 }
@@ -172,7 +169,7 @@ c++17では標準ライブラリに変更が加えられた。`std::tupl`e と `
 
 c++17の標準ライブラリの仕様改定において、条件付きで `explicit` を付与する仕様が追加された。これは、c++17時点では SFINAE により実装されていた。c++20以降は条件付きで `explicit` を付与する言語機能が追加され、より簡潔にコンストラクタを宣言できるようになった。具体的には、`noexcept` と同様に `explicit(<cond>)` （ `<cond>` は `bool` の定数式）と書けるようになり、 `<cond>` が `true` の場合のときに限り `explicit` と解釈される。
 
-```
+```cpp
 template <typename T>
 class Test {
 public:
@@ -183,7 +180,7 @@ public:
 
 ## まとめ
 
-- c++11以前<span class="easy-footnote-margin-adjust" id="easy-footnote-3-1109"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/cpp-explicit-specifier/#easy-footnote-bottom-3-1109 "令和の時代なので c++14 以降にバージョンアップすべき")</span>：1変数を引数に取るコンストラクタは（コピーコンストラクタ以外は）`explicit` を付与する
+- c++11以前：1変数を引数に取るコンストラクタは（コピーコンストラクタ以外は）`explicit` を付与する
   - これにより、コピー初期化と暗黙の型変換を抑制して気づきづらいミスを減らせる
 - c++11：↑ に加えて `operator T` にも `explicit` を付与する。それ以外（0変数、2変数以上）のコンストラクタにはつけてもつけなくても良い
 - c++17：`std::pair` と `std::tuple` がどちらもいい感じに `explicit` を付与するようになった

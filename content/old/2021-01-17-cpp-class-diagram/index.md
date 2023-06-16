@@ -2,20 +2,16 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-01-17T10:13:16+09:00"
-guid: https://komorinfo.com/blog/?p=849
-id: 849
-image: https://komorinfo.com/wp-content/uploads/2021/01/test_diagram.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2021/01/test_diagram.png
-permalink: /cpp-class-diagram/
 tags:
   - C/C++
   - Docker
   - Python
 title: C++のクラス図を楽して自動生成する
-url: cpp-class-diagram/
+relpermalink: blog/cpp-class-diagram/
+url: blog/cpp-class-diagram/
+description: C++のクラス図を描いて！と言われた時の対処法。
 ---
 
 ## モチベ
@@ -30,7 +26,7 @@ url: cpp-class-diagram/
 
 以下のようなC++ヘッダファイルを例にクラス図を生成してみる。
 
-```
+```cpp
 // hoge.hpp
 #pragma once
 
@@ -58,7 +54,7 @@ private:
 };
 ```
 
-```
+```cpp
 // fuga.hpp
 #pragma once
 
@@ -88,11 +84,14 @@ private:
 
 ヘッダファイル群を [hpp2plantuml](https://github.com/thibaultmarin/hpp2plantuml) に与え、[PlantUML](https://github.com/plantuml/plantuml) 形式を経由して画像に変換する。
 
+{{< github repo="thibaultmarin/hpp2plantuml" >}}
+{{< github repo="plantuml/plantuml" >}}
+
 hpp2plantumlはpythonで記述されたツールで、簡単に環境構築できる。
 
 今回は、Dockerにより環境を構築した。
 
-```
+```sh
 $ cat Dockerfile
 FROM python:3
 
@@ -120,7 +119,7 @@ optional arguments:
 
 ヘッダファイルが `include/` に格納されている場合、以下のようにしてクラス図を生成できる。
 
-```
+```sh
 $ docker run --rm -v $(pwd):/work hpp2plantuml-test hpp2plantuml -i "/work/include/*.hpp" \
   | sed 's/struct/class/g' \
   > test_diagram.pu
@@ -129,6 +128,8 @@ $ plantuml -tsvg test_diagram.pu
 
 上記のコマンドを実行すると、次のようなクラス図が得られる。
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2021/01/test_diagram.png)</figure>hpp2plantumlコマンドの後に `sed` コマンドを挟んで `struct` を `class` に置き換えている。このように、hpp2plantumlにより生成されたPlantUMLファイルは壊れていたり情報が欠けていたりすることがある。そのため、特にエラーなく図が生成できた場合でも、軽く図の確認をしたほうがいいと思う。
+![plantumlを用いたクラス図の生成結果](featured.png)
+
+hpp2plantumlコマンドの後に `sed` コマンドを挟んで `struct` を `class` に置き換えている。このように、hpp2plantumlにより生成されたPlantUMLファイルは壊れていたり情報が欠けていたりすることがある。そのため、特にエラーなく図が生成できた場合でも、軽く図の確認をしたほうがいいと思う。
 
 Draw.ioを職人芸で作るよりは見栄えが劣るかもしれないが、自動生成した割にはかなりいい感じのクラス図が生成できる。

@@ -2,27 +2,21 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-01-17T11:09:43+09:00"
-guid: https://komorinfo.com/blog/?p=860
-id: 860
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /move-onlylambda-task-queue/
 tags:
   - C/C++
+  - Algorithm
 title: move-onlyなlambda式のTaskQueueを作る
-url: move-onlylambda-task-queue/
+relpermalink: blog/move-onlylambda-task-queue/
+url: blog/move-onlylambda-task-queue/
 ---
 
 ## モチベ
 
-move-onlyなTaskをqueueに格納したい。 `std::queue<std::function<void(void)>>` で良ければ話は早いが、これではmove-onlyなファンクターをqueueに格納できない<span class="easy-footnote-margin-adjust" id="easy-footnote-1-860"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/move-onlylambda-task-queue/#easy-footnote-bottom-1-860 "<code>std::function</code> にmove-onlyファンクターを格納できない件については、過去記事を参照。</p>
+move-onlyなTaskをqueueに格納したい。 `std::queue<std::function<void(void)>>` で良ければ話は早いが、これではmove-onlyなファンクターをqueueに格納できない[^1]。
 
-<ul><li><a href="https://komorinfo.com/blog/unique-function/">move-onlyな関数を扱えるstd::functionのようなものを実装する</a></li><li><a href="https://komorinfo.com/blog/post-593/">一度きりしか呼べないファンクターを管理したい</a></li><li><a href="https://komorinfo.com/blog/relay-future-function/" data-type="URL" data-id="https://komorinfo.com/blog/relay-future-function/">std::functionやunique_functionを用いて、std::futureを中継する</a></li></ul>
-
-<p>")</span>。
+[^1]: <code>std::function</code> にmove-onlyファンクターを格納できない件については、[move-onlyな関数を扱えるstd::functionのようなものを実装する](/blog/unique_function)、[一度きりしか呼べないファンクターを管理したい](/blog/post-593)、[std::functionやunique_functionを用いて、std::futureを中継する](/blog/relay-future-function)を参照。
 
 `std::function` の代わりに [move-onlyな関数を扱えるstd::functionのようなものを実装する](https://komorinfo.com/blog/unique-function/) で作った `komori::unique_function` を使って実現することもできる。しかし、queueに積むという目的を達するだけならもっと簡単にできる方法があるのでそれを紹介する。
 
@@ -32,7 +26,7 @@ move-onlyなTaskをqueueに格納したい。 `std::queue<std::function<void(voi
 
 言葉で説明するのが難しいので、とりあえずコードを示す。
 
-```
+```cpp
 #pragma once
 // task.hpp
 
@@ -77,11 +71,13 @@ std::unique_ptr<TaskBase> createTask(Func&& func) {
 
 createTask関数を作成しているのは、template classはtemplate typeを自動推論できないためである。lambda式を表す無名クラスをtemplate parameterとして直接指定するのは難しいため、createTask関数を経由して `LambdaTask<(#lambda)>` のインスタンスを生成している。
 
-lambda式の代わりにstd::functionや関数オブジェクト等を使いたい場合もこのクラスを流用できる<span class="easy-footnote-margin-adjust" id="easy-footnote-2-860"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/move-onlylambda-task-queue/#easy-footnote-bottom-2-860 "Funcが <code>operator()(void)</code> を実装していればlambda、std::function、関数オブジェクト等の違いを意識することなく使用できる")</span>。
+lambda式の代わりにstd::functionや関数オブジェクト等を使いたい場合もこのクラスを流用できる[^2]。
+
+[^2]: Funcが `operator()(void)` を実装していればlambda、std::function、関数オブジェクト等の違いを意識することなく使用できる
 
 このクラスを用いると、以下のようにTaskQueueを実現できる。
 
-```
+```cpp
 #include <cstdlib>
 #include <iostream>
 #include <queue>
@@ -122,11 +118,11 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-16-24行目付近でmove-onlyなタスクををqueueに積んでいる。ここで積むタスクは `std::promise` をキャプチャしているため、copy-assignableではない<span class="easy-footnote-margin-adjust" id="easy-footnote-3-860"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/move-onlylambda-task-queue/#easy-footnote-bottom-3-860 "lambda式の初期化キャプチャはC++14以降で利用できる（<a rel="noreferrer noopener" href="https://cpprefjp.github.io/lang/cpp14/initialize_capture.html" target="_blank">https://cpprefjp.github.io/lang/cpp14/initialize_capture.html</a>）")</span>。
+16-24行目付近でmove-onlyなタスクををqueueに積んでいる。ここで積むタスクは `std::promise` をキャプチャしているため、copy-assignableではない。
 
 上記のサンプルコードでは、queueにタスクを1つだけ積み、すぐに取り出して実行をしている。実行結果は以下のようになる。
 
-```
+```sh
 $ g++ src/main.cpp -lpthread
 $ ./a.out
 push task

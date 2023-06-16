@@ -1,0 +1,11 @@
+[[main]]
+    name = "C/C++"
+    weight = 20
+
+[[main]]
+    name = "Rust"
+    weight = 20
+
+[[subnavigation]]
+    name = "ブログ移行作業中..."
+    weight = 10

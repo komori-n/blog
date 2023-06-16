@@ -2,18 +2,16 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-05-29T16:56:08+09:00"
-guid: https://komorinfo.com/blog/?p=1130
-id: 1130
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /cpp14-features/
 tags:
   - C/C++
+  - C++11
+  - C++14
 title: c++14でできてc++11ではできないことまとめ
-url: cpp14-features/
+relpermalink: blog/cpp14-features/
+url: blog/cpp14-features/
+description: c++14とc++11の差分まとめ。c++11とc++14を行ったり来たりしている時に確認すると便利。
 ---
 
 c++14はc++11のマイナーバージョンアップで、c++11やc++17のような目玉となる機能拡張は少ない。そのため、「この書き方ってc++11でも動くんだっけ？」と気にする必要がある。また、開発プロジェクトで使用するコンパイルオプションが何の前触れもなくc++14からc++11に変わりそうになったとき、いつでも「この機能が使えなくなるとビルドが通らなくなる」とか「この機能がないと冗長な書き方になる」のようなことを言えるようにしておく必要がある。
@@ -35,13 +33,13 @@ c++11時代のconstexpr関数には書ける内容に強い制限があった。
 > ・戻り値型(リテラル型)として、`void`を許可
 > ・`constexpr`非静的メンバ関数の、暗黙の`const`修飾を削除
 >
-> <cite>https://cpprefjp.github.io/lang/cpp14/relaxing\_constraints\_on\_constexpr.html</cite>
+> <https://cpprefjp.github.io/lang/cpp14/relaxing\_constraints\_on\_constexpr.html>
 
 この制限緩和により、メモリ確保を行わない関数やクラスのほとんど全てをconstexpr化できるようになった。個人的には、これだけでもc++14を使う理由になるほど画期的な変更だと思う。
 
 なお、上で引用した制限緩和のうち、最後の項目はc++11と行き来する可能性のあるコードでは注意が必要である。
 
-```
+```cpp
 struct Hoge{
   // c++11: 暗黙的に const 修飾される
   // c++14: const 修飾されない
@@ -59,7 +57,7 @@ c++11で動いていたコードがc++14で動かなくなるわけではない�
 
 lambda式のキャプチャで、代入キャプチャ、参照キャプチャに加えて初期化キャプチャができるようになった。
 
-```
+```cpp
 #include <memory>
 
 int main() {
@@ -75,9 +73,11 @@ int main() {
 }
 ```
 
-特に、unique_ptrやfuture, promiseのようにコピーができない（moveしかできない）変数をキャプチャする時に重宝する。上記のコードは、c++11までの機能で表現すると、以下のコードとほぼ等価である<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1130"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/cpp14-features/#easy-footnote-bottom-1-1130 "mutableをつけないlambda式は、キャプチャした変数をを書き換えることができない。<code>operator()</code> がconst修飾されているイメージである。")</span>。
+特に、unique_ptrやfuture, promiseのようにコピーができない（moveしかできない）変数をキャプチャする時に重宝する。上記のコードは、c++11までの機能で表現すると、以下のコードとほぼ等価である[^1]。
 
-```
+[^1]: mutableをつけないlambda式は、キャプチャした変数をを書き換えることができない。`operator()` がconst修飾されているイメージである。
+
+```cpp
 #include <memory>
 
 class TmpStruct {
@@ -106,7 +106,7 @@ int main() {
 
 c++14から `'` で数値リテラルの桁を区切れるようになった。
 
-```
+```cpp
 constexpr unsigned long long kMask = 0xffff'ffff'ffff'ff00ULL;
 ```
 
@@ -116,7 +116,7 @@ constexpr unsigned long long kMask = 0xffff'ffff'ffff'ff00ULL;
 
 `std::make_shared` はc++11で追加されたのに対し、 `std::make_unique` はc++14で遅れて追加された。そのため、c++11で `std::unique_ptr` の初期化を行う場合は以下のように書く必要がある。
 
-```
+```cpp
 #include <memory>
 
 int main() {
@@ -128,7 +128,7 @@ int main() {
 
 c++11環境でも以下のように簡単に自作はできる。
 
-```
+```cpp
 template <T, typename Args...>
 std::unique_ptr<T> make_unique(Args&& args...) {
   return std::unique_ptr<T> {new T(std::forward<Args>(args)...)};
@@ -137,11 +137,11 @@ std::unique_ptr<T> make_unique(Args&& args...) {
 
 ただ個人的には、make_uniqueは様々な箇所で使用するので、標準ライブラリから提供されたものを使いたいというお気持ちがある。make_uniqueを使うだけでも、c++11からc++14へ移行する理由としては十分だと思う。
 
-## &lt;type_traits&gt;への \_t 版クラステンプレートの追加
+## `<type_traits>`への \_t 版クラステンプレートの追加
 
 &lt;type_traits&gt; の `XXX<T>::type` で結果を参照するクラステンプレートに対し、 `XXX_t<T>` というクラスが新たに追加された。一見すると文字数が4文字減るだけに見えるが、推論後の型を直接参照できるようになるので以下のように `typename` を省けるようになる。
 
-```
+```cpp
 #include <type_traits>
 
 // T が整数型のときのみ定義されてほしい
@@ -166,19 +166,19 @@ c++14からは `std::nullptr_t` をテンプレートパラメータとして使
 
 詳しくは以下の記事を参照。
 
-<figure class="wp-block-embed is-type-wp-embed is-provider-コウモリのちょーおんぱ wp-block-embed-コウモリのちょーおんぱ"><div class="wp-block-embed__wrapper">> [SFINAEでtemplate classのメンバ関数の実体化を制御する](https://komorinfo.com/blog/sfinae-template-class/)
+{{< article link="/blog/sfinae-template-class/" >}}
 
-<iframe class="wp-embedded-content" data-secret="oGEXdYpFks" frameborder="0" height="282" marginheight="0" marginwidth="0" sandbox="allow-scripts" scrolling="no" security="restricted" src="https://komorinfo.com/blog/sfinae-template-class/embed/#?secret=oGEXdYpFks" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="“SFINAEでtemplate classのメンバ関数の実体化を制御する” — コウモリのちょーおんぱ" width="500"></iframe></div></figure>## 2進数リテラル
+## 2進数リテラル
 
 `0b` または `0B` で2進数リテラルを書けるようになった。
 
-```
+```cpp
 int x = 0b101001110;
 ```
 
 ただ、GCCやClangを始めとする主要なコンパイラでは古くからサポートされているので、多くの環境ではc++11以前から使えるはず。実際、手元の環境ではc++11でも2進数リテラルが問題なく使えた。
 
-```
+```sh
 $ cat test.cpp
 #include <iostream>
 

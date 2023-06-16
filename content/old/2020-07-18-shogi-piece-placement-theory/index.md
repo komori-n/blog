@@ -2,46 +2,53 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - アルゴリズム
   - 将棋
+series:
+  - "利かずの駒並べ"
+series_order: 1
 date: "2020-07-18T17:27:56+09:00"
-guid: https://komorinfo.com/blog/?p=135
-id: 135
-image: https://komorinfo.com/wp-content/uploads/2020/07/sfen.png
-og_img:
-  - http://sfenreader.appspot.com/sfen?sfen=8P%2F7NN%2F9%2F9%2FS7P%2F1P7%2F9%2F9%2F8P%20b%20-%201&lm=86
-permalink: /shogi-piece-placement-theory/
 tags:
   - C/C++
-  - 利かずの駒並べ
+  - パズル
 title: 利かずの駒並べ｜理論編
-url: shogi-piece-placement-theory/
+relpermalink: blog/shogi-piece-placement-theory/
+url: blog/shogi-piece-placement-theory/
+description: 将棋パズル「利かずの駒並べ」を計算機上で効率よく解く方法について説明する。
 ---
 
 利かずの駒並べを現実的な時間で解くソフトを作った。
 
-ソースコード｜<https://github.com/komori-n/shogi-piece-placement>
-
-1. 利かずの駒並べ｜理論編（ここ）
-2. [利かずの駒並べ｜実践編](https://komorinfo.com/blog/shogi-piece-placement-result/)
-
-（メンタル死んでたときに書いた、[旧ブログの投稿](https://komodiary.hatenablog.jp/entry/piece-arrangement) の加筆修正版<span class="easy-footnote-margin-adjust" id="easy-footnote-1-135"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/shogi-piece-placement-theory/#easy-footnote-bottom-1-135 "自分で読み返しても何書いてあるかよく分からなかったので読む必要はない。")</span>。）
+{{< github repo="komori-n/shogi-piece-placement" >}}
 
 ## 概要
 
 **利かずの駒並べ**とは、将棋の駒を他の駒の利きに入らないように配置する遊びのこと。2歩や行きどころのない駒の配置も許される。
 
-<div class="wp-block-image"><figure class="aligncenter size-large is-resized">![](http://sfenreader.appspot.com/sfen?sfen=8P%2F7NN%2F9%2F9%2FS7P%2F1P7%2F9%2F9%2F8P%20b%20-%201&lm=86)<figcaption>86の歩は他の駒の利きに入っている</figcaption></figure></div>すべての駒を先手の駒として扱う単方向の駒並べでは、本将棋で使う40枚の駒（歩18香4桂4銀4金4玉2飛2角2）を盤面に配置できることが知られている<span class="easy-footnote-margin-adjust" id="easy-footnote-2-135"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/shogi-piece-placement-theory/#easy-footnote-bottom-2-135 "40枚が上限。これ以上駒を置くことはできない。")</span>。
+![駒配置の例](http://sfenreader.appspot.com/sfen?sfen=8P%2F7NN%2F9%2F9%2FS7P%2F1P7%2F9%2F9%2F8P%20b%20-%201&lm=86 "86の歩は他の駒の利きに入っている")
 
-<div class="wp-block-image"><figure class="aligncenter size-large">![](http://sfenreader.appspot.com/sfen?sfen=G1G1LLLPL%2F1R7%2FP1P1PPSSP%2F3R5%2FG1P1PSP1P%2F5N1PN%2FK1S1P1P1N%2F4BP1P1%2FK1G1N1PBP%20b%20-%201)<figcaption>39枚（歩17香4桂4銀4金4玉2飛2角2）配置の例</figcaption></figure></div><div class="wp-block-luxe-blocks-accordion" style="margin-top:10px;margin-bottom:30px"><input class="acb" id="626c6d2bb78e055496ca7cc68411" style="display:none" type="checkbox"></input><label class="acl" for="626c6d2bb78e055496ca7cc68411" style="color:#fff;background-color:#006edc;border:1px solid #006edc;display:flex;margin:0"><div class="act" style="padding:5px 15px;flex:1 0"><svg height="18" viewbox="0 2 24 28" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M14 21.5v-3c0-0.281-0.219-0.5-0.5-0.5h-3c-0.281 0-0.5 0.219-0.5 0.5v3c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5zM18 11c0-2.859-3-5-5.688-5-2.547 0-4.453 1.094-5.797 3.328-0.141 0.219-0.078 0.5 0.125 0.656l2.063 1.563c0.078 0.063 0.187 0.094 0.297 0.094 0.141 0 0.297-0.063 0.391-0.187 0.734-0.938 1.047-1.219 1.344-1.437 0.266-0.187 0.781-0.375 1.344-0.375 1 0 1.922 0.641 1.922 1.328 0 0.812-0.422 1.219-1.375 1.656-1.109 0.5-2.625 1.797-2.625 3.313v0.562c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5v0c0-0.359 0.453-1.125 1.188-1.547 1.188-0.672 2.812-1.578 2.812-3.953zM24 14c0 6.625-5.375 12-12 12s-12-5.375-12-12 5.375-12 12-12 12 5.375 12 12z" fill="#fff"></path></svg><span>40枚配置の例（ネタバレ防止）</span></div><div class="aci" style="margin:5px 0;padding:0 15px;border-left:1px solid #fff"></div></label><div class="acc" style="border:1px solid #006edc"><div class="wp-block-image"><figure class="aligncenter size-large">![](http://sfenreader.appspot.com/sfen?sfen=G1LLLLP1G%2F1R7%2FP1PSSSP1G%2F7R1%2FK1PSPPP1P%2F3N1N3%2FK1P1P1P1P%2F3P1P2N%2FG1PBPBP1N%20b%20-%201)<figcaption>40枚（歩18香4桂4銀4金4玉2飛2角2）配置の例</figcaption></figure></div>3720通りある配置の一例。実は、3720通りの解のうち、飛車と角の位置は（左右鏡像を除いて）すべて同じ。
+すべての駒を先手の駒として扱う単方向の駒並べでは、本将棋で使う40枚の駒（歩18香4桂4銀4金4玉2飛2角2）を盤面に配置できることが知られている[^1][^2]。
 
-</div></div>利かずの駒並べには、すべての先手側の駒として並べる**単方向バージョン**と、上下の向きを指定せずに並べる**双方向バージョン**がある。単方向バージョンについては江戸時代あたりから知られている遊びで配置方法は広く知られているが、双方向バージョンについてはあまり知られていない。
+[^1]: 40枚が上限。これ以上駒を置くことはできない。
+[^2]: 3720通りある配置の一例。実は、3720通りの解のうち、飛車と角の位置は（左右鏡像を除いて）すべて同じ。
 
-利かずの駒並べについて、詳しくは<span class="easy-footnote-margin-adjust" id="easy-footnote-3-135"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/shogi-piece-placement-theory/#easy-footnote-bottom-3-135 "<a href="http://toybox.tea-nifty.com/memo/2005/07/post_1a14.html">http://toybox.tea-nifty.com/memo/2005/07/post_1a14.html</a>")</span>を参照。似たような遊びとして、チェスの [8-queen puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle) と呼ばれるものがある。
+![39枚（歩17香4桂4銀4金4玉2飛2角2）配置の例](http://sfenreader.appspot.com/sfen?sfen=G1G1LLLPL%2F1R7%2FP1P1PPSSP%2F3R5%2FG1P1PSP1P%2F5N1PN%2FK1S1P1P1N%2F4BP1P1%2FK1G1N1PBP%20b%20 "39枚（歩17香4桂4銀4金4玉2飛2角2）配置の例")
 
-この問題の解をプログラムで探す場合、素朴に深さ優先探索で駒を1枚ずつ置いていくと指数関数的に時間がかかる<span class="easy-footnote-margin-adjust" id="easy-footnote-4-135"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/shogi-piece-placement-theory/#easy-footnote-bottom-4-135 "<a href="http://www.pluto.ai.kyutech.ac.jp/~matumoto/syougi/">http://www.pluto.ai.kyutech.ac.jp/~matumoto/syougi/</a>")</span>。今回は、これを現実的な時間で解く方法について説明する。
+![40枚（歩18香4桂4銀4金4玉2飛2角2）配置の例](http://sfenreader.appspot.com/sfen?sfen=G1LLLLP1G%2F1R7%2FP1PSSSP1G%2F7R1%2FK1PSPPP1P%2F3N1N3%2FK1P1P1P1P%2F3P1P2N%2FG1PBPBP1N%20b%20-%201 "40枚（歩18香4桂4銀4金4玉2飛2角2）配置の例")
 
-アルゴリズムに興味がなく結果を早く見たい方は、次回の記事 利かずの駒並べ｜実践編 を参照。
+利かずの駒並べには、すべての先手側の駒として並べる **単方向バージョン** と、上下の向きを指定せずに並べる **双方向バージョン** がある。単方向バージョンについては江戸時代あたりから知られている遊びで配置方法は広く知られているが、双方向バージョンについてはあまり知られていない。
+
+利かずの駒並べについて、詳しくは[^3]を参照。似たような遊びとして、チェスの [8-queen puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle) と呼ばれるものがある。
+
+[^3]: <http://toybox.tea-nifty.com/memo/2005/07/post_1a14.html>
+
+この問題の解をプログラムで探す場合、素朴に深さ優先探索で駒を1枚ずつ置いていくと指数関数的に時間がかかる[^4]。今回は、これを現実的な時間で解く方法について説明する。
+
+[^4]: <http://www.pluto.ai.kyutech.ac.jp/~matumoto/syougi/>
+
+アルゴリズムに興味がなく結果を早く見たい方は、次回の記事利かずの駒並べ｜実践編を参照。
+
+{{< article link="/blog/shogi-piece-placement-result/" >}}
 
 ## 理論
 
@@ -57,7 +64,7 @@ url: shogi-piece-placement-theory/
 
 ここでは、上で掲載した39枚配置をベースに説明する。上の図中の「香、銀、金、玉」をすべて「歩」に、「桂」を「石」に置き換えた図を考えると、利かずの配置が得られる。
 
-<div class="wp-block-image"><figure class="aligncenter size-large">![](https://komorinfo.com/blog/wp-content/uploads/2020/07/sfen.png)<figcaption>金駒小駒を劣化駒に置き換えた図。利かずの配置になっている。</figcaption></figure></div>このように、ある駒集合に対し利かずの配置法が存在する場合、劣化駒に置き換えるてもやはり利かずの配置になる。
+![39枚配置の金駒・小駒を劣化駒に置き換えた図](featured.png "金駒小駒を劣化駒に置き換えた図。利かずの配置になっている。")このように、ある駒集合に対し利かずの配置法が存在する場合、劣化駒に置き換えるてもやはり利かずの配置になる。
 
 この主張の対偶を取ると、「**ある駒集合に対し、利きを劣化させた駒集合の配置が不可能ならば、元の駒集合も配置不可能である**」ということが言える。当たり前の事実に見えるかもしれないが、この事実から探索を途中で打ち切ることができるようになる。
 
@@ -65,7 +72,7 @@ url: shogi-piece-placement-theory/
 
 盤面がある程度埋まっていて、残りの置く駒が歩と石だけの場合、そこそこ高速に配置可能性を判定できる。
 
-<div class="wp-block-image"><figure class="aligncenter size-large">![](https://komorinfo.com/blog/wp-content/uploads/2020/07/sfen-1-1.png)</figure></div>青で示したマスは、すでにある駒が利いている。また、ピンクで示したマスは、一段目または青の真下のマスである。
+![2枚の飛車が発生させる利き](sfen-1-1.png "青で示したマスは、すでにある駒が利いている。また、ピンクで示したマスは、一段目または青の真下のマスである。")
 
 この盤面に対し追加で歩27枚石11枚が配置可能であることはすぐに判定できる。なぜなら、ピンクが27マス、白が11マスあるので、それぞれに歩と石を敷き詰めればよいため。
 
@@ -77,7 +84,7 @@ url: shogi-piece-placement-theory/
 
 このような考え方は一般に成り立つ。すなわち、以下のようなアルゴリズムにより歩N枚石M枚が配置可能かを判定できる。
 
-**歩N枚石M枚配置可能性判定（単方向）**
+##### 歩N枚石M枚配置可能性判定（単方向）
 
 1. 一段目または直上に利きのある空きマス（ピンク）に歩を置けるだけ置く。
 2. 直上が空きマスで、かつ直下に駒または利きのあるマスに歩を順に置いていく。
@@ -86,7 +93,9 @@ url: shogi-piece-placement-theory/
 
 手順2で下から置いているのは、下図のように空きマスを無駄遣いすることを防ぐため。（上から順でも可）。
 
-<div class="wp-block-image"><figure class="aligncenter size-large">![](https://komorinfo.com/blog/wp-content/uploads/2020/07/sfen-2.png)<figcaption>下から詰めて置かない例</figcaption></figure></div>#### 劣化駒を用いた枝刈り
+![下から詰めて置かない例](sfen-2.png "下から詰めて置かない例")
+
+#### 劣化駒を用いた枝刈り
 
 探索の途中で「残りの駒を歩と石に劣化させても配置可能か」を判定する。置く駒が歩と石だけであれば、上記のアルゴリズムで高速に配置可能性を判定できる。もし配置不可能であれば、元の駒集合も配置不可能なので探索を打ち切ることができる。
 
@@ -94,7 +103,9 @@ url: shogi-piece-placement-theory/
 
 例えば下の局面。
 
-<div class="wp-block-image"><figure class="aligncenter size-large">![](https://komorinfo.com/blog/wp-content/uploads/2020/07/sfen-2-1.png)</figure></div>残り駒は「歩18香4桂4銀4金4玉2」なので、劣化駒に直すと「歩32石4」となる。しかし、図の局面は歩が19枚までしか置けないので、この配置は不可能であると分かる。
+![明らかに配置できない局面の例](sfen-2-1.png)
+
+残り駒は「歩18香4桂4銀4金4玉2」なので、劣化駒に直すと「歩32石4」となる。しかし、図の局面は歩が19枚までしか置けないので、この配置は不可能であると分かる。
 
 このように、歩と石に劣化させるというアイデアだけで、もともと数日単位でかかっていた計算時間を100ms程度まで落とせる。
 
@@ -111,7 +122,7 @@ url: shogi-piece-placement-theory/
 
 どちら向きに置いてもよい歩N枚石M枚が配置可能かも同様にして判定することができる。
 
-**歩N枚石M枚配置可能性判定（双方向）**
+##### 歩N枚石M枚配置可能性判定（双方向）
 
 1. 一段目または直上に利きのある空きマスに▲歩を置けるだけ置く。
 2. 九段目または直下に利きのある空きマスに△歩を置けるだけ置く。
@@ -122,7 +133,9 @@ url: shogi-piece-placement-theory/
 
 双方向バージョンでポイントになるのは3の手順。例えば下図の配置の場合、単方向バージョンでは歩が5枚までしか置くことができないが、双方向バージョンでは歩を向かい合わせにすることで最大で10枚まで置くことが可能になる。
 
-<div class="wp-block-image"><figure class="aligncenter size-large">![](https://komorinfo.com/blog/wp-content/uploads/2020/07/sfen-3.png)</figure></div>（上記のアルゴリズムでちゃんと判定できることの証明は略。直感的に言うと、「空きマスをできるだけ無駄にしない」配置法になっているので、上記アルゴリズムでは配置不可能と判定されるが実際には配置可能な局面の存在を仮定すると矛盾が導ける）
+![歩が向かい合う配置の説明](sfen-3.png)
+
+（上記のアルゴリズムでちゃんと判定できることの証明は略。直感的に言うと、「空きマスをできるだけ無駄にしない」配置法になっているので、上記アルゴリズムでは配置不可能と判定されるが実際には配置可能な局面の存在を仮定すると矛盾が導ける）
 
 ## まとめ
 

@@ -2,3 +2,6 @@
 /resources/_gen
 .vscode/
 /old/
+
+.DS_Store
+.hugo_build.lock

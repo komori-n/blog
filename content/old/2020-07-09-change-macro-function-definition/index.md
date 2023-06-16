@@ -2,18 +2,15 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2020-07-09T21:19:49+09:00"
-guid: https://komorinfo.com/blog/?p=77
-id: 77
-image: https://komorinfo.com/wp-content/uploads/2020/07/cocoro-pyonpyon.png
-og_img:
-  - https://komorinfo.com/blog/wp-content/uploads/2020/07/コメント-2020-07-11-114357.png
-permalink: /change-macro-function-definition/
 tags:
   - C/C++
+  - C Preprocessor Macro
+relpermalink: blog/change-macro-function-definition/
+url: blog/change-macro-function-definition/
 title: 値に応じて中身が変わるマクロ関数
-url: change-macro-function-definition/
+description: 値に応じて展開結果が代わるようなC言語マクロの書き方について。
 ---
 
 書こうと思ったら意外と苦戦したのでメモ。
@@ -24,7 +21,7 @@ url: change-macro-function-definition/
 
 具体的には、以下のようなマクロを考える。
 
-```
+```c
 #define A 0
 #define B 1
 
@@ -37,7 +34,7 @@ A, Bの2つのモードがあり、configすべき項目がいくつか（この
 
 このとき、以下のように展開されるマクロ関数`EXPAND(i)`をうまく書きたい。
 
-```
+```c
 EXPAND(1)  // => IMPL_A(1)
 EXPAND(2) // => IMPL_B(2)
 EXPAND(3) // => IMPL_A(3)
@@ -47,7 +44,7 @@ EXPAND(3) // => IMPL_A(3)
 
 マクロ関数でなくても良いなら、以下のように`#if~#endif`を連打すれば簡単に実現できる。
 
-```
+```c
 #if CFG_1_MODE == A
 IMPL_A(1)
 #elif CFG_1_MODE == B
@@ -58,7 +55,7 @@ IMPL_B(1)
 
 これをマクロ関数にするとなると意外と難しくなる。`#define`中では`#if`は使えないので、次のように工夫する必要がある。
 
-```
+```c
 #define EXPAND(i) IMPL_TMP(CFG_##i##_MODE)(i)
 #define IMPL_TMP(mode) IMPL_CAT(mode)
 #define IMPL_CAT(mode) IMPL_##mode
@@ -68,7 +65,7 @@ IMPL_B(1)
 
 `CFG_##i##_MODE`の値をIMPL\_の後にくっつけて、分岐を実現する。
 
-```
+```c
 $ gcc -E cocoro-pyonpyon.c
 # 1 "cocoro-pyonpyon.c"
 # 1 "<built-in>"
@@ -89,4 +86,4 @@ IMPL_A(3)
 
 ## コード
 
-[GigHub – cocoro-pyonpyon.c](https://gist.github.com/komori-n/9e4d290618982cba573a546c14215d41)
+{{< gist komori-n 9e4d290618982cba573a546c14215d41 >}}

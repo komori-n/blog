@@ -2,19 +2,16 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2020-09-14T21:02:29+09:00"
-guid: https://komorinfo.com/blog/?p=508
-id: 508
-image: https://komorinfo.com/wp-content/uploads/2020/09/selenium.png
-og_img:
-  - https://komorinfo.com/blog/wp-content/uploads/2020/09/selenium.png
-permalink: /selenium-docker/
 tags:
-  - Docker
   - Python
+  - Docker
+  - スクレイピング
 title: seleniumのGUIデバッグができるDockerコンテナ
-url: selenium-docker/
+relpermalink: blog/selenium-docker/
+url: blog/selenium-docker/
+description: GUIを起動しながらseleniumの挙動を確認する方法について
 ---
 
 Seleniumの環境構築は、chromedriverとGoogle Chromeのバージョンを合わせたりパスを通したりするなど結構手間が多い。WSLからWindows側のGoogle Chromeを操作しようとするとハマることが結構ある（あった）。
@@ -23,10 +20,13 @@ Seleniumの環境構築は、chromedriverとGoogle Chromeのバージョンを�
 
 Dockerコンテナ起動のコマンドは以下。
 
-```
-$ docker run -d -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome-debug
+```sh
+docker run -d -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome-debug
 ```
 
-ポート5900がGUIデバッグ用。Ultra VNC<span class="easy-footnote-margin-adjust" id="easy-footnote-1-508"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/selenium-docker/#easy-footnote-bottom-1-508 "https://forest.watch.impress.co.jp/library/software/ultravnc/")</span>などのVNCクライアントからコンテナに接続すれば、コンテナ内のデスクトップ画面が表示できる。<span class="easy-footnote-margin-adjust" id="easy-footnote-2-508"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/selenium-docker/#easy-footnote-bottom-2-508 "PWは<code>secret</code>。")</span>
+ポート5900がGUIデバッグ用。Ultra VNC[^1]などのVNCクライアントからコンテナに接続すれば、コンテナ内のデスクトップ画面が表示できる[^2]。
 
-<div class="wp-block-image"><figure class="aligncenter size-large">![](https://komorinfo.com/blog/wp-content/uploads/2020/09/image-4-1024x777.png)</figure></div>
+[^1]: <https://forest.watch.impress.co.jp/library/software/ultravnc/>
+[^2]: PWは<code>secret</code>。
+
+![実行結果](image-4.png "実行結果")

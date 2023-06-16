@@ -2,18 +2,15 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - explanation
 date: "2020-10-11T20:38:50+09:00"
-guid: https://komorinfo.com/blog/?p=552
-id: 552
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /libstd-function-impl/
 tags:
   - C/C++
+  - STL
 title: libstdc++のstd::functionの実装を眺める
-url: libstd-function-impl/
+relpermalink: blog/libstd-function-impl/
+url: blog/libstd-function-impl/
+description: libstdc++のstd::functionの実装を大まかに解説する
 ---
 
 ## 概要
@@ -34,18 +31,16 @@ libstd++は、C++ STLのGNU実装である。コードは以下のページを�
 [https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/bits/std_function.h](https://github.com/gcc-mirror/gcc/blob/master/libstdc%2B%2B-v3/include/bits/std_function.h)（rev abed8b5）
 
 また、検証のために作成したコードは以下を参照。
+
 <https://gist.github.com/komori-n/c8b8a4e0b1eaf7ad1623b63e50d94561>
 
 ## 結論
 
 - 関数ポインタ、メンバ関数ポインタは静的にメモリ確保される
 - 次の条件を満たす関数オブジェクト、ラムダ式は動的にメモリ確保される
-
   - サイズが16バイトより大きい
   - 16バイトでアラインしたら問題がある
-
   - trivial_copyableではない
-
 - `std::function`のサイズは32バイトで、内約は以下のようになっている
   - （メンバ）関数ポインタ、インスタンス等の関数本体を保存する：16バイト
   - 内部のstaticメンバ関数を参照する：8バイト x 2
@@ -61,7 +56,7 @@ libstd++は、C++ STLのGNU実装である。コードは以下のページを�
 
 `std::function`の使用例を以下に示す。
 
-```
+```cpp
 #include <iostream>
 #include <functional>
 void hoge(void) {
@@ -103,7 +98,7 @@ int main(void) {
 
 `union _Any_data`は`std::function`に代入される色んなファンクターを統一的に扱う機能を提供する。
 
-```
+```cpp
   class _Undefined_class;
   union _Nocopy_types
   {
@@ -133,7 +128,7 @@ int main(void) {
 
 手元の環境では、ポインタと関数ポインタのサイズは8バイト、関数ポインタのサイズは16バイトで、`sizeof(_Any_data)`は16バイトだった。
 
-```
+```cpp
   std::cout << sizeof(void*) << std::endl;                        // 8
   std::cout << sizeof(const void*) << std::endl;                  // 8
   std::cout << sizeof(void(*)()) << std::endl;                    // 8
@@ -143,11 +138,13 @@ int main(void) {
 
 ## メモリ管理
 
-ファンクタのメモリ管理方法は`_Function_base::_Base_manager<_Functor>`（と`_Function_handler` <span class="easy-footnote-margin-adjust" id="easy-footnote-1-552"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/libstd-function-impl/#easy-footnote-bottom-1-552 "invokerなどの一部関数はこちらに実装されているが、些細なことなのでここでは触れない。")</span>）に定義されている。動的にメモリが確保されるかどうかは、ファンクタのサイズ、align等に応じて決められる。
+ファンクタのメモリ管理方法は`_Function_base::_Base_manager<_Functor>`（と`_Function_handler` [^1]）に定義されている。動的にメモリが確保されるかどうかは、ファンクタのサイズ、align等に応じて決められる。
+
+[^1]: invokerなどの一部関数はこちらに実装されているが、些細なことなのでここでは触れない。
 
 メモリ確保が静的になるか動的になるかはコンパイル時定数の`__stored_locally`により決められる。メモリ確保のコードは以下のようになっている。 `__stored_locallyP`の値に応じて2つの初期化関数が呼び分けられる。
 
-```
+```cpp
         static void
         _M_init_functor(_Any_data& __functor, _Functor&& __f, true_type)
         { ::new (__functor._M_access()) _Functor(std::move(__f)); }
@@ -160,7 +157,7 @@ int main(void) {
 
 次に、`__stored_locally`の計算部分のコードを示す。
 
-```
+```cpp
     static const size_t _M_max_size = sizeof(_Nocopy_types);
     static const size_t _M_max_align = __alignof__(_Nocopy_types);
 
@@ -186,7 +183,7 @@ int main(void) {
 
 上記のルールを踏まえていくつかの例に対し`__is_locally_stored`の値がどうなるかを示す。
 
-```
+```cpp
 void hoge(void) {}  // 普通の関数
 class Fuga { void piyo(void) {} };  // メンバ関数
 template <size_t N> struct DummyData;  // Nバイトの構造体（実装略）

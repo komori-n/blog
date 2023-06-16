@@ -1,31 +1,28 @@
 ---
-add-keywords:
-  - commit message, コミットメッセージ, 使用例, あいまい検索
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 canonical: https://komorinfo.com/blog/post-1099/
 date: "2021-04-12T23:10:54+09:00"
-guid: https://komorinfo.com/blog/?p=1099
-id: 1099
-image: https://komorinfo.com/wp-content/uploads/2021/04/git.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2021/04/git.png
-permalink: /english-commit-messages/
 tags:
   - Git
+  - English
+  - commit message
+  - あいまい検索
 title: 英語コミットメッセージの使用例をサッと検索する
-url: english-commit-messages/
+relpermalink: blog/english-commit-messages/
+url: blog/english-commit-messages/
+description: fzfによりあいまい検索をすることで、commitメッセージをサクッと検索する方法
 ---
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2021/04/image-1-1024x517.png)</figure>英語でコミットメッセージを書くときに、しっくりくる表現がなかなか出て来なくて時間を溶かすことがそこそこある。純粋に英文法だけなら単語でググれば答えは見つかるかもしれないが、少ない文字数で伝わるコミットメッセージを書くのはまだまだ苦手意識を感じる。
+英語でコミットメッセージを書くときに、しっくりくる表現がなかなか出て来なくて時間を溶かすことがそこそこある。純粋に英文法だけなら単語でググれば答えは見つかるかもしれないが、少ない文字数で伝わるコミットメッセージを書くのはまだまだ苦手意識を感じる。
 
 そこで、Angularリポジトリのコミットメッセージをfuzzy search（あいまい検索）して文例を検索できる環境を整えた。
 
 ## 必要なもの
 
-- [](https://github.com/angular/angular)[angular/angular: One framework. Mobile &amp; desktop.](https://github.com/angular/angular)
+- [angular/angular: One framework. Mobile &amp; desktop.](https://github.com/angular/angular)
 - [junegunn/fzf: A command-line fuzzy finder](https://github.com/junegunn/fzf)
 
 Angularリポジトリのコミットを適当に整形して `fzf` コマンドで曖昧検索できるようにする。
@@ -36,7 +33,7 @@ Angularリポジトリのコミットを適当に整形して `fzf` コマンド
 
 fzfの左ペインにコミットメッセージのSummary行を、右ペインに選択中のコミットの `git show` の結果を表示する。
 
-```
+```sh
 #!/bin/bash
 
 cd ${ANGULAR_DIR} && \
@@ -49,4 +46,4 @@ cd ${ANGULAR_DIR} && \
 
 `git show` を用いることで、右ペインにコミットメッセージ全文だけでなくコードの変更内容も表示することができるので、自分が今まさにコミットしようとしているコードに近い用例を見つけやすくなっている。
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2021/04/image-2-1024x517.png)</figure>
+![実行結果](image-2.png)

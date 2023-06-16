@@ -2,18 +2,14 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2020-10-28T20:28:24+09:00"
-guid: https://komorinfo.com/blog/?p=579
-id: 579
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /unique-function/
 tags:
   - C/C++
 title: move-onlyな関数を扱えるstd::functionのようなものを実装する
-url: unique-function/
+relpermalink: blog/unique-function/
+url: blog/unique-function/
+description: C++14環境で、move-onlyな関数を格納できるstd::functionライクなライブラリを実装した
 ---
 
 ## モチベーション
@@ -24,7 +20,7 @@ url: unique-function/
 
 move-onlyなラムダ式を使いたくなる場面なんてあるのかと思われるかもしれないが、`unique_ptr`などのmove-onlyなオブジェクトをラムダ式に渡したくなることがしばしばある。
 
-```
+```cpp
 std::unique_ptr<int> ptr = std::make_unique<int>(334);
 std::function<void()> fn = [ptr = std::move(ptr)](void) {
   /* ... */
@@ -33,11 +29,14 @@ std::function<void()> fn = [ptr = std::move(ptr)](void) {
 
 `unique_ptr`の代わりに`shared_ptr`を使えば`std::function`に渡せるようになるが、パフォーマンスのことを考えるとできれば`unique_ptr`のまま渡したい。
 
-そこで、move-onlyなファンクターを扱える`std::function`の代替クラス`unique_function`を実装した。このようなクラスは、c++標準化委員会で現在も議論されている内容で、`std::unique_function`や`std::any_invoker`という名前でproposalが出されている（P0228、P0288）<span class="easy-footnote-margin-adjust" id="easy-footnote-1-579"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/unique-function/#easy-footnote-bottom-1-579 "個人的には、<code>std::unique_function</code>が<code>std::function</code>のmove-only版であることは分かりやすいが、<code>std::any_invoker</code>は何をするクラスなのか分かりにくいと思う")</span>。
+そこで、move-onlyなファンクターを扱える`std::function`の代替クラス`unique_function`を実装した。このようなクラスは、c++標準化委員会で現在も議論されている内容で、`std::unique_function`や`std::any_invoker`という名前でproposalが出されている（P0228、P0288）[^1] [^2]。
+
+[^1]: 個人的には、`std::unique_function`が`std::function`のmove-only版であることは分かりやすいが、`std::any_invoker`は何をするクラスなのか分かりにくいと思う
+[^2]: C++23で`std::move_only_function`という名前で正式に標準ライブラリ入りするらしい[move_only_function - cpprefjp C++日本語リファレンス](https://cpprefjp.github.io/reference/functional/move_only_function.html)
 
 完成イメージはこんな感じ。
 
-```
+```cpp
 std::unique_ptr<int> ptr = std::make_unique<int>(334);
 komori::unique_function<void()> fn = [ptr = std::move(ptr)](void) {
   /* ... */
@@ -51,7 +50,7 @@ do_something(std::move(fn));  // moveすればファンクターを渡せる
 
 以下が`unique_function`の実装全文である。
 
-```
+```cpp
 #pragma once
 
 #include <utility>
@@ -135,15 +134,21 @@ namespace komori {
 }
 ```
 
-やっていることは非常に単純。ファンクターがセットされた際、`new`により動的にメモリ確保して`void* storage_`に格納する。また、`invoke_`（関数呼び出し）、`deleter_`（メモリ解放）という2つの関数ポインタを初期化する<span class="easy-footnote-margin-adjust" id="easy-footnote-2-579"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/unique-function/#easy-footnote-bottom-2-579 "実装のミソはここ。<code>unique_function<Res(ArgTypes...)></code>は格納している型に関するtemplate parameterは持っていないが、ファンクターを渡された時に、その呼出方法とメモリ開放方法を覚えておくことで、ファンクターの型を忘れてしまっても良い構造になっている。頭いい。")</span> <span class="easy-footnote-margin-adjust" id="easy-footnote-3-579"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/unique-function/#easy-footnote-bottom-3-579 "<code>unique_function</code>の中では動的に確保した<code>void*</code>でファンクターを管理しているので、<code>delete</code>する際は適切にメモリ解放するdeleterが必要になる。")</span>。
+やっていることは非常に単純。ファンクターがセットされた際、`new`により動的にメモリ確保して`void* storage_`に格納する。また、`invoke_`（関数呼び出し）、`deleter_`（メモリ解放）という2つの関数ポインタを初期化する[^3] [^4]。
+
+[^3]: 実装のミソはここ。`unique_function<Res(ArgTypes...)>`は格納している型に関するtemplate parameterは持っていないが、ファンクターを渡された時に、その呼出方法とメモリ開放方法を覚えておくことで、ファンクターの型を忘れてしまっても良い構造になっている。頭いい。
+[^4]: `unique_function`の中では動的に確保した`void*`でファンクターを管理しているので、`delete`する際は適切にメモリ解放するdeleterが必要になる。
 
 コードを短くするためにいくつか実装をサボった部分がある。
 
-- small object optimization(SOO):[ libstdc++のstd::functionの実装を眺める](https://komorinfo.com/blog/libstd-function-impl/) で見たように、`std::function`の実装では小さなメモリに収まるファンクタは動的メモリ確保を行わず、静的領域に変数を格納されることが多い。一方、上記の実装では、ファンクターのサイズに関係なく動的にメモリを確保している<span class="easy-footnote-margin-adjust" id="easy-footnote-4-579"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/unique-function/#easy-footnote-bottom-4-579 "これに対応しようとすると、型のサイズに応じて<code>invoke_helper</code>を分岐させたり、invoker, deleterに加えてmover（moveの時にポインタ付け替えで済ますか<code>std::move</code>をするか）を実装する必要があり、かなり大変。")</span>
+- small object optimization(SOO):[libstdc++のstd::functionの実装を眺める](/blog/libstd-function-impl/) で見たように、`std::function`の実装では小さなメモリに収まるファンクタは動的メモリ確保を行わず、静的領域に変数を格納されることが多い。一方、上記の実装では、ファンクターのサイズに関係なく動的にメモリを確保している[^5]
 - std::invoke: 関数の呼び出し部分でc++17で追加されたstd::invokeを使用している。c++11, 14しか使えない環境の場合、std::invokeに相当する機能を実装する必要がある（そんなに難しくない）
 - const、noexceptなどのquelifier
+
+[^5]: これに対応しようとすると、型のサイズに応じて`invoke_helper`を分岐させたり、invoker, deleterに加えてmover（moveの時にポインタ付け替えで済ますか`std::move`をするか）を実装する必要があり、かなり大変。
 
 コードは短いが色々調べながらの実装だったのでとても勉強になった。
 
 本ページの実装は以下でも参照できる。
+
 <https://gist.github.com/komori-n/dcc1af3f79481ff085a4835e6bcf8084>

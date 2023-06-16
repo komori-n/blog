@@ -2,21 +2,19 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-05-08T15:14:28+09:00"
-guid: https://komorinfo.com/blog/?p=1119
-id: 1119
-image: https://komorinfo.com/wp-content/uploads/2021/05/6329640559837184.jpg
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2021/05/6329640559837184.jpg
-permalink: /implement-tcp-with-rust/
 tags:
   - Rust
 title: 『Rustで始めるTCP自作入門』のWSLでの環境構築方法（手抜き工事）
-url: implement-tcp-with-rust/
+relpermalink: blog/implement-tcp-with-rust/
+url: blog/implement-tcp-with-rust/
+description: 『Rustで始めるTCP自作入門』をWSL環境で行うための環境構築方法について
 ---
 
-最近、 [Rustで始めるTCP自作入門：ひつじ技研](https://techbookfest.org/product/6562563816947712?productVariantID=5842153718677504) を読んでTCPを完全なる理解に至った。この本は素のUbuntu向けの環境構築方法しか記述されていないが、Docker for Windows(WSL2)を用いて**一応**動作させることができたのでその方法を紹介する。ただし、WSL特有の事情により`tc qdisc`を用いた仮想的な帯域制限はできない<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1119"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/implement-tcp-with-rust/#easy-footnote-bottom-1-1119 "<a href="https://github.com/microsoft/WSL/issues/6065">WSL2 seems not support traffic control by <code>tc qdisc</code> · Issue #6065 · microsoft/WSL</a>")</span>。
+最近、 [Rustで始めるTCP自作入門：ひつじ技研](https://techbookfest.org/product/6562563816947712?productVariantID=5842153718677504) を読んでTCPを完全なる理解に至った。この本は素のUbuntu向けの環境構築方法しか記述されていないが、Docker for Windows(WSL2)を用いて**一応**動作させることができたのでその方法を紹介する。ただし、WSL特有の事情により`tc qdisc`を用いた仮想的な帯域制限はできない[^1]。
+
+[^1]: [WSL2 seems not support traffic control by `tc qdisc` · Issue #6065 · microsoft/WSL](https://github.com/microsoft/WSL/issues/6065)
 
 ## 環境構築
 
@@ -25,7 +23,7 @@ url: implement-tcp-with-rust/
 - `sudo` を削除する
 - `iptables` ではなく `iptables-legacy` を用いる
 
-```
+```sh
 #!/bin/bash
 
 set -eux
@@ -70,7 +68,7 @@ ip netns exec host1 ethtool -K host1-veth1 tx off
 
 次に、[rustの公式Dockerイメージ](https://hub.docker.com/_/rust) を改造して開発用のイメージを作る。やることは非常にシンプルで、必要パッケージを `apt` でインストールしてsetup.shをコンテナ内にコピーするだけである。
 
-```
+```dockerfile
 FROM rust
 
 WORKDIR /work
@@ -83,9 +81,11 @@ COPY setup.sh /tmp
 
 本の中では素のUbuntuを想定しているため必要パッケージについては陽に触れられてはいないが、上記のパッケージさえ導入しておけば最後まで読み進めることができる。
 
-あとは、コンテナをビルドして `--privilege` オプションをつけて起動し、`/tmp/setup.sh` のスクリプトを叩けばよい<span class="easy-footnote-margin-adjust" id="easy-footnote-2-1119"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/implement-tcp-with-rust/#easy-footnote-bottom-2-1119 "<code>setup.sh</code> は <code>--privilege</code> がないと動作しないので、コンテナ起動後に手動で叩く必要がある")</span>。
+あとは、コンテナをビルドして `--privilege` オプションをつけて起動し、`/tmp/setup.sh` のスクリプトを叩けばよい[^2]。
 
-```
+[^2]: `setup.sh` は `--privilege` がないと動作しないので、コンテナ起動後に手動で叩く必要がある
+
+```sh
 $ docker build  -t toytcp .
 $ docker run --privileged -v `pwd`:/work -it --rm toytcp
 # /tmp/setup.sh

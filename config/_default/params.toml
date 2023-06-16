@@ -12,6 +12,8 @@ autoSwitchAppearance = true
 enableSearch = true
 enableCodeCopy = true
 
+images = ["favicon.ico"]
+
 # mainSections = ["section1", "section2"]
 # robots = ""
 

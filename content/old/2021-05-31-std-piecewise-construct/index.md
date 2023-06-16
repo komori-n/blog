@@ -2,18 +2,14 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-05-31T23:04:05+09:00"
-guid: https://komorinfo.com/blog/?p=1138
-id: 1138
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /std-piecewise-construct/
 tags:
   - C/C++
+  - std::pair
 title: std::piecewise_constructの使い方（std::pair）
-url: std-piecewise-construct/
+relpermalink: blog/std-piecewise-construct/
+url: blog/std-piecewise-construct/
 ---
 
 c++の `std::pair` には `std::piecewise_construct` を渡して要素を直接構築するためのコンストラクタが存在する。このページではこの `std::piecewise_construct` の使い方について簡単にまとめる。
@@ -22,7 +18,7 @@ c++の `std::pair` には `std::piecewise_construct` を渡して要素を直接
 
 `std::piecewise_construct` は空の構造体 `std::piecewise_construct_t` 型の変数である。
 
-```
+```cpp
 namespace std {
   struct piecewise_construct_t {};
   constexpr piecewise_construct_t piecewise_construct {};
@@ -31,7 +27,7 @@ namespace std {
 
 この変数自体は何の効果はない。`std::pair` のコンストラクタでタグとして使うのが基本的な使い方である。
 
-```
+```cpp
 namespace std {
   template <typename T1, typename T2>
   template <typename... Args1, typename... Args2>
@@ -42,23 +38,11 @@ namespace std {
 }
 ```
 
-第一要素を `first_args` から、第二要素を `second_args` からそれぞれ直接構築したpairをコンストラクトする<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1138"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/std-piecewise-construct/#easy-footnote-bottom-1-1138 "本筋には全く関係ないが、tupleを展開してコンストラクタを起動するには工夫が必要である。</p>
-
-template &lt;typename... Args, size_t... Indices>
-T ConstructImpl(std::tuple&lt;Args...> t, std::index_sequence&lt;Indices...>) {
-return T(std::get&lt;Indices>(t)...);
-}
-
-template &lt;typename... Args>
-T Construct(std::tuple&lt;Args...> t) {
-return ConstructImpl(t, std::index_sequence_for&lt;Args...>());
-}</pre>
-
-<p>上記のコードのように、<code>std::index_sequence_for</code> で0, &#8230;, n-1のインデックスを作り、<code>std::get</code>で一つずつ取り出せばよい。")</span>。それぞれ事前に作っておいてmoveコンストラクタで渡せばいいと思われるかもしれないが、moveできないクラスやmoveのオーバーヘッドが大きいクラスをpairの要素にしたい場合に有用である<span class="easy-footnote-margin-adjust" id="easy-footnote-2-1138"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/std-piecewise-construct/#easy-footnote-bottom-2-1138 "メンバ変数で std::array で巨大配列を持っているクラスが一例。moveは可能だが配列全体をコピーする必要がある。")</span>。
+第一要素を `first_args` から、第二要素を `second_args` からそれぞれ直接構築したpairをコンストラクトする。
 
 使用例：
 
-```
+```cpp
 #include <iostream>
 #include <utility>
 #include <tuple>
@@ -79,7 +63,7 @@ int main() {
 
 実用上、pairへ要素を直接構築したくなることがあるのかと疑問に思われるかもしれない。しかし、piecewise_constructは `std::map`（ `std::unordered_map` や `std::multimap` なども同様）への要素挿入時に便利に使えるのである。
 
-```
+```cpp
 #include <iostream>
 #include <utility>
 #include <tuple>

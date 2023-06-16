@@ -8,14 +8,14 @@ title = "[wip] コウモリのちょーおんぱ"
   isoCode = "ja-jp"
   rtl = false
   dateFormat = "2006-01-02"
-  # logo = "img/logo.png"
-  # secondaryLogo = "img/secondary-logo.png"
+  # logo = "img/favicon-32x32.png"
+  # secondaryLogo = "img/icon.png"
   # description = "My awesome website"
   # copyright = "Copy, _right?_ :thinking_face:"
 
 [author]
   name = "komori-n"
-#  image = "img/blowfish_logo.png"
+  # image = "img/icon.png"
 #  headline = "I'm only human"
 #  bio = "A little bit about you"
 #   links = [

@@ -2,18 +2,15 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-02-21T16:11:49+09:00"
-guid: https://komorinfo.com/blog/?p=996
-id: 996
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /multi-timer/
 tags:
   - C/C++
+  - timer
 title: 1スレッドで複数タイマーを管理する
-url: multi-timer/
+relpermalink: blog/multi-timer/
+url: blog/multi-timer/
+description: C++において、1つのスレッド複数のタイマーを同時に管理する方法について説明する。
 ---
 
 よく困るので汎用的に使えそうなタイマーライブラリを作った。
@@ -22,7 +19,7 @@ url: multi-timer/
 
 一定時間経過後にコールバックで教えてほしいことがある。タイマーが1個であれば、以下のようにタイマー用のスレッドを立ててsleepさせれば実現できる。
 
-```
+```cpp
 // 5秒後にfnをコールしてもらう
 void Timer::call_after_5s(std::function<void(void)> fn) {
     this->thread_ = std::thread([fn](void) {
@@ -32,17 +29,17 @@ void Timer::call_after_5s(std::function<void(void)> fn) {
 }
 ```
 
-ただ、タイマーの数が多くなると、スレッドの生成・破棄のコストが無視できない。そのため、スレッド数をケチって複数コールバックを実現するライブラリを作った<span class="easy-footnote-margin-adjust" id="easy-footnote-1-996"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/multi-timer/#easy-footnote-bottom-1-996 "Rustの影響で、ライブラリをなるべく細かく分割して公開する癖がついてしまった")</span>。
+ただ、タイマーの数が多くなると、スレッドの生成・破棄のコストが無視できない。そのため、スレッド数をケチって複数コールバックを実現するライブラリを作った。
 
 ソースコードは以下のリポジトリで入手できる。
 
-<https://github.com/komori-n/multi-timer>
+{{< github repo="komori-n/multi-timer" >}}
 
 ## 使い方
 
 `komori::MultiTimer<Task>`のtemplate parameterには、lambda式や`std::function`、`komori::unique_function`などのoperator()で呼べるような型を代入する。中身の型は何でも良いが、用途を考えると`komori::onetime_function<void(void)>`を入れるのがおすすめである。
 
-```
+```cpp
   komori::MultiTimer<komori::onetime_function<void(void)>> timer;
   timer.start_processing();
 
@@ -62,7 +59,7 @@ void Timer::call_after_5s(std::function<void(void)> fn) {
 
 上記のプログラムを実行すると、出力結果は以下のようになる。
 
-```
+```text
 2s
 3s
 2s+2s
@@ -76,7 +73,7 @@ void Timer::call_after_5s(std::function<void(void)> fn) {
 
 `std::priority_queue`で直近のコールバックまでsleepする。スケジュールの管理には以下の構造体を用いる。
 
-```
+```cpp
 using time_point = std::chrono::system_clock::time_point;
 
 template <typename Task>
@@ -98,9 +95,11 @@ struct ScheduleCompare {
 
 `TaskSchedule::task`に`mutable`が付与されているのは、queueの先頭からmoveで取り出すためである。
 
-```
+```cpp
 auto task = std::move(task_queue_.top().task);
 task_queue_.pop();
 ```
 
-`std::priority_queue::top()`の戻り値はconst参照である。もしこれが書き換え可能な参照を返却する場合、queueのtopが優先度最大でなくなる可能性があるためなので仕方がない。しかし、今回のケースではtaskはqueueの優先度には関係ないので、mutableを付与して中身を書き換えても問題にならない<span class="easy-footnote-margin-adjust" id="easy-footnote-2-996"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/multi-timer/#easy-footnote-bottom-2-996 "「top()の直後にpop()するならconst_castでconstを外せばいい」という主張もある。（<a rel="noreferrer noopener" href="https://stackoverflow.com/questions/20149471/move-out-element-of-std-priority-queue-in-c11" target="_blank">https://stackoverflow.com/questions/20149471/move-out-element-of-std-priority-queue-in-c11</a>）しかし、const_castでconst外しをするのはあまりに行儀が悪いと感じた。")</span>。
+`std::priority_queue::top()`の戻り値はconst参照である。もしこれが書き換え可能な参照を返却する場合、queueのtopが優先度最大でなくなる可能性があるためなので仕方がない。しかし、今回のケースではtaskはqueueの優先度には関係ないので、mutableを付与して中身を書き換えても問題にならない[^1]。
+
+[^1]: 「top()の直後にpop()するならconst_castでconstを外せばいい」という主張もある。（<https://stackoverflow.com/questions/20149471/move-out-element-of-std-priority-queue-in-c11>）しかし、const_castでconst外しをするのはあまりに行儀が悪いと思う。"

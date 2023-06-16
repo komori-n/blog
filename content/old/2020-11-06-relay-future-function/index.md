@@ -2,25 +2,21 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2020-11-06T20:43:22+09:00"
-guid: https://komorinfo.com/blog/?p=574
-id: 574
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /relay-future-function/
 tags:
   - C/C++
 title: std::functionやunique_functionを用いて、std::futureを中継する
-url: relay-future-function/
+relpermalink: blog/relay-future-function/
+url: blog/relay-future-function/
+description: std::functionやunique_functionを用いて、std::futureを中継して別の関数へ渡す方法について説明する
 ---
 
 ## 問題設定
 
 `std::future<X>`（`X`は構造体）を返す関数`func_a(int a)`を考える。背後にいるworker threadに要求を投げて、その戻り値を非同期に受け取ような関数を想定している。
 
-```
+```cpp
 struct X;
 std::future<X> func_a(int a);
 ```
@@ -29,9 +25,11 @@ std::future<X> func_a(int a);
 
 以下では、この`func_a`の実装について考える。
 
-さて、`func_a`のworker threadに計算をお願いする部分を別の関数`func_b`として切り出したい。関数`func_b`は、futureパターン等を用いて要求をworker threadに渡し、コンテキストをすぐに返す関数とする。ここで、切り出した関数の内部の処理は構造体`X`に依存させず、`X`と等価な情報を持つ構造体`Y`を用いるとする<span class="easy-footnote-margin-adjust" id="easy-footnote-1-574"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/relay-future-function/#easy-footnote-bottom-1-574 "<code>X</code>は外部との互換性のために使う構造体で、将来構造が変更される可能性がある状況を想定している。")</span>。加えて、`func_b`をtemplate関数にしてヘッダーに置くことも禁止とする<span class="easy-footnote-margin-adjust" id="easy-footnote-2-574"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/relay-future-function/#easy-footnote-bottom-2-574 "関数の実装が複雑で、ヘッダーにおくべきでない状況を想定している。")</span>。この制限に従えば、関数`func_b`の引数や戻り値はある程度柔軟に決めてもよい。
+さて、`func_a`のworker threadに計算をお願いする部分を別の関数`func_b`として切り出したい。関数`func_b`は、futureパターン等を用いて要求をworker threadに渡し、コンテキストをすぐに返す関数とする。ここで、切り出した関数の内部の処理は構造体`X`に依存させず、`X`と等価な情報を持つ構造体`Y`を用いるとする[^1]。加えて、`func_b`をtemplate関数にしてヘッダーに置くことも禁止とする。この制限に従えば、関数`func_b`の引数や戻り値はある程度柔軟に決めてもよい。
 
-```
+[^1]: `X`は外部との互換性のために使う構造体で、将来構造が変更される可能性がある状況を想定している。
+
+```cpp
 struct Y;
 
 // func_bは自由に引数や戻り値を変えてもよい。
@@ -52,7 +50,7 @@ void func_b(int a, F functor);                              // templateを使っ
 
 仮に`X=Y`の場合、以下のようにすれば簡単に実現できる。
 
-```
+```cpp
 void func_b(int a, std::promise<X> promise);
 
 std::future<X> func_a(int a) {
@@ -67,7 +65,7 @@ std::future<X> func_a(int a) {
 
 これが`X!=Y`のときは途端に難しくなる。上記のような`func_b`にpromiseを渡す方式の場合、返ってきた`future<Y>`を`promise<X>`に変換して格納し直す必要があるためである。
 
-```
+```cpp
 void func_b(int a, std::promise<Y> promise);
 X convert_y_to_x(const Y& y);
 
@@ -87,7 +85,7 @@ std::function<X> func_a(int a) {
 
 futureを中継するだけのthreadを起動しておけば実現は可能だが、それだけのためにthreadを起動するのはオーバーヘッドが大きすぎる。
 
-```
+```cpp
 void relay_future(std::promise<X> promise_x, std::future<Y> future_y) {
   auto y = future_y.get();  // blocking wait
   promise_x.set_value(std::move(y));
@@ -108,7 +106,7 @@ std::function<X> func_a(int a) {
 
 `func_b`の引数を自由に変えられるので、`std::function`でコールバック関数を渡せば簡単に解決すると思われるかもしれない。
 
-```
+```cpp
 void func_b(int a, std::function<void(const Y&)> callback);
 X convert_y_to_x(const Y& y);
 
@@ -126,7 +124,7 @@ std::function<X> func_a(int a) {
 
 「コールすると`y`から`x`に変換して`promise_x`にセットする関数」を引数に渡す方法である。一見するとこれで行けるように見えるが、これではうまく行かない。
 
-```
+```sh
 $ g++ main.cpp
 In file included from /usr/include/c++/9/future:48,
                  from func_a.hpp:3,
@@ -155,7 +153,7 @@ In file included from func_a.hpp:3,
 
 以下のように、中継専用の関数オブジェクトを使えばゴリ押すことも可能だが、他の箇所で関数オブジェクトを流用できないしいかにもダサい。そもそも、`func_b`が`FutureRelay`に依存しているということは、間接的に`Y`にも依存しているので、問題設定にやや違反してしまっている。
 
-```
+```cpp
 class FutureRelay {
 public:
   FutureRelay(std::promise<X> promise) : promise_(std::move(promise)) {}
@@ -197,7 +195,7 @@ std::function<X> func_a(int a) {
 
 一方、2の方法は反則に近い方法である。この方法は、作成した`std::function`をmove-onlyでしか使わないという前提で、dummyのcopy constructorを定義する方法である。もし万が一、渡した関数オブジェクトのcopy constructorが呼ばれてしまった場合、例外をthrowする。
 
-これは、`func_b`の実装者に`std::function`をmove-onlyで使うことを暗に強制することになる。また、そのコードが正しく動作するかは実行時に例外が投げられるまで分からない。<span class="easy-footnote-margin-adjust" id="easy-footnote-3-574"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/relay-future-function/#easy-footnote-bottom-3-574 "<code>constexpr</code>を駆使してもう一段wrapperを噛ませばコンパイル時にcopy constructorが呼ばれるかどうか検出できる感じはある。ただ、本来の<code>std::function</code>にはない使用制限を<code>func_b</code>に課すことになるので、設計としてよくないことに変わりはないと思う。")</span>
+これは、`func_b`の実装者に`std::function`をmove-onlyで使うことを暗に強制することになる。また、そのコードが正しく動作するかは実行時に例外が投げられるまで分からない。
 
 ## ObjectPool等に預ける
 
@@ -205,7 +203,7 @@ std::function<X> func_a(int a) {
 
 ObjectPoolの実装は何でもよいが、一例を示す。
 
-```
+```cpp
 #pragma once
 
 #include <queue>
@@ -237,7 +235,7 @@ private:
 
 ObjectPoolを用いると、以下のような感じでpromiseへの値の受け渡しが行える。
 
-```
+```cpp
 void func_b(int a, std::function<void(const Y&)> functor);
 X convert_y_to_x(const Y& y);
 
@@ -264,13 +262,17 @@ std::function<X> func_a(int a) {
 
 ## unique_function(any_invokable)を用いる
 
-上で見てきたようにね「`std::function`がcopyableであること」と「`std::promise`がmove-onlyであること」がぶつかっているので実装が難しくなっているのであった。そのため、`std::function`の代わりにunique_function（any_invokableと呼ばれることもある）を用いることで、この問題をシンプルに解決できる<span class="easy-footnote-margin-adjust" id="easy-footnote-4-574"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/relay-future-function/#easy-footnote-bottom-4-574 "一応、copyableな<code>std::promise</code>を作って解決することもできるが、<code>std::promsie</code>は実装がそこそこ難しいのと、パフォーマンスがあまりよろしくなさそうなので見送った。")</span>。
+上で見てきたようにね「`std::function`がcopyableであること」と「`std::promise`がmove-onlyであること」がぶつかっているので実装が難しくなっているのであった。そのため、`std::function`の代わりにunique_function（any_invokableと呼ばれることもある）を用いることで、この問題をシンプルに解決できる[^2]。
 
-unique_functionについては [move-onlyな関数を扱えるstd::functionのようなものを実装する](https://komorinfo.com/blog/unique-function/) を参照。一言でいうと、`std::function`のmove-only版である。
+[^2]: 一応、copyableな`std::promise`を作って解決することもできるが、`std::promsie`は実装がそこそこ難しいのと、パフォーマンスがあまりよろしくなさそうなので見送った。
 
-unique_functionを用いれば、promiseの受け渡しが簡単に行える。また、promiseの所有権が明確で、メモリリークの可能性も小さい。<span class="easy-footnote-margin-adjust" id="easy-footnote-5-574"></span><span class="easy-footnote">[<sup>5</sup>](https://komorinfo.com/blog/relay-future-function/#easy-footnote-bottom-5-574 "加えて、<code>komori::unique_function</code>の実装は短いので、気軽に使いやすいと思う。")</span>
+unique_functionについては [move-onlyな関数を扱えるstd::functionのようなものを実装する](/blog/unique-function/) を参照。一言でいうと、`std::function`のmove-only版である。
 
-```
+unique_functionを用いれば、promiseの受け渡しが簡単に行える。また、promiseの所有権が明確で、メモリリークの可能性も小さい[^3]。
+
+[^3]: 加えて、`komori::unique_function`の実装は短いので、気軽に使いやすいと思う。
+
+```cpp
 void func_b(int a, komori::unique_function<void(const Y&)> functor);
 X convert_y_to_x(const Y& y);
 

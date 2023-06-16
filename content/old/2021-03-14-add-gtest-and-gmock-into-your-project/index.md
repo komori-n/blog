@@ -2,19 +2,16 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-03-14T17:14:23+09:00"
-guid: https://komorinfo.com/blog/?p=1057
-id: 1057
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /add-gtest-and-gmock-into-your-project/
 tags:
   - C/C++
   - GoogleTest
+  - Git
 title: GoogleTest/GoogleMockをsubmoduleで管理する
-url: add-gtest-and-gmock-into-your-project/
+relpermalink: blog/add-gtest-and-gmock-into-your-project/
+url: blog/add-gtest-and-gmock-into-your-project/
+description: GoogleTest/GoogleMockをgit submoduleでお手軽に導入する
 ---
 
 GoogleTest/GoogleMockの導入を、何回やっても覚えられないので自分用にメモする。
@@ -43,17 +40,17 @@ GoogleTest/GoogleMockを既存のプロジェクトに導入する方法は大�
 
 GoogleTestとGoogleMockはどちらも [google/googletest: Googletest – Google Testing and Mocking Framework](https://github.com/google/googletest) リポジトリで管理されている。これを、適当な位置（以下の例では third-party の下）にsubmoduleとして追加する。
 
-```
-$ mkdir third-party
-$ cd third-party
-$ git submodule add https://github.com/google/googletest.git
+```sh
+mkdir third-party
+cd third-party
+git submodule add https://github.com/google/googletest.git
 ```
 
 ### CMakeLists.txtの作成
 
 プロジェクトのソースとテスト用ソースからテスト用バイナリを生成するルールを記述する。
 
-```
+```cmake
 cmake_minimum_required(VERSION 3.0)
 project(google-test-test CXX)
 
@@ -103,7 +100,7 @@ add_test(NAME GoogleTestTest COMMAND ${PROGRAM})
 
 参考：[Google Testの使い方 – Qiita](https://qiita.com/shohirose/items/30e39949d8bf990b0462)
 
-`main()` 関数は（ “gmock_main” の内に含まれている）GoogleTest用のものを用いるので、”src/main.cpp”をビルド対象から除外する必要がある<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1057"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/add-gtest-and-gmock-into-your-project/#easy-footnote-bottom-1-1057 "すなわち、main.cppに含まれる関数はGoogleTestのテスト対象にはできない。そのため、src/main.cppに主要なロジックを含めるべきではない")</span>。
+`main()` 関数は（ “gmock_main” の内に含まれている）GoogleTest用のものを用いるので、”src/main.cpp”をビルド対象から除外する必要がある。
 
 GoogleMockが必要ない（GoogleTestのみ使いたい）場合、依存ライブラリとインクルードパスからgmockを削除し、依存ライブラリの”gmock_main” を “gtest_main” へと書き換えればよい。
 
@@ -111,14 +108,14 @@ GoogleMockが必要ない（GoogleTestのみ使いたい）場合、依存ライ
 
 2つの整数を足す `add(a, b)` という関数に対し、単体検査を書いてみる。
 
-```
+```cpp
 // include/hoge.hpp
 #pragma once
 
 int add(int a, int b);
 ```
 
-```
+```cpp
 // src/hoge.cpp
 
 #include "hoge.hpp"
@@ -128,7 +125,7 @@ int add(int a, int b) {
 }
 ```
 
-```
+```cpp
 // test/hoge_test.cpp
 
 #include "gtest/gtest.hpp"
@@ -141,7 +138,7 @@ TEST(HogeTest, Add) {
 
 以下のコマンドにより、ビルドとテストを行える。
 
-```
+```sh
 $ mkdir build
 $ cd build
 $ cmake ..

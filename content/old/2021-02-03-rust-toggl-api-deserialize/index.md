@@ -4,17 +4,12 @@ draft: true
 categories:
   - プログラミング
 date: "2021-02-03T17:00:12+09:00"
-guid: https://komorinfo.com/blog/?p=868
-id: 868
-image: https://komorinfo.com/wp-content/uploads/2021/01/1200px-Rust_programming_language_black_logo.svg_.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2021/01/1200px-Rust_programming_language_black_logo.svg_.png
-permalink: /rust-toggl-api-deserialize/
 tags:
   - Rust
   - Toggl Track
 title: RustでToggl Reports API v2を叩いてdeserializeする
-url: rust-toggl-api-deserialize/
+relpermalink: blog/rust-toggl-api-deserialize/
+url: blog/rust-toggl-api-deserialize/
 ---
 
 やってみたらものすごく簡単で感動したのでメモ。
@@ -26,7 +21,7 @@ url: rust-toggl-api-deserialize/
 
 パッケージのバージョンは以下。
 
-```
+```toml
 [dependencies]
 reqwest = { version = "0.11" }
 tokio = { version = "1.0", features = ["full"] }
@@ -40,9 +35,9 @@ anyhow = "1.0"
 
 ### reportを取ってくる
 
-[公式リファレンス](https://github.com/toggl/toggl_api_docs/blob/master/reports.md) のRESTful APIの仕様を参考に、[requwest](https://github.com/seanmonstar/reqwest)でGETを投げる<span class="easy-footnote-margin-adjust" id="easy-footnote-1-868"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/rust-toggl-api-deserialize/#easy-footnote-bottom-1-868 "toggl Report APIの詳細な使い方については <a href="https://komorinfo.com/blog/toggl-report-to-line-notify/">togglの日報をLINEに送る</a> を参照。")</span>。エラー処理を簡単にするために、[anyhow](https://crates.io/crates/anyhow)を用いている。
+[公式リファレンス](https://github.com/toggl/toggl_api_docs/blob/master/reports.md) のRESTful APIの仕様を参考に、[requwest](https://github.com/seanmonstar/reqwest)でGETを投げる。エラー処理を簡単にするために、[anyhow](https://crates.io/crates/anyhow)を用いている。
 
-```
+```rust
 use anyhow::Result;
 
 const EMAIL: &'static str = "ikamat.kmr@gmail.com";
@@ -75,57 +70,51 @@ URLにqueryをくっつけて認証情報とともに投げるだけである。
 
 togglへ上記のようなリクエストを投げると、以下のようなjsonが返ってくる。
 
-```
+```json
 {
-    "total_grand":7420000,
-    "total_billable":null,
-    "total_currencies":
-    [
+  "total_grand": 7420000,
+  "total_billable": null,
+  "total_currencies": [
+    {
+      "currency": null,
+      "amount": null
+    }
+  ],
+  "data": [
+    {
+      "id": 162834023,
+      "title": {
+        "project": "Personal",
+        "client": null,
+        "color": "0",
+        "hex_color": "hoge"
+      },
+      "time": 141000,
+      "total_currencies": [
         {
-            "currency":null,
-            "amount":null
+          "currency": null,
+          "amount": null
         }
-    ],
-    "data":
-    [
+      ],
+      "items": [
         {
-            "id":162834023,
-            "title":
-            {
-                "project":"Personal",
-                "client":null,
-                "color":"0",
-                "hex_color":"hoge"
-            },
-            "time":141000,
-            "total_currencies":
-            [
-                {
-                    "currency":null,
-                    "amount":null
-                }
-            ],
-            "items":
-            [
-                {
-                    "title":
-                    {
-                        "time_entry":"todoist"
-                    },
-                    "time":141000,
-                    "cur":null,
-                    "sum":null,
-                    "rate":null
-                }
-            ]
+          "title": {
+            "time_entry": "todoist"
+          },
+          "time": 141000,
+          "cur": null,
+          "sum": null,
+          "rate": null
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
 jsonのパースには [serde](https://github.com/serde-rs/serde) クレートを用いる。特に、serdeの [derive](https://serde.rs/derive.html) モジュールを使うことで、ユーザー定義の構造体のserialization/deserializationが簡単に書ける。
 
-```
+```rust
 #[derive(Deserialize, Debug)]
 struct EntryTitle {
     #[serde(rename = "time_entry")]
@@ -163,11 +152,13 @@ struct Track {
 }
 ```
 
-基本的には、構造体の前に `#[derive(Deserialize)]` をつけるだけで構造体へのパースをしてくれるようになる。渡されるjsonと定義した構造体の間で名前が違う場合は、上記の例のように `[serde(rename = "hoge")]` とすることで違いを吸収することができる<span class="easy-footnote-margin-adjust" id="easy-footnote-2-868"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/rust-toggl-api-deserialize/#easy-footnote-bottom-2-868 "Deserializeでは、渡されたjsonのkeyの数が構造体のメンバの数より多い場合、余剰なエントリーは無視される。余剰エントリーを無視ではなくエラーにしたい場合は <code>#[serde(deny_unknown_fields)]</code> をつける。")</span>。
+基本的には、構造体の前に `#[derive(Deserialize)]` をつけるだけで構造体へのパースをしてくれるようになる。渡されるjsonと定義した構造体の間で名前が違う場合は、上記の例のように `[serde(rename = "hoge")]` とすることで違いを吸収することができる[^1]。
+
+[^1]: Deserializeでは、渡されたjsonのkeyの数が構造体のメンバの数より多い場合、余剰なエントリーは無視される。余剰エントリーを無視ではなくエラーにしたい場合は `#[serde(deny_unknown_fields)]` をつける。
 
 このように構造体定義に少し細工をしておくだけで、jsonのパースが1行でできるようになる。
 
-```
+```rust
 #[tokio::main]
 async fn main() -> Result<()> {
     let toggl_token = env::var("TOGGL_TOKEN")?;
@@ -187,4 +178,4 @@ async fn main() -> Result<()> {
 
 ## コード全文
 
-[toggl_report.rs](https://gist.github.com/komori-n/3dfcdfaf4faf83332b5e236ca4d86abf)
+{{< gist komori-n 3dfcdfaf4faf83332b5e236ca4d86abf >}}

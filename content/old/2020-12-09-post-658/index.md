@@ -2,25 +2,22 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2020-12-09T20:34:12+09:00"
-guid: https://komorinfo.com/blog/?p=658
-id: 658
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /post-658/
 tags:
   - C/C++
+  - std::recursive_mutex
 title: std::recursive_mutexを使う
-url: post-658/
+relpermalink: blog/post-658/
+url: blog/post-658/
+description: あまり使われていないようでたまに使うstd::recursive_mutexの使い方について
 ---
 
 知らなかったのでメモ。
 
 以下のように、コールバック関数を登録したり呼び出したりできるクラス `Hoge` を考える。
 
-```
+```cpp
 #include <iostream>
 #include <cstdlib>
 #include <functional>
@@ -66,7 +63,7 @@ int main(int argc, char*argv[]) {
 
 シンプルに考えると、以下のように `std::mutex` でlockをとればいい気がする。
 
-```
+```cpp
 class Hoge {
 public:
   template <typename F>
@@ -93,9 +90,11 @@ private:
 };
 ```
 
-しかし、 `std::mutex` を使うこの方法は一つ欠点がある。それは、`Hoge::invoke()`のコールバック中に `Hoge::clear()`を呼び出すとデッドロックになってしまうことである<span class="easy-footnote-margin-adjust" id="easy-footnote-1-658"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/post-658/#easy-footnote-bottom-1-658 "厳密には、同じスレッドから同じmutexをロックしようとしたときの動作はundefined。手元の環境では、<code>-lpthread</code>をつけてビルドしたらデッドロックになったが、つけずにビルドしたら普通に実行できた。")</span>。
+しかし、 `std::mutex` を使うこの方法は一つ欠点がある。それは、`Hoge::invoke()`のコールバック中に `Hoge::clear()`を呼び出すとデッドロックになってしまうことである[^1]。
 
-```
+[^1]: 厳密には、同じスレッドから同じmutexをロックしようとしたときの動作はundefined。手元の環境では、<code>-lpthread</code>をつけてビルドしたらデッドロックになったが、つけずにビルドしたら普通に実行できた。
+
+```cpp
   Hoge hoge;
 
   hoge.set([&](void) {
@@ -109,7 +108,7 @@ private:
 
 これは、C++標準ライブラリに入っている`std::recursive_mutex`を使えば解決できる。`std::recursive_mutex`は（名前の通り）再帰関数用の排他変数で、同じスレッドから複数回 `lock()`がくると内部のカウンタをインクリメントし、`unlock()`がくるとデクリメントする。そして、`unlock()`後に内部カウンタが0になった場合のみロックを解除するという動作になっている。
 
-```
+```cpp
 #include <iostream>
 #include <cstdlib>
 #include <mutex>

@@ -2,18 +2,15 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-06-18T23:03:15+09:00"
-guid: https://komorinfo.com/blog/?p=1153
-id: 1153
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /cpp-const-position/
 tags:
   - C/C++
+  - const
 title: C/C++でconstの位置に迷うときの考え方
-url: cpp-const-position/
+relpermalink: blog/cpp-const-position/
+url: blog/cpp-const-position/
+description: C/C++で参照やポインタが絡むときのconst付与位置の考え方
 ---
 
 C/C++で、ポインタや参照が絡んだ時に `const` をどこにつければいいか一瞬迷うことがある。そのため、 `const` の考え方について自分用にメモする。
@@ -41,7 +38,7 @@ C/C++で、ポインタや参照が絡んだ時に `const` をどこにつけれ
 - `T=const char*` -&gt; `T=char const*`
 - `const T&` -&gt; `T const&`
 
-`T=char const*` を `const T&` に代入すれば、求める型は `char const* const&`（`=const char* const&`）だと分かる。「`const`は直前の型を修飾する」という大原則を忘れなければ、`const`を付ける位置に迷うことは少なくなるはずだ<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1153"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/cpp-const-position/#easy-footnote-bottom-1-1153 "この例題で15分溶かした自称C++プログラマーがいるらしい")</span>。
+`T=char const*` を `const T&` に代入すれば、求める型は `char const* const&`（`=const char* const&`）だと分かる。「`const`は直前の型を修飾する」という大原則を忘れなければ、`const`を付ける位置に迷うことは少なくなるはずだ。
 
 ## constexprの考え方
 
@@ -51,7 +48,7 @@ C/C++で、ポインタや参照が絡んだ時に `const` をどこにつけれ
 
 コードで差分を示すと以下のようになる。
 
-```
+```cpp
 int g = 334;
 
 // OK: グローバル変数 g への書き換え不可能なポインタ
@@ -73,10 +70,10 @@ int main() {
 }
 ```
 
-とてもややこしいので注意が必要だ<span class="easy-footnote-margin-adjust" id="easy-footnote-2-1153"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/cpp-const-position/#easy-footnote-bottom-2-1153 "<code>constexpr</code>でも<code>const</code>の1.のルールは使える。すなわち、<code>constexpr int x</code> は <code>int constexpr x</code> と書くこともできる")</span>。
+とてもややこしいので注意が必要だ[^1]。
+
+[^1]: `constexpr`でも`const`の1.のルールは使える。すなわち、`constexpr int x` は `int constexpr x` と書くこともできる
 
 `constexpr` と `const` の関係については以下の記事も参照。
 
-<figure class="wp-block-embed is-type-wp-embed is-provider-コウモリのちょーおんぱ wp-block-embed-コウモリのちょーおんぱ"><div class="wp-block-embed__wrapper">> [constexpr宣言された変数は暗黙的にconstになる](https://komorinfo.com/blog/constexpr-variable-is-const/)
-
-<iframe class="wp-embedded-content" data-secret="K7zfNflHTj" frameborder="0" height="282" marginheight="0" marginwidth="0" sandbox="allow-scripts" scrolling="no" security="restricted" src="https://komorinfo.com/blog/constexpr-variable-is-const/embed/#?secret=K7zfNflHTj" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="“constexpr宣言された変数は暗黙的にconstになる” — コウモリのちょーおんぱ" width="500"></iframe></div></figure>
+{{< article link="/blog/constexpr-variable-is-const/">}}

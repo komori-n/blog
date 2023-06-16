@@ -2,25 +2,22 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-03-11T18:21:04+09:00"
-guid: https://komorinfo.com/blog/?p=1054
-id: 1054
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /constexpr-variable-is-const/
 tags:
   - C/C++
+  - constexpr
 title: constexpr宣言された変数は暗黙的にconstになる
-url: constexpr-variable-is-const/
+permalink: blog/constexpr-variable-is-const/
+url: blog/constexpr-variable-is-const/
+description: constexpr宣言された変数は暗黙的にconstexprとなるが、constの付く位置に注意。
 ---
 
 constexprはc++11で導入されたキーワードで、変数や関数が定数式（Constant Expressions）であることを宣言することができる。
 
 constexpr変数はコンパイル時に値が定まるので、template parameterや配列宣言時のサイズ指定に使用できる。
 
-```
+```cpp
 constexpr size_t N = 10;
 std::array<int, N> hoge;
 int fuga[N];
@@ -30,7 +27,7 @@ int fuga[N];
 
 constexprが付与された変数は、暗黙的にconstも付与される。
 
-```
+```cpp
 // 以下の2つは等価
 constexpr int N = 334;
 constexpr const int N = 334;
@@ -38,7 +35,7 @@ constexpr const int N = 334;
 
 しかし、ポインタ型に対しconstexprをつける時は注意が必要である。
 
-```
+```cpp
 int x = 0;
 // 以下の2つは等価
 constexpr int* p = &x;
@@ -50,7 +47,7 @@ constexpr const int* p = &x;
 
 constexprは対象の変数がROM化可能（すなわち書き換え不可）であることを宣言するので、constが付与されるのは `*` の後になる。言い換えると、上記の例の場合、`p` 自体を実行時に変えることはできないが、 `*p` を通じて `x` の値を書き換えることはできるのである。
 
-```
+```cpp
 int x = 0;
 int main(void) {
     int y = 10;

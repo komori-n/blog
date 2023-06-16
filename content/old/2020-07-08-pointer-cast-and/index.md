@@ -2,20 +2,14 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 canonical: https://komorinfo.com/blog/pointer-and-big-endian/
 date: "2020-07-08T19:31:21+09:00"
-guid: https://komorinfo.com/blog/?p=56
-id: 56
-image: https://komorinfo.com/wp-content/uploads/2020/07/pointer-1.png
-og_img:
-  - https://komorinfo.com/blog/wp-content/uploads/2020/07/pointer.png
-permalink: /pointer-cast-and/
 tags:
   - C/C++
-  - QEMU
 title: ポインタのキャストでエンディアンを意識しないとバグる例
-url: pointer-cast-and/
+relpermalink: blog/pointer-cast-and/
+url: blog/pointer-cast-and/
 description: C言語でエンディアンの異なる環境で挙動が代わる例について解説する。
 ---
 
@@ -90,4 +84,4 @@ event2(&param1);
 
 ## 検証コード
 
-[GitHub – event-endian-test.c](https://gist.github.com/komori-n/f00e52341b176bf39d48d1059d70a9d8)
+{{< gist komori-n f00e52341b176bf39d48d1059d70a9d8 >}}

@@ -2,25 +2,21 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2020-09-09T20:56:53+09:00"
-guid: https://komorinfo.com/blog/?p=499
-id: 499
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/blog/wp-content/uploads/2020/09/cpp.png
-permalink: /cpp-cast/
 tags:
   - C/C++
 title: static_cast, dynamic_cast, reinterpret_castで結果が変わる例
-url: cpp-cast/
+relpermalink: blog/cpp-cast/
+url: blog/cpp-cast/
+description: C++のstatic_cast, dynamic_cast, reinterpret_castの結果が異なる変換の例を示す。
 ---
 
 `static_cast`, `dynamic_cast`, `reinterpret_cast`の計算結果がすべて違う値になる例がぱっと思いつかなかったのでメモ。
 
 以下のコードは、3つのキャストの計算結果が異なる例である。
 
-```
+```cpp
 #include <iostream>
 #include <cstdlib>
 
@@ -45,7 +41,7 @@ int main(int argc, char* argv[]) {
 
 コンパイルして実行すると、以下のように成る。
 
-```
+```sh
 $ g++ cast_test.cpp
 $ ./a.out
 a2      :0x55eb8db7ae70
@@ -60,4 +56,7 @@ reinterpret_cast<B*>(a2)        :0x55eb8db7ae70
 
 `dynamic_cast`では、実行時に`a2`の継承関係を調べて結果を決める。`a2`は`B`のインスタンスではないので、動的キャストに失敗して`nullptr`が返る。
 
-`reinterpret_cast`は、計算前後でアドレス値が変化しない。<span class="easy-footnote-margin-adjust" id="easy-footnote-1-499"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/cpp-cast/#easy-footnote-bottom-1-499 "厳密に言うと、<code>reinterpret_cast</code>前後でアドレス値が変わるかどうかは処理系依存である。ISO/IEC 14882:2011（C++11）では、<code>reintepret_cast</code>で別の型に変換して、再度<code>reinterpret_cast</code>で元の型に戻しても値が変わらないことだけが記載されている。")</span>`reinterpret_cast`の危険性がよく分かる。
+`reinterpret_cast`は、計算前後でアドレス値が変化しない[^1]。
+`reinterpret_cast`の危険性がよく分かる。
+
+[^1]: 厳密に言うと、`reinterpret_cast`前後でアドレス値が変わるかどうかは処理系依存である。C++11では、`reintepret_cast`で別の型に変換して、再度`reinterpret_cast`で元の型に戻しても値が変わらないことだけが記載されている。

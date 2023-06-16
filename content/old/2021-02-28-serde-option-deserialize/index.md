@@ -2,23 +2,19 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-02-28T17:11:22+09:00"
-guid: https://komorinfo.com/blog/?p=1037
-id: 1037
-image: https://komorinfo.com/wp-content/uploads/2021/01/1200px-Rust_programming_language_black_logo.svg_.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2021/01/1200px-Rust_programming_language_black_logo.svg_.png
-permalink: /serde-option-deserialize/
 tags:
   - Rust
 title: serdeのDeserializeでnullと値なしを区別する
-url: serde-option-deserialize/
+relpermalink: blog/serde-option-deserialize/
+url: blog/serde-option-deserialize/
+description: Rustのserdeライブラリでnullと値なしを区別する方法について
 ---
 
 ## 環境
 
-```
+```toml
 # rustc 1.49.0
 serde = "1.0"
 serde_derive = "1.0"
@@ -29,7 +25,7 @@ serde_json = "1.0"
 
 次のような、Option型をメンバに取る構造体のデシリアライズについて考える。
 
-```
+```rust
 use serde_derive::Deserialize;
 
 #[derive(Debug, Deserialize)]
@@ -46,7 +42,7 @@ struct Hoge {
 
 の3つを与えると、後者2つはいずれもNoneにデシリアイズされる。
 
-```
+```rust
 let json_1 = r#"{ "val": 334 }"#;
 let ans_1: Hoge = serde_json::from_str(json_1).unwrap();
 assert_eq!(ans_1.val, Some(334));
@@ -68,7 +64,7 @@ nullと値なしではデータの意味が変わってしまうようなjsonの
 
 シンプルにカスタムデシリアライザを定義するだけで実現できる。
 
-```
+```rust
 use serde::{Deserialize, Deserializer};
 use serde_derive::Deserialize;
 
@@ -90,7 +86,7 @@ fn deserialize_option<'de, D, T>(deserializer: D) -> Result<Option<T>, D::Error>
 
 \#\[serde(deserialize_with=…)\]でカスタムデシリアライザを指定する。直感的にはやや気持ち悪いが、これにより値のあるなしにかかわらずdeserialize_optionが呼ばれ、値なしの場合はパースに失敗するようになる。
 
-```
+```rust
 let json_1 = r#"{ "val": 334 }"#;
 let ans_1: Hoge = serde_json::from_str(json_1).unwrap();
 assert_eq!(ans_1.val, Some(334));
@@ -104,4 +100,6 @@ let ans_3: Result<Hoge, _> = serde_json::from_str(json_3);
 assert!(ans_3.is_err());
 ```
 
-コード：<https://gist.github.com/komori-n/87064b81d14f773737571da43c1dd0ec>
+## コード
+
+{{< gist komori-n 87064b81d14f773737571da43c1dd0ec >}}

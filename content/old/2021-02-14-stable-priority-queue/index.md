@@ -2,22 +2,18 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 canonical: https://komorinfo.com/blog/post-979/
 date: "2021-02-14T22:44:15+09:00"
-guid: https://komorinfo.com/blog/?p=979
-id: 979
-image: https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2020/09/cpp.png
-permalink: /stable-priority-queue/
 tags:
   - C/C++
 title: 安定な優先順位付きキュー（stable_priority_queue）を作る
-url: stable-priority-queue/
+relpermalink: blog/stable-priority-queue/
+url: blog/stable-priority-queue/
+description: C++で安定な優先順位つきキュー（stable_priority_queue）を作る
 ---
 
-[https://github.com/komori-n/stable_priority_queue](https://github.com/komori-n/stable_priority_queue)
+{{< github repo="komori-n/stable_priority_queue" >}}
 
 ## モチベ
 
@@ -27,7 +23,7 @@ url: stable-priority-queue/
 
 例えば、以下のコードを考える。
 
-```
+```cpp
 #include <queue>
 #include <cstdlib>
 #include <iostream>
@@ -81,7 +77,7 @@ int main(void) {
 
 このサンプルコードを実行すると、以下のような出力が得られる。出力の1個目の値が優先度、2個目の値が何番目に挿入したかを表す数である。
 
-```
+```sh
 $ ./priority_queue.out
 4 2
 3 0
@@ -99,7 +95,7 @@ $ ./priority_queue.out
 
 格納したい構造体に「何番目に挿入したか」のメンバを追加して、これを加味して優先度を定義すれば安定なpriority_queueを実現できる。しかし、ダサい上にカウンタのオーバーフローのことも考えなくてはいけないので面倒くさい。
 
-```
+```cpp
 // 「ダサい」実装の例
 // キューに格納する要素に連番を振る
 template <typename Key>
@@ -125,13 +121,15 @@ private:
 
 そこで、同値な値は到着順に値が出てくる安定なpriority_queueを自作した。作成した`komori::stable_priority_queue`のコードは以下のリポジトリで確認できる。
 
-[https://github.com/komori-n/stable_priority_queue](https://github.com/komori-n/stable_priority_queue)
+{{< github repo="komori-n/stable_priority_queue" >}}
 
 ## stable_priority_queue の作り方
 
-以下のように、Keyの型に応じて実装の切り替えを行っている。要素がcopyableでないときは`std::multiset<Key>`を、copyableのときは`std::map<Key, std::queue<Key>>`を用いる<span class="easy-footnote-margin-adjust" id="easy-footnote-1-979"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/stable-priority-queue/#easy-footnote-bottom-1-979 "c++11以降では<code>std::multiset</code>に格納された同値な要素は、挿入順に並べられることが保証されている。")</span>。
+以下のように、Keyの型に応じて実装の切り替えを行っている。要素がcopyableでないときは`std::multiset<Key>`を、copyableのときは`std::map<Key, std::queue<Key>>`を用いる[^1]。
 
-```
+[^1]: c++11以降では<code>std::multiset</code>に格納された同値な要素は、挿入順に並べられることが保証されている。
+
+```cpp
   template <typename Key,
       typename Compare = std::less<Key>>
   using stable_priority_queue = typename std::conditional<
@@ -143,11 +141,15 @@ private:
 
 mapを用いる方の実装は、要素をkeyとvalueの2箇所で保つ必要があるので、Keyがcopyableでなければ使えない。一方で、`std::multiset`を用いる方法はcopyableかどうかに依らず使える。そのため、copyableかどうかに関係なく`std::multiset`の方の実装を用いる方法も考えられる。しかし、要素の重複個数が多くなった際に`std::map<Key, std::queue<Key>>`の方が木の高さが低く抑えられ、木の更新コストが小さく済むことが実装中に判明したので、上記のデータ構造を採用している。
 
-基本的には素直に実装するだけだが、std::multimapで降順に要素を並べるために、渡されたCompareの順序を反転させる`reverse_compare`を挟んでいる<span class="easy-footnote-margin-adjust" id="easy-footnote-2-979"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/stable-priority-queue/#easy-footnote-bottom-2-979 "<code>std::map</code>を用いる方は必ずしも逆順で格納する必要はないが、先頭要素を取ってくる処理が短く書けるので<code>reverse_compare</code>でソートしている。")</span>。
+基本的には素直に実装するだけだが、std::multimapで降順に要素を並べるために、渡されたCompareの順序を反転させる`reverse_compare`を挟んでいる[^2]。
+
+[^2]: `std::map`を用いる方は必ずしも逆順で格納する必要はないが、先頭要素を取ってくる処理が短く書けるので`reverse_compare`でソートしている。
 
 ## 速度比較
 
-`std::priority_queue`と`komori::stable_priority_queue`の速度比較を行った。計測条件は以下の通りである<span class="easy-footnote-margin-adjust" id="easy-footnote-3-979"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/stable-priority-queue/#easy-footnote-bottom-3-979 "g++ 9.3.0、Ubuntu 20.04（WSL 2）、Intel(R) Core(TM) i5-8400 CPU")</span>。
+`std::priority_queue`と`komori::stable_priority_queue`の速度比較を行った。計測条件は以下の通りである[^3]。
+
+[^3]: g++ 9.3.0、Ubuntu 20.04（WSL 2）、Intel(R) Core(TM) i5-8400 CPU"
 
 - Entry：72 bytes（priorityは4 bytes）
 - 要素数： 100000
@@ -159,21 +161,23 @@ mapを用いる方の実装は、要素をkeyとvalueの2箇所で保つ必要�
 
 それぞれ、経過時間は以下のようになった。
 
-<figure class="wp-block-table is-style-regular">| 方法 | 時間 |
-|---|---|
-| std::priority\_queue | 403 ms |
-| komori::stable\_priority\_queue | 757 ms |
+| 方法                          | 時間   |
+| ----------------------------- | ------ |
+| std::priority_queue           | 403 ms |
+| komori::stable_priority_queue | 757 ms |
 
-</figure>`komori::stable_priority_queue`は`std::priority_queue`の1/2倍程度の速度で動作した。`std::priority_queue`に安定性が加わっていることを考えると、まずまずのパフォーマンスだと考えられる。
+`komori::stable_priority_queue`は`std::priority_queue`の1/2倍程度の速度で動作した。`std::priority_queue`に安定性が加わっていることを考えると、まずまずのパフォーマンスだと考えられる。
 
 ### 要素がcopyableの場合
 
 それぞれ、経過時間は以下のようになった。
 
-<figure class="wp-block-table">| 方法 | 時間 |
-|---|---|
-| std::priority\_queue | 346 ms |
-| komori::stable\_priority\_queue | 110 ms |
-| komori::noncopyable\_queue | 572 ms |
+| 方法                          | 時間   |
+| ----------------------------- | ------ |
+| std::priority_queue           | 346 ms |
+| komori::stable_priority_queue | 110 ms |
+| komori::noncopyable_queue     | 572 ms |
 
-</figure>`komori::stable_priority_queue`は`std::priority_queue`の4倍程度高速に動作している<span class="easy-footnote-margin-adjust" id="easy-footnote-4-979"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/stable-priority-queue/#easy-footnote-bottom-4-979 "<code>std::priority_queue</code>はヒープ内の要素の移動が必要なので、格納するクラスのサイズが大きいほど挿入、削除に時間がかかるようになる。")</span>。また、実装を切り替えることによりnoncopyable\_queue（`std::multimap`を用いた実装）よりも高速に動作していることが読み取れる。
+`komori::stable_priority_queue`は`std::priority_queue`の4倍程度高速に動作している[^4]。また、実装を切り替えることによりnoncopyable_queue（`std::multimap`を用いた実装）よりも高速に動作していることが読み取れる
+
+[^4]: `std::priority_queue`はヒープ内の要素の移動が必要なので、格納するクラスのサイズが大きいほど挿入、削除に時間がかかるようになる。
