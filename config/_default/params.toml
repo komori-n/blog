@@ -12,7 +12,7 @@ autoSwitchAppearance = true
 enableSearch = true
 enableCodeCopy = true
 
-images = ["favicon.ico"]
+# images = ["/favicon.ico"]
 
 # mainSections = ["section1", "section2"]
 # robots = ""
@@ -22,12 +22,12 @@ images = ["favicon.ico"]
 # defaultBackgroundImage = "IMAGE.jpg" # used as default for background images
 # defaultFeaturedImage = "IMAGE.jpg" # used as default for featured images in all articles
 
-# highlightCurrentMenuArea = true
+highlightCurrentMenuArea = true
 smartTOC = true
 # smartTOCHideUnfocusedChildren = true
 
 [header]
-  layout = "basic" # valid options: basic, fixed, fixed-fill, fixed-fill-blur
+  layout = "fixed" # valid options: basic, fixed, fixed-fill, fixed-fill-blur
 
 [footer]
   showMenu = true
@@ -37,15 +37,15 @@ smartTOC = true
   showScrollToTop = true
 
 [homepage]
-  layout = "hero" # valid options: page, profile, hero, card, background, custom
-  #homepageImage = "IMAGE.jpg" # used in: hero, and card
+  layout = "background" # valid options: page, profile, hero, card, background, custom
+  homepageImage = "img/top_background.jpg" # used in: hero, and card
   showRecent = true
   showRecentItems = 7
   showMoreLink = true
   showMoreLinkDest = "/posts"
   cardView = false
   cardViewScreenWidth = false
-  layoutBackgroundBlur = false # only used when layout equals background
+  layoutBackgroundBlur = true # only used when layout equals background
 
 [article]
   showDate = true
@@ -53,8 +53,8 @@ smartTOC = true
   showLikes = false
   showDateUpdated = true
   showAuthor = true
-  showHero = false
-  # heroStyle = "basic" # valid options: basic, big, background, thumbAndBackground
+  showHero = true
+  heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
   layoutBackgroundBlur = true # only used when heroStyle equals background or thumbAndBackground
   layoutBackgroundHeaderSpace = true # only used when heroStyle equals background
   showBreadcrumbs = false
@@ -97,13 +97,13 @@ smartTOC = true
 
 [taxonomy]
   showTermCount = true
-  showHero = false
+  # showHero = false
   # heroStyle = "background" # valid options: basic, big, background, thumbAndBackground
   showBreadcrumbs = false
   showViews = false
   showLikes = false
   showTableOfContents = false
-  cardView = false
+  cardView = true
 
 [term]
   showHero = false

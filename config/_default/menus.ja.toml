@@ -1,13 +1,32 @@
 [[main]]
+    name = "ALL"
+    pageRef = "posts"
+    weight = 10
+
+[[main]]
     name = "カテゴリ"
     pageRef = "categories"
-    weight = 20
+    weight = 15
 
 [[main]]
     name = "タグ"
     pageRef = "tags"
     weight = 20
 
-[[subnavigation]]
-    name = "ブログ移行作業中..."
+[[main]]
+    name = "C/C++"
+    parent = "タグ"
+    pageRef = "tags/c/c++"
+    weight = 10
+
+[[main]]
+    name = "Rust"
+    parent = "タグ"
+    pageRef = "tags/rust"
+    weight = 10
+
+[[main]]
+    name = "詰将棋エンジン"
+    pageRef = "tags/詰将棋"
+    parent = "タグ"
     weight = 10

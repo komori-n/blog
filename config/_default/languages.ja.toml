@@ -1,17 +1,18 @@
 languageCode = "ja-jp"
 languageName = "Japanese"
 weight = 1
-title = "[wip] コウモリのちょーおんぱ"
+title = "コウモリのちょーおんぱ"
 
 [params]
   displayName = "JP"
   isoCode = "ja-jp"
   rtl = false
   dateFormat = "2006-01-02"
-  # logo = "img/favicon-32x32.png"
+  logo = "img/site_logo_new.png"
   # secondaryLogo = "img/icon.png"
-  # description = "My awesome website"
+  description = "C/C++/Rustの日頃の開発の気づきを共有する"
   # copyright = "Copy, _right?_ :thinking_face:"
+  keywords = ["C言語", "C++", "Rust", "詰将棋", "KomoringHeights"]
 
 [author]
   name = "komori-n"
