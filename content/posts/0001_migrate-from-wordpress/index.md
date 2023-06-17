@@ -1,5 +1,6 @@
 ---
 author: komori-n
+draft: true
 categories:
   - やってみた
 date: 2023-06-17T18:00:26+09:00
