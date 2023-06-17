@@ -76,4 +76,4 @@ int main() {
 
 `constexpr` と `const` の関係については以下の記事も参照。
 
-{{< article link="/blog/constexpr-variable-is-const/">}}
+{{< article link="blog/constexpr-variable-is-const/">}}

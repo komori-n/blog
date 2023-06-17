@@ -4,16 +4,12 @@ draft: true
 categories:
   - プログラミング
 date: "2022-06-15T21:06:29+09:00"
-guid: https://komorinfo.com/blog/?p=1658
-id: 1658
-image: https://komorinfo.com/wp-content/uploads/2022/02/cropped-25806739-1-1.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2022/02/cropped-25806739-1-1.png
-permalink: /template-technique-for-type-list/
 tags:
   - C/C++
 title: 型リストに対する展開回数を抑えたC++テンプレート
-url: template-technique-for-type-list/
+relpermalink: blog/template-technique-for-type-list/
+url: blog/template-technique-for-type-list/
+description: 本記事は、型リストに対する基本的なテンプレートに絞って再帰深度を抑えるテクニックを説明する。
 ---
 
 ## モチベーション
@@ -33,7 +29,7 @@ C++でtemplate meta programming（TMP）をするとき、展開深さ上限に�
 
 いずれの問題についても、以下のような愚直な線形再帰コードを書けば簡単に実現できる。
 
-```
+```cpp
 // IsAnyOf<T, Ts...>
 //   T ∈ Ts...  -> true
 //   otherwise  -> false
@@ -49,7 +45,7 @@ constexpr bool kIsAnyOf<T, FirstType, OtherTypes...> = kIsAnyOf<T, OtherTypes...
 
 しかし、このような再帰的に template 引数を展開するコードは、引数の型が多くなるとコンパイラの再帰深さ上限に達したり、メモリ不足によるコンパイルエラーになってしまうことがある。例えば、`kIsAnyOf<Hoge<0>, Hoge<1>, ..., Hoge<10000>>` を与えると再帰深さが 10000 に達するため、手元の環境ではコンパイルエラーになってしまった。
 
-```
+```sh
 $ g++ -std=c++14 test.cpp
 test.cpp:10:56: fatal error: recursive template instantiation exceeded maximum depth of 1024
 constexpr bool kIsAnyOf<T, FirstType, OtherTypes...> = kIsAnyOf<T, OtherTypes...>;
@@ -61,25 +57,14 @@ constexpr bool kIsAnyOf<T, FirstType, OtherTypes...> = kIsAnyOf<T, OtherTypes...
 
 ## 型がリストに含まれるか（kIsAnyOf）
 
-<div class="wp-block-vk-blocks-border-box vk_borderBox vk_borderBox-background-transparent is-style-vk_borderBox-style-solid-kado-tit-onborder"><div class="vk_borderBox_title_container">#### `template <T, Ts...> IsAnyOf`
+### `template <T, Ts...> IsAnyOf`
 
-</div><div class="vk_borderBox_body">- `T` が `Ts...` に含まれている → true
+- `T` が `Ts...` に含まれている → true
 - `T` が `Ts...` に含まれていない → false
 
-</div></div>まずは最も簡単な問題から。`kIsAnyOf` を再帰なしで実現する方法はいくつか考えられる。ここでは、次の `kFind` に拡張しやすい constexpr 関数を使う方法を紹介する<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1658"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/template-technique-for-type-list/#easy-footnote-bottom-1-1658 "以下は最近知ったおしゃれなコード。<code>&lt;..., false&gt;</code> と <code>&lt;false, ...&gt;</code> を比較することで <code>...</code> がすべて <code>false</code> かどうかを判定できる。</p>
+まずは最も簡単な問題から。`kIsAnyOf` を再帰なしで実現する方法はいくつか考えられる。ここでは、次の `kFind` に拡張しやすい constexpr 関数を使う方法を紹介する。
 
-template &lt;bool... Bs>
-struct BoolList {};
-
-template &lt;class T, class... Ts>
-constexpr bool kIsAnyOf = !std::is_same&lt;
-BoolList&lt;std::is_same&lt;T, Ts>::value..., false>,
-BoolList&lt;false, std::is_same&lt;T, Ts>::value...>
-\>::value;</pre>
-
-<p>")</span>。
-
-```
+```cpp
 template <class T, class... Ts>
 constexpr bool IsAnyOf() {
   const bool bs[] = { std::is_same<T, Ts>::value... };
@@ -99,14 +84,14 @@ constexpr bool kIsAnyOf = IsAnyOf<T, Ts...>();
 
 ## 型が何番目にあるか（kFind）
 
-<div class="wp-block-vk-blocks-border-box vk_borderBox vk_borderBox-background-transparent is-style-vk_borderBox-style-solid-kado-tit-onborder"><div class="vk_borderBox_title_container">#### `template <T, Ts...> kFind`
+### `template <T, Ts...> kFind`
 
-</div><div class="vk_borderBox_body">- `T` が `Ts...` に含まれている → その index を返す
+- `T` が `Ts...` に含まれている → その index を返す
 - `T` が `Ts...` に含まれていない → `sizeof...(Ts)` を返す
 
-</div></div>`kIsAnyOf` では true/false を返していたが、`kFind` では見つけた index を返す。このメタ関数は `kIsAnyOf` と同様に constexpr 関数で実現できる。
+`kIsAnyOf` では true/false を返していたが、`kFind` では見つけた index を返す。このメタ関数は `kIsAnyOf` と同様に constexpr 関数で実現できる。
 
-```
+```cpp
 template <class T, class... Ts>
 constexpr std::size_t Find() {
   const bool bs[] = { std::is_same<T, Ts>::value... };
@@ -126,15 +111,15 @@ constexpr std::size_t kFind = Find<T, Ts...>();
 
 ## 条件を満たす型が何番目にあるか（kFindIf）
 
-<div class="wp-block-vk-blocks-border-box vk_borderBox vk_borderBox-background-transparent is-style-vk_borderBox-style-solid-kado-tit-onborder"><div class="vk_borderBox_title_container">#### `template <P, Ts...> kFindIf`
+### `template <P, Ts...> kFindIf`
 
-</div><div class="vk_borderBox_body">- `P<T>::value` は `bool` 値
+- `P<T>::value` は `bool` 値
 - `Ts...` に `P<T> == true` となる型が含まれている → その index を返す
 - `Ts...` に `P<T> == true` となる型が含まれていない → `sizeof...(Ts)` を返す
 
-</div></div>`kFindIf` を使う典型的な応用として、型リストの中からあるテンプレート型 `Hoge<Args...>` （`Args...` は任意）が含まれているかどうかの判定に使える。具体的には、条件式 `P` を以下のように定義すればよい。
+`kFindIf` を使う典型的な応用として、型リストの中からあるテンプレート型 `Hoge<Args...>` （`Args...` は任意）が含まれているかどうかの判定に使える。具体的には、条件式 `P` を以下のように定義すればよい。
 
-```
+```cpp
 template <class Ts>
 struct Hoge {};
 
@@ -147,7 +132,7 @@ struct IsHoge<Hoge<Args...>> : std::bool_constant<true> {};
 
 このメタ関数も容易に実現できる。初めて見たときは少し戸惑うかもしれないが、template template の文法をしっかり理解していれば難しいことはないはずだ。
 
-```
+```cpp
 template <template <class T> class P, class... Ts>
 constexpr bool FindIf() {
   const bool bs[] = { P<Ts>::value... };
@@ -169,18 +154,20 @@ constexpr bool kFindIf = FindIf<P, Ts...>();
 
 ## N番目の型は何か（NthType）
 
-<div class="wp-block-vk-blocks-border-box vk_borderBox vk_borderBox-background-transparent is-style-vk_borderBox-style-solid-kado-tit-onborder"><div class="vk_borderBox_title_container">#### `template <I, Ts...> NthType`
+### `template <I, Ts...> NthType`
 
-</div><div class="vk_borderBox_body">- `I` は `std::size_t`
+- `I` は `std::size_t`
 - `Ts...` の `I` 番目の型を返す
 
-</div></div>先程までとは逆に、型リストの I 番目の型を取ってくる問題である。
+先程までとは逆に、型リストの I 番目の型を取ってくる問題である。
 
-STL に詳しい方は `std::tuple_element` を使えばよいと考えるかもしれない。しかし、STL の実装によっては `std::tuple_element` が線形再帰により実現されているため、大量の型を処理したい場合は不向きである<span class="easy-footnote-margin-adjust" id="easy-footnote-2-1658"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/template-technique-for-type-list/#easy-footnote-bottom-2-1658 "libstdc++の <code>tuple_element</code> は<a rel="noreferrer noopener" href="https://github.com/gcc-mirror/gcc/commit/09aab7e699dcbd79fd64959cf259567bdca94022#diff-c83fa13992f340f6a862cc4955e8c2b97522219ebd2f1c4366c0758e5374c7db" target="_blank">少し前のコミット</a> で再帰を使わない実装に変わった。また、clang には <code>\_\_type_pack_element</code> という組み込み関数が搭載されており、clang&amp;libc++ 環境なら <code>std::tuple_element</code> を使って問題ない")</span> <span class="easy-footnote-margin-adjust" id="easy-footnote-3-1658"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/template-technique-for-type-list/#easy-footnote-bottom-3-1658 "実は libstdc++ の <code>std::get</code> は 再帰を使わない実装になっているので、<code>decltype(std::get<Index>(...))</code> でも効率的に型を求めることができる（ライブラリ依存の実装なのであまりおすすめしない）")</span>。
+STL に詳しい方は `std::tuple_element` を使えばよいと考えるかもしれない。しかし、STL の実装によっては `std::tuple_element` が線形再帰により実現されているため、大量の型を処理したい場合は不向きである[^1]。
+
+[^1]: libstdc++の `tuple_element` は<https://github.com/gcc-mirror/gcc/commit/09aab7e699dcbd79fd64959cf259567bdca94022#diff-c83fa13992f340f6a862cc4955e8c2b97522219ebd2f1c4366c0758e5374c7db>で再帰を使わない実装に変わった。また、clang には `__type_pack_element` という組み込み関数が搭載されており、clang&amp;libc++ 環境なら `std::tuple_element` を使って問題ない
 
 `std::tuple` に頼らず、かつ線形再帰を使わずに実現しようと思うとかなり難しい。このためには、関数テンプレートの型の自動推論とパラメータパックを用いた多重継承を駆使する必要がある。コード例がこちら。
 
-```
+```cpp
 template <class T, std::size_t Index>
 struct IndexTag {};
 
@@ -203,7 +190,9 @@ using NthType = decltype(Get<N>(std::declval<GetImpl<std::index_sequence_for<Ts.
 2. `GetImpl<std::index_sequence<...>, Ts...>`: `Ts...` の型をそれぞれ `T[0]`, `T[1]`, … とおくと、 `IndexTag<Ts[0], 0>`, `IndexTag<Ts[1], 1>`, …, を多重継承した型
 3. `T Get<Index, T>(IndexTag<T, Index>)`: `IndexTag` から `T` だけ取ってくる空関数。コンパイル時にのみ使用し、実際に呼ばれることはない
 
-これらの補助型を用いることで、`Get<Index>(GetImpl{})` すれば適切な `Get()` の定義が選ばれ、型 `T` が得られるというメカニズムだ<span class="easy-footnote-margin-adjust" id="easy-footnote-4-1658"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/template-technique-for-type-list/#easy-footnote-bottom-4-1658 "厳密に言うと、<code>std::index_sequence_for<Ts...></code> が O(log(n)) アルゴリズムかどうかは実装依存である。ただ、仮に線形時間だったとしても、紹介したコードの方が <code>std::tuple_element</code> と比べて定数倍高速化できる")</span> 。パラメータパックを展開しながら多重継承する手法を初めて見た方にはかなり分かりづらいコードかもしれない。
+これらの補助型を用いることで、`Get<Index>(GetImpl{})` すれば適切な `Get()` の定義が選ばれ、型 `T` が得られるというメカニズムだ[^2]。パラメータパックを展開しながら多重継承する手法を初めて見た方にはかなり分かりづらいコードかもしれない。
+
+[^2]: 厳密に言うと、`std::index_sequence_for<Ts...>` が O(log(n)) アルゴリズムかどうかは実装依存である。ただ、仮に線形時間だったとしても、紹介したコードの方が `std::tuple_element` と比べて定数倍高速化できる
 
 ## まとめ
 

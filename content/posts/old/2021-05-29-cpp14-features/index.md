@@ -33,7 +33,7 @@ c++11時代のconstexpr関数には書ける内容に強い制限があった。
 > ・戻り値型(リテラル型)として、`void`を許可
 > ・`constexpr`非静的メンバ関数の、暗黙の`const`修飾を削除
 >
-> <https://cpprefjp.github.io/lang/cpp14/relaxing\_constraints\_on\_constexpr.html>
+> <https://cpprefjp.github.io/lang/cpp14/relaxing_constraints_on_constexpr.html>
 
 この制限緩和により、メモリ確保を行わない関数やクラスのほとんど全てをconstexpr化できるようになった。個人的には、これだけでもc++14を使う理由になるほど画期的な変更だと思う。
 
@@ -166,7 +166,7 @@ c++14からは `std::nullptr_t` をテンプレートパラメータとして使
 
 詳しくは以下の記事を参照。
 
-{{< article link="/blog/sfinae-template-class/" >}}
+{{< article link="blog/sfinae-template-class/" >}}
 
 ## 2進数リテラル
 

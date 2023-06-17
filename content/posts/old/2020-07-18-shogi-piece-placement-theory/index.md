@@ -48,7 +48,7 @@ description: 将棋パズル「利かずの駒並べ」を計算機上で効率�
 
 アルゴリズムに興味がなく結果を早く見たい方は、次回の記事利かずの駒並べ｜実践編を参照。
 
-{{< article link="/blog/shogi-piece-placement-result/" >}}
+{{< article link="blog/shogi-piece-placement-result/" >}}
 
 ## 理論
 

@@ -2,20 +2,19 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2022-03-31T22:48:33+09:00"
-guid: https://komorinfo.com/blog/?p=1607
-id: 1607
-permalink: /cpp-template-deduction/
 tags:
   - C/C++
 title: C++で型推論結果を手っ取り早く知りたいとき
-url: cpp-template-deduction/
+relpermalink: blog/cpp-template-deduction/
+url: blog/cpp-template-deduction/
+description: C++のtemplateまわりのビルドエラーに立ち向かっているとき、templateの型推論結果をぱっと知る方法について説明する。
 ---
 
 C++のtemplateまわりのビルドエラーに立ち向かっているとき、templateの型推論結果をぱっと知りたくなることがしばしばある。
 
-```
+```cpp
 template <typename T, typename U = /* template 黒魔術（略） */>
 void Hoge(T&& t) {
   // このあたりでバグっている場合を考える
@@ -29,7 +28,7 @@ void Hoge(T&& t) {
 
 `<typeinfo>` や `<boost/type_index.hpp>` により、実行時に型情報を print させれば型を知ることができる。
 
-```
+```cpp
 #include <typeinfo>
 #include <iostream>
 #include <type_traits>
@@ -46,7 +45,7 @@ int main() {
 
 実行結果
 
-```
+```sh
 $ ./a.out
 i
 ```
@@ -66,7 +65,7 @@ i
 
 Effective Modern C++で紹介されている方法。実体のないtemplateクラスに型を入れて、わざとコンパイルエラーを発生させることにより型を特定する。
 
-```
+```cpp
 #include <typeinfo>
 #include <iostream>
 #include <type_traits>
@@ -99,7 +98,7 @@ int main() {
 
 個人的におすすめしたいお手軽手法。関数やクラスに `[[deprecated]]` をつけることで、ビルド時に warning を出させることができる。
 
-```
+```cpp
 #include <typeinfo>
 #include <iostream>
 #include <type_traits>

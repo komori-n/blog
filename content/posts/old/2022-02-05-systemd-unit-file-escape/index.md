@@ -4,11 +4,10 @@ draft: true
 categories:
   - プログラミング
 date: "2022-02-05T15:36:52+09:00"
-guid: https://komorinfo.com/blog/?p=1578
-id: 1578
-permalink: /systemd-unit-file-escape/
 title: systemd unit fileでは%のエスケープが必要
-url: systemd-unit-file-escape/
+relpermalink: blog/systemd-unit-file-escape/
+url: blog/systemd-unit-file-escape/
+description: systemdのunit file内で`%`を使いたいときは`%%`とエスケープしなければならない。
 ---
 
 systemdのunit file内で`%`を使いたいときは`%%`とエスケープしなければならない。
@@ -17,7 +16,7 @@ Proxy接続が必要な環境でDockerを使う状況を考える。[Docker公�
 
 serviceの起動時に環境変数`HTTP_PROXY`, `HTTPS_PROXY`を設定する。環境変数を自動で設定させるためには、`/etc/systemd/system/docker.service.d/http-proxy.conf`に以下のようなファイルを用意すればよい。
 
-```
+```conf
 [Service]
 Environment="HTTP_PROXY=http://proxy.example.com:80"
 Environment="HTTPS_PROXY=http://proxy.example.com:80"
@@ -27,7 +26,7 @@ Environment="HTTPS_PROXY=http://proxy.example.com:80"
 
 URL、user、passwordの中に特殊文字が含まれている場合はエンコードが必要になる。例えば、次のような user/password のいずれかに特殊文字が含まれるケースを考える。
 
-- URL｜http://33.4.33.4:8080
+- URL｜<http://33.4.33.4:8080>
 - User｜user
 - PW｜p@ssword
 
@@ -35,7 +34,7 @@ passwordに特殊文字が含まれてるため、エンコードが必要にな
 
 ここで、エンコードした文字列をそのままunit configuration fileに書いてもうまく行かない。
 
-```
+```sh
 $ cat /etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
 Environment="HTTP_PROXY=http://user:p%40ssword@33.4.33.4:8080"
@@ -47,9 +46,11 @@ Environment=
 # ↑ Environment=HTTP_PROXY=http://... と表示されてほしい
 ```
 
-実は、`%`はunit configuration file内ではSpecifierとして用いられる記号なので、さらにエスケープして`%%`と書く必要がある<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1578"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/systemd-unit-file-escape/#easy-footnote-bottom-1-1578 "<a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html">systemd.unit</a>")</span>。
+実は、`%`はunit configuration file内ではSpecifierとして用いられる記号なので、さらにエスケープして`%%`と書く必要がある[^1]。
 
-```
+[^1]: [systemd.unit](https://www.freedesktop.org/software/systemd/man/systemd.unit.html)
+
+```sh
 $ cat /etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
 Environment="HTTP_PROXY=http://user:p%%40ssword@33.4.33.4:8080"

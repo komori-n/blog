@@ -21,7 +21,7 @@ description: df-pnアルゴリズムを更に高速に動作させるために�
 
 本記事は前の投稿の続きである。ただし、前の投稿を読まなくても大部分は理解できると思う。
 
-{{< article link="/blog/df-pn-basics/" >}}
+{{< article link="blog/df-pn-basics/" >}}
 
 以下では、持ち駒は多重集合（重複が許された集合）として扱うものとする。
 

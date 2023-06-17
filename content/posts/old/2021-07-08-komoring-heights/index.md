@@ -32,9 +32,9 @@ df-pnアルゴリズムをベースにして、n手詰めルーチンや証明�
 
 細かい技術解説は最近の詰将棋技術の解説記事を参照。
 
-{{< article link="/blog/df-pn-basics/" >}}
+{{< article link="blog/df-pn-basics/" >}}
 
-{{< article link="/blog/proof-piece-and-disproof-piece/" >}}
+{{< article link="blog/proof-piece-and-disproof-piece/" >}}
 
 実装にあたってtanuki-詰め[^2]やdlshogiのdf-pnエンジン[^3]、やねうら王の詰将棋エンジン[^4]を大いに参考にしている。
 

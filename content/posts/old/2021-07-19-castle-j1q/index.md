@@ -5,16 +5,12 @@ categories:
   - ポエム
   - 城
 date: "2021-07-19T22:40:59+09:00"
-guid: https://komorinfo.com/blog/?p=1332
-id: 1332
-image: https://komorinfo.com/wp-content/uploads/2020/12/IMG_20201129_065859-1-scaled.jpg
-og_img:
-  - https://lh3.googleusercontent.com/kUgsIofUcO2RbOCQYwDRubvskyUmtNG6ziBO95jMHkbcUOO9MQuGGhyykc1zL-M5ChVm5kjyCPaHNaoa4uqKEIFV83YyF3KP5FrZG-zx2qjP6CM-3Iqe3u-UNuNtjCt6yTRIz4fFmoZ1uaT329AhjQHe-XYVbt2dX1ZBJf2mjE4pg6r0S-1L-aAboTXJE90OWGtoLPBO7YBcM7XIZEnBQlYGyHcW8Dp0gBILnVQBxU2tLHchmVPfG-0xiBdFZIQ8g_F7HZ9jTrk0bHU12ewZRprhcIjYwurWKXi32QHK7T1ucODRNjxW9cLPfK1b01y1htGaHxaoqP8RBzELKom9JfnkyNoT1sBkPDuC5QOjG5RxRQkKaYB_AcL9QktUkS7Y0vUXx-iJVFvtxazvy88Z-ZM2NXkoQ4t0xfDXW3-qDiAedfsYxmTfBq_JD33cDyojMpURoxtbqJInPiAls5ePvbW7DC2fdi9qQ00RBomRi3WLlw9gGA3AVKwhKI7JKqUi85n0jw6YCPqdWxmojHgALlyr9u9-08_oENqp0GOTJh_6WJB8VhaZbZI1Gp1zxnZ5NCdWZyjhHg_YiQvQo48Hhk_LpNqsibSqPlwmyUZph9rPFG4ZRRFkKCNT7gz_7TLpqEJevHeU1V5CsM_iyJrMzFDRNZZfBmp5L48B5bpbY53ttU_SCdJdU6B_uoYxRmxw3fgMZ_LXLwI2-XukLXvuKdLg-w=w1283-h962-no?authuser=0
-permalink: /castle-j1q/
 tags:
   - 日本100名城
 title: 第18回 日本城郭検定 準1級に合格した
-url: castle-j1q/
+relpermalink: blog/castle-j1q/
+url: blog/castle-j1q/
+description: 第18回日本城郭検定の準1級に合格したので、本記事では準1級の受験対策や受験した感想について述べる。
 ---
 
 第18回日本城郭検定の準1級に合格したので、本記事では準1級の受験対策や受験した感想について述べる。
@@ -25,26 +21,36 @@ url: castle-j1q/
 
 階級は1級、準1級、2級、3級、オンライン入門級の5つに分かれている。オンライン入門級だけは特殊な開催方式で、いつでも無料で受験することができる。詳しくは以下の記事を参照。
 
-<figure class="wp-block-embed is-type-wp-embed is-provider-コウモリのちょーおんぱ wp-block-embed-コウモリのちょーおんぱ"><div class="wp-block-embed__wrapper">> [日本城郭検定オンライン入門級 受験のススメ](https://komorinfo.com/blog/castle-test-online/)
+{{< article link="blog/castle-test-online/" >}}
 
-<iframe class="wp-embedded-content" data-secret="NYrXEGGNCN" frameborder="0" height="282" marginheight="0" marginwidth="0" sandbox="allow-scripts" scrolling="no" security="restricted" src="https://komorinfo.com/blog/castle-test-online/embed/#?secret=NYrXEGGNCN" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="“日本城郭検定オンライン入門級 受験のススメ” — コウモリのちょーおんぱ" width="500"></iframe></div></figure>準1級から3級は半年に1回、1級は1年に1回試験が行われる。問題はすべて4択で、100問中概ね7割以上正当すれば合格である<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1332"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/castle-j1q/#easy-footnote-bottom-1-1332 "問題の難易度によって合格ラインが変わる。実際に過去に合格ラインが50点まで下げられた事があるらしい")</span>。それぞれの級の平均合格率は以下のようになっている。
+準1級から3級は半年に1回、1級は1年に1回試験が行われる。問題はすべて4択で、100問中概ね7割以上正当すれば合格である[^1]。それぞれの級の平均合格率は以下のようになっている。
 
-<figure class="wp-block-table">| 級 | 平均合格率 |
-|---|---|
-| 3級 | 82.8% |
-| 2級 | 73.6% |
-| 準1級 | 35.8% |
-| 1級 | 4.9% |
+[^1]: 問題の難易度によって合格ラインが変わる。実際に過去に合格ラインが50点まで下げられた事があるらしい
 
-<figcaption>各級の合格率<span class="easy-footnote-margin-adjust" id="easy-footnote-2-1332"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/castle-j1q/#easy-footnote-bottom-2-1332 "<a href="https://www.kentei-uketsuke.com/shiro/about/">日本城郭検定とは &#8211; 城の検定「日本城郭検定」公式サイト</a>")</span></figcaption></figure>準1級は3人に1人、1級はなんと20人に1人程度しか合格していない。1級は準1級合格者でなければ受験できないため、その難易度の高さが際立つ。
+| 級    | 平均合格率 |
+| ----- | ---------- |
+| 3級   | 82.8%      |
+| 2級   | 73.6%      |
+| 準1級 | 35.8%      |
+| 1級   | 4.9%       |
 
-今回、3回目の受験にして準1級に合格できた<span class="easy-footnote-margin-adjust" id="easy-footnote-3-1332"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/castle-j1q/#easy-footnote-bottom-3-1332 "ちなみに前回は1点足りなくて落ちた")</span>。本ページでは合格に至るまでの勉強方法などについて共有する。
+↑各級の合格率[^2]。準1級は3人に1人、1級はなんと20人に1人程度しか合格していない。1級は準1級合格者でなければ受験できないため、その難易度の高さが際立つ。
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2021/07/j1q-1024x841.jpg)</figure>## 準1級の対策方法
+[^2]: [日本城郭検定とは - 城の検定「日本城郭検定」公式サイト](https://www.kentei-uketsuke.com/shiro/about/)
+
+今回、3回目の受験にして準1級に合格できた[^3] 。本ページでは合格に至るまでの勉強方法などについて共有する。
+
+[^3]: ちなみに前回は1点足りなくて落ちた
+
+![準1級の合格認定証](j1q-scaled.jpg)
+
+## 準1級の対策方法
 
 準1級は試験範囲が非常に広く、闇雲にインプットを増やしても合格に近づくことは難しい。そのため、効率よく試験知識を身につけるためにはインプット方法を工夫する必要がある。
 
-準1級に合格するために最低限必要なことは大きく次の4つだと思う<span class="easy-footnote-margin-adjust" id="easy-footnote-4-1332"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/castle-j1q/#easy-footnote-bottom-4-1332 "逆に、各回で発表される準1級のテーマ（第18回は『作事』）は特に気にする必要がない。というより、問題の予測が難しく出題数もそれほど多くないため、時事問題に力を注いだほうがよい")</span>。
+準1級に合格するために最低限必要なことは大きく次の4つだと思う[^4]。
+
+[^4]: 逆に、各回で発表される準1級のテーマ（第18回は『作事』）は特に気にする必要がない。というより、問題の予測が難しく出題数もそれほど多くないため、時事問題に力を注いだほうがよい
 
 1. 過去問を丸暗記する
 2. 時系列や関連する人物を整理する
@@ -55,7 +61,9 @@ url: castle-j1q/
 
 ### 過去問を丸暗記する
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2021/07/mondai-766x1024.jpg)</figure>正確な割合は不明だが、準1級の問題は半分以上過去問で構成されていると思われる。特に、直近1~2年の過去問から再出題される割合が非常に高く感じる。そのため、準1級合格のために最も効率的な勉強方法は **試行回数を重ねること** である。準1級は過去問題集がないため、過去問を入手するためには本番の受験回数を増やすのが最も手っ取り早い。
+![](mondai-scaled.jpg)
+
+正確な割合は不明だが、準1級の問題は半分以上過去問で構成されていると思われる。特に、直近1~2年の過去問から再出題される割合が非常に高く感じる。そのため、準1級合格のために最も効率的な勉強方法は **試行回数を重ねること** である。準1級は過去問題集がないため、過去問を入手するためには本番の受験回数を増やすのが最も手っ取り早い。
 
 過去問を入手できたら、正答率100%になるまで過去問を丸暗記するのが最も効率良い勉強法になる。
 
@@ -69,15 +77,15 @@ url: castle-j1q/
 
 ### いろんなお城を攻める
 
-<figure class="wp-block-image">![](https://lh3.googleusercontent.com/kUgsIofUcO2RbOCQYwDRubvskyUmtNG6ziBO95jMHkbcUOO9MQuGGhyykc1zL-M5ChVm5kjyCPaHNaoa4uqKEIFV83YyF3KP5FrZG-zx2qjP6CM-3Iqe3u-UNuNtjCt6yTRIz4fFmoZ1uaT329AhjQHe-XYVbt2dX1ZBJf2mjE4pg6r0S-1L-aAboTXJE90OWGtoLPBO7YBcM7XIZEnBQlYGyHcW8Dp0gBILnVQBxU2tLHchmVPfG-0xiBdFZIQ8g_F7HZ9jTrk0bHU12ewZRprhcIjYwurWKXi32QHK7T1ucODRNjxW9cLPfK1b01y1htGaHxaoqP8RBzELKom9JfnkyNoT1sBkPDuC5QOjG5RxRQkKaYB_AcL9QktUkS7Y0vUXx-iJVFvtxazvy88Z-ZM2NXkoQ4t0xfDXW3-qDiAedfsYxmTfBq_JD33cDyojMpURoxtbqJInPiAls5ePvbW7DC2fdi9qQ00RBomRi3WLlw9gGA3AVKwhKI7JKqUi85n0jw6YCPqdWxmojHgALlyr9u9-08_oENqp0GOTJh_6WJB8VhaZbZI1Gp1zxnZ5NCdWZyjhHg_YiQvQo48Hhk_LpNqsibSqPlwmyUZph9rPFG4ZRRFkKCNT7gz_7TLpqEJevHeU1V5CsM_iyJrMzFDRNZZfBmp5L48B5bpbY53ttU_SCdJdU6B_uoYxRmxw3fgMZ_LXLwI2-XukLXvuKdLg-w=w1283-h962-no?authuser=0)</figure>過去問の重要性が高いのは間違いないが、準1級に合格するためには知らない問題でも4割以上は正答する必要がある。そのためには、色々な城を定期的に攻めることが重要になる。
+![竹田城](takeda.jpg)
 
-日本100名城・続日本100名城だけが優れた城というわけではないが、検定を主催する公益財団法人・日本城郭検定協会が選定しているので、やはりこれらの城を中心的に攻めるのがよい<span class="easy-footnote-margin-adjust" id="easy-footnote-5-1332"></span><span class="easy-footnote">[<sup>5</sup>](https://komorinfo.com/blog/castle-j1q/#easy-footnote-bottom-5-1332 "日本100名城を「観光すべき城Top100（Top200）」だとは捉えない方がよい。200城に匹敵するほどの価値はあるが、各都道府県の認定上限（5城）に漏れたり、伏見城のように諸般の事情により選定から外れたりした城もある")</span>。
+過去問の重要性が高いのは間違いないが、準1級に合格するためには知らない問題でも4割以上は正答する必要がある。そのためには、色々な城を定期的に攻めることが重要になる。
 
-城に関する知識は書籍や動画などから得ることもできるが、記憶に残りやすくするためには実際に城攻めしたほうがよい。実際、僕も「○○城に現存する門の名前は？」という問題を見て「よく覚えていないけど徳が高そうな名前だった気がする……！」という朧気な記憶だけで正解したことがある<span class="easy-footnote-margin-adjust" id="easy-footnote-6-1332"></span><span class="easy-footnote">[<sup>6</sup>](https://komorinfo.com/blog/castle-j1q/#easy-footnote-bottom-6-1332 "</p>
+日本100名城・続日本100名城だけが優れた城というわけではないが、検定を主催する公益財団法人・日本城郭検定協会が選定しているので、やはりこれらの城を中心的に攻めるのがよい。
 
-<figure class="wp-block-image is-resized"><img loading="lazy" src="https://lh3.googleusercontent.com/3XaaCEy2v_IWxRmIw3eHYy69O_3m5lBWYCQiYfbTq8dxojPDavnjHeEupeGEFG3IXtxZJ048Kjg1cgB3Bm0OJRV4CRVCP5XPQftWIN2vfHfuy05TRcA534DazMKIwhYqmy_-moU0N4NsBqrOZ-TBry0LZyHw_xx8VMefJLEPi4muuyfzEOLfHx_mPNVRHh4z6fhC_WCSkZlFI1YiQtyedqr8bU7ArinDtgXHWSa4VrbWZTRNlujzmjVKqZMV1PnuCG6F2hLfbQPH058FhLJsAX_C64raJGKlAbT50DWE-YvAH9FkL398ujmz79B98leks1xgn_HyFX9hUZnIK_6TFf8r4I8aw26MVKQIoDY8BmyqPHyShVgvDc7TSArtLWVXJ3nCPfsHdqEjNTJcxcQq09fhRyLuneYJrOZguJcmjs4OG2ljGUDH5n2P8yIEMNKTEnvtpY6StdqG3OZTzrDD-KOWeRswk5DhuPhdrwtTDnlEtL9RTD8WXsz-tLQJNorayPmh0iN9vF3oKJ207AdAEBKi7UiXDnWtEy8Gs-Sjs85eA8J7jWTo07f3cjt3y8s7ZGZOg_4xhSybZ7Liq0D7SKK6hd4kNzOXmreOu3gcp5Xf5USZl7MYpk2ylVcIO14WeEGHJfVqKD96jYgP60ajUpsAQpWCNIuFc-rSPXIwePfMsmEABwRUgYIVuWIKIB93xJmnsywOiWtfmEnwxk4Iav8_=w1283-h962-no?authuser=0" alt="" width="321" height="241"/></figure>
+城に関する知識は書籍や動画などから得ることもできるが、記憶に残りやすくするためには実際に城攻めしたほうがよい。実際、僕も「○○城に現存する門の名前は？」という問題を見て「よく覚えていないけど徳が高そうな名前だった気がする……！」という朧気な記憶だけで正解したことがある[^5]
 
-<p>↑ 津城入徳門")</span>。
+[^5]: ↓ ![津城入徳門](nyutoku.jpg "津城入徳門")
 
 ### 時事問題対策をする
 
