@@ -20,8 +20,9 @@
 {{ end }}
 
 {{ $baseURL := (relLangURL "") }}
+{{ $showMoreLink := delimit (slice $baseURL $showMoreLinkDest) "/" }}
 <div class="mt-10 flex justify-center">
-  <a href="{{ delimit (slice $baseURL $showMoreLinkDest) "" }}">
+  <a href="{{ $showMoreLink }}">
     <button
       class="bg-transparent hover:text-primary-500 prose dark:prose-invert font-semibold hover:text-white py-2 px-4 border border-primary-500 hover:border-transparent rounded">
       {{ i18n "recent.show_more" | markdownify | emojify }}

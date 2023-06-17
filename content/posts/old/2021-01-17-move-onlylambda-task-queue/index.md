@@ -21,7 +21,11 @@ url: blog/move-onlylambda-task-queue/
 
 move-onlyなTaskをqueueに格納したい。 `std::queue<std::function<void(void)>>` で良ければ話は早いが、これではmove-onlyなファンクターをqueueに格納できない[^1]。
 
-[^1]: <code>std::function</code> にmove-onlyファンクターを格納できない件については、[move-onlyな関数を扱えるstd::functionのようなものを実装する](/blog/unique_function)、[一度きりしか呼べないファンクターを管理したい](/blog/post-593)、[std::functionやunique_functionを用いて、std::futureを中継する](/blog/relay-future-function)を参照。
+[^1]:
+    `std::function` にmove-onlyファンクターを格納できない件については、以下を参照。
+    {{< article link="blog/unique-function/" >}}
+    {{< article link="blog/post-593/" >}}
+    {{< article link="blog/relay-future-function/" >}}
 
 `std::function` の代わりに [move-onlyな関数を扱えるstd::functionのようなものを実装する](https://komorinfo.com/blog/unique-function/) で作った `komori::unique_function` を使って実現することもできる。しかし、queueに積むという目的を達するだけならもっと簡単にできる方法があるのでそれを紹介する。
 

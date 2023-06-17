@@ -23,7 +23,7 @@ description: 4000円で手に入る画面付きマイコンWio Terminalを用い
 
 ## Wio Terminal
 
-![Wio Terminal](featured.png)
+![Wio Terminal](feature.png)
 
 Wio Terminalは、seeed studioの画面つきデバイスである。販売価格は4000円前後と安いが、以下の特徴を備えている[^1]：
 

@@ -16,7 +16,9 @@ url: blog/post-593/
 description: C++14環境にて、一度きりしか呼べないstd::functionライクなクラスを自作する。
 ---
 
-[move-onlyな関数を扱えるstd::functionのようなものを実装する](/blog/unique-function/)の派生。
+以下の記事の派生。
+
+{{< article link="blog/unique-function/" >}}
 
 一度しか呼べないことが保証された`std::function`のようなものが欲しい。ファンクターをコールできるのは一度きりで、呼んだ後は必ずデストラクトされるようにしたい。ついでに、`std::function`では保持できないmove-onlyなファンクターも保持したい。
 
@@ -52,7 +54,7 @@ description: C++14環境にて、一度きりしか呼べないstd::functionラ�
 
 戻り値（`Res`）が`void`かどうかによって実装を切り替えている[^1]。戻り値が`void`以外の場合、invokeの戻り値を中継して呼び出し元に返却する必要があるが、`void`の場合は必要ない。C++ではvoid型の変数を宣言することは許されないので、SFINAEを用いて実装を切り替えている。
 
-[^1]: member関数のSFINAEによる実体化抑制は[SFINAEでtemplate classのメンバ関数の実体化を制御する](/blog/sfinae-template-class)を参照。
+[^1]: member関数のSFINAEによる実体化抑制は以下を参照。{{< article link="blog/sfinae-template-class/" >}}
 
 やっていることは単純で、関数呼び出し直後にnullファンクターとswapするだけである。入れ替え先のnullファンクターはswap直後にデストラクトされるので、storageで抱えているファンクターを2度以上呼び出すことはできない。
 

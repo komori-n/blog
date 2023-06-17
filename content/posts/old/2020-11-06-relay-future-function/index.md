@@ -272,7 +272,9 @@ std::function<X> func_a(int a) {
 
 [^2]: 一応、copyableな`std::promise`を作って解決することもできるが、`std::promsie`は実装がそこそこ難しいのと、パフォーマンスがあまりよろしくなさそうなので見送った。
 
-unique_functionについては [move-onlyな関数を扱えるstd::functionのようなものを実装する](/blog/unique-function/) を参照。一言でいうと、`std::function`のmove-only版である。
+unique_functionについては以下を参照。一言でいうと、`std::function`のmove-only版である。
+
+{{< article link="blog/unique-function/" >}}
 
 unique_functionを用いれば、promiseの受け渡しが簡単に行える。また、promiseの所有権が明確で、メモリリークの可能性も小さい[^3]。
 

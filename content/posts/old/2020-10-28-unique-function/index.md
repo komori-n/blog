@@ -147,7 +147,7 @@ namespace komori {
 
 コードを短くするためにいくつか実装をサボった部分がある。
 
-- small object optimization(SOO):[libstdc++のstd::functionの実装を眺める](/blog/libstd-function-impl/) で見たように、`std::function`の実装では小さなメモリに収まるファンクタは動的メモリ確保を行わず、静的領域に変数を格納されることが多い。一方、上記の実装では、ファンクターのサイズに関係なく動的にメモリを確保している[^5]
+- small object optimization(SOO):[libstdc++のstd::functionの実装を眺める](../libstd-function-impl/) で見たように、`std::function`の実装では小さなメモリに収まるファンクタは動的メモリ確保を行わず、静的領域に変数を格納されることが多い。一方、上記の実装では、ファンクターのサイズに関係なく動的にメモリを確保している[^5]
 - std::invoke: 関数の呼び出し部分でc++17で追加されたstd::invokeを使用している。c++11, 14しか使えない環境の場合、std::invokeに相当する機能を実装する必要がある（そんなに難しくない）
 - const、noexceptなどのquelifier
 

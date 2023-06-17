@@ -132,7 +132,7 @@ $ plantuml -tsvg test_diagram.pu
 
 上記のコマンドを実行すると、次のようなクラス図が得られる。
 
-![plantumlを用いたクラス図の生成結果](featured.png)
+![plantumlを用いたクラス図の生成結果](feature.png)
 
 hpp2plantumlコマンドの後に `sed` コマンドを挟んで `struct` を `class` に置き換えている。このように、hpp2plantumlにより生成されたPlantUMLファイルは壊れていたり情報が欠けていたりすることがある。そのため、特にエラーなく図が生成できた場合でも、軽く図の確認をしたほうがいいと思う。
 
