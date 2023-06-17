@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2022-07-30T20:06:00+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - 順列
+  - 重複
+  - ライブラリ
+  - 公開
+  - コンパイル時
 title: コンパイル時に重複のある順列を扱う
 relpermalink: blog//komoperm/
 url: blog/komoperm/

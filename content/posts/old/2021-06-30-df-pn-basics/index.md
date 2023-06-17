@@ -1,12 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - 将棋
+  - 技術解説
 date: "2021-06-30T22:32:06+09:00"
 tags:
-  - df-pn algorithm
+  - 将棋
+keywords:
   - 詰将棋
+  - df-pnアルゴリズム
+  - 証明数
+  - 反証数
 title: 詰将棋に対するdf-pnアルゴリズムの解説
 relpermalink: blog/df-pn-basics/
 url: blog/df-pn-basics/

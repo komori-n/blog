@@ -1,13 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-09-14T21:02:29+09:00"
 tags:
   - Python
+keywords:
   - Docker
   - スクレイピング
+  - Selenium
+  - VNCクライアント
 title: seleniumのGUIデバッグができるDockerコンテナ
 relpermalink: blog/selenium-docker/
 url: blog/selenium-docker/

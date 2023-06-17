@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2022-04-30T15:45:55+09:00"
 tags:
-  - C/C++
+  - C++
+  - SFINAE
+keywords:
+  - C++17
+  - Constraints
+  - enable_if
+  - nullptr
 title: SFINAEの制約式を少しだけ読みやすくするConstraints
 relpermalink: blog/sfinae-constraints/
 url: blog/sfinae-constraints/

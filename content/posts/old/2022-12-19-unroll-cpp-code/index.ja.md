@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2022-12-19T19:39:37+09:00"
 tags:
-  - C/C++
+  - C言語
+  - C++
+keywords:
+  - ループアンロール
+  - マクロ
+  - Unroller
+  - Pragma
 title: C++でループをアンロールする
 relpermalink: blog/unroll-cpp-code/
 url: blog/unroll-cpp-code/

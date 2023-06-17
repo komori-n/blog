@@ -1,12 +1,18 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - やってみた
 date: "2023-01-31T21:41:05+09:00"
 tags:
+  - CTF
+keywords:
   - writeup
-  - python
+  - Python
+  - ksnctf
+  - Are you human?
+  - リード・ソロモン符号
+  - 機械学習
+  - サポートベクターマシン
 title: ksnctf『Are you human?』Writeup
 relpermalink: blog/ksnctf-are-you-human-writeup/
 url: blog/ksnctf-are-you-human-writeup/

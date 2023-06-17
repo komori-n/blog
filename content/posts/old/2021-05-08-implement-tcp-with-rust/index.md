@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 date: "2021-05-08T15:14:28+09:00"
 tags:
   - Rust
+keywords:
+  - Docker
+  - WSL
+  - Rustで始めるTCP自作入門
+  - TCP
 title: 『Rustで始めるTCP自作入門』のWSLでの環境構築方法（手抜き工事）
 relpermalink: blog/implement-tcp-with-rust/
 url: blog/implement-tcp-with-rust/

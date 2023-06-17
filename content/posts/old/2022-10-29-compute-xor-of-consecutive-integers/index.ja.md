@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - 数学
+  - 技術解説
 date: "2022-10-29T21:01:00+09:00"
 tags:
+  - 数学
+keywords:
   - アルゴリズム
+  - xor
+  - 排他的論理和
+  - 連続整数
 title: 連続整数列の排他的論理和（xor）
 relpermalink: blog/compute-xor-of-consecutive-integers/
 url: blog/compute-xor-of-consecutive-integers/

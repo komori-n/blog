@@ -1,12 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-11-04T20:28:02+09:00"
 tags:
-  - C/C++
+  - C++
   - SFINAE
+  - STL
+keywords:
+  - C++14
+  - enable_if_t
+  - nullptr
+  - 実体化抑制
 title: SFINAEでtemplate classのメンバ関数の実体化を制御する
 relpermalink: blog/sfinae-template-class/
 url: blog/sfinae-template-class/

@@ -1,11 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-10-28T20:28:24+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - C++14
+  - ラムダ式
+  - 関数オブジェクト
+  - unique_function
+  - move-only
+  - function
 title: move-onlyな関数を扱えるstd::functionのようなものを実装する
 relpermalink: blog/unique-function/
 url: blog/unique-function/

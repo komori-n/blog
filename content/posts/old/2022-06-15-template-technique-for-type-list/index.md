@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - 技術解説
 date: "2022-06-15T21:06:29+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - template
+  - C++14
+  - メモリ
+  - 展開回数
 title: 型リストに対する展開回数を抑えたC++テンプレート
 relpermalink: blog/template-technique-for-type-list/
 url: blog/template-technique-for-type-list/

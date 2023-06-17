@@ -1,12 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-05-31T23:04:05+09:00"
 tags:
-  - C/C++
-  - std::pair
+  - C++
+keywords:
+  - pair
+  - piecewise_construct
+  - map
+  - 直接構築
 title: std::piecewise_constructの使い方（std::pair）
 relpermalink: blog/std-piecewise-construct/
 url: blog/std-piecewise-construct/

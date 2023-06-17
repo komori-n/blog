@@ -1,12 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-02-21T16:11:49+09:00"
 tags:
-  - C/C++
-  - timer
+  - C++
+keywords:
+  - タイマー
+  - ライブラリ
+  - MultiTimer
+  - sleep
+  - priority_queeu
+  - タスクスケジューラー
 title: 1スレッドで複数タイマーを管理する
 relpermalink: blog/multi-timer/
 url: blog/multi-timer/

@@ -1,11 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - 技術解説
 date: "2021-04-21T21:16:32+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - C++03
+  - C++11
+  - C++17
+  - C++20
+  - explicit
+  - 型変換
   - コンストラクタ
 title: c++のexplicit指定子の使い方まとめ
 relpermalink: blog/cpp-explicit-specifier/

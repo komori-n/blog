@@ -1,11 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-11-06T20:43:22+09:00"
 tags:
-  - C/C++
+  - C++
+  - STL
+keywords:
+  - function
+  - future
+  - promise
+  - Lambda式
+  - unique_function
 title: std::functionやunique_functionを用いて、std::futureを中継する
 relpermalink: blog/relay-future-function/
 url: blog/relay-future-function/

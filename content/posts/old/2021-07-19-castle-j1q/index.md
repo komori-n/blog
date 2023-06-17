@@ -1,12 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
   - ポエム
-  - 城
 date: "2021-07-19T22:40:59+09:00"
 tags:
+  - 城
+keywords:
+  - 日本城郭検定
   - 日本100名城
+  - 受験記
+  - 準1級
+  - 勉強法
 title: 第18回 日本城郭検定 準1級に合格した
 relpermalink: blog/castle-j1q/
 url: blog/castle-j1q/

@@ -1,11 +1,14 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 date: "2020-11-22T09:43:55+09:00"
 tags:
   - Toggl Track
+keywords:
+  - WSL
+  - powershell
+  - 自動化
 title: PCでTogglの作業記録を強制する
 relpermalink: blog/force-toggl-kit/
 url: blog/force-toggl-kit/

@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - Programming
+  - Techniques
 date: "2022-07-30T20:07:00+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - permutation
+  - duplication
+  - library
+  - publication
+  - compile-time
 title: Handle permutations with duplicates at compile time
 relpermalink: en/blog/komoperm/
 url: blog/komoperm/

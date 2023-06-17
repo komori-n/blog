@@ -1,16 +1,21 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - アルゴリズム
-  - 将棋
+  - 技術解説
 series:
-  - "利かずの駒並べ"
+  - 利かずの駒並べ
 series_order: 1
 date: "2020-07-18T17:27:56+09:00"
 tags:
-  - C/C++
+  - C++
   - パズル
+  - 将棋
+keywords:
+  - 利かずの駒並べ
+  - 石
+  - 劣化駒
+  - 探索
+  - 全列挙
 title: 利かずの駒並べ｜理論編
 relpermalink: blog/shogi-piece-placement-theory/
 url: blog/shogi-piece-placement-theory/

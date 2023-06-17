@@ -1,11 +1,12 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-07-10T19:21:00+09:00"
 tags:
-  - C/C++
+  - C言語
+keywords:
+  - Cプリプロセッサマクロ
 relpermalink: blog/macro-strip-brackets/
 url: blog/macro-strip-brackets/
 title: マクロ定数からカッコを剥ぎ取る

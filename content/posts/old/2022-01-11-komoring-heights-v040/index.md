@@ -1,14 +1,23 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
-  - 将棋
+  - ポエム
+  - 技術解説
 date: "2022-01-11T22:59:52+09:00"
 tags:
-  - C/C++
-  - df-pn algorithm
+  - C++
+  - 将棋
+  - KomoringHeights
+keywords:
   - 詰将棋
+  - リリース
+  - ミクロコスモス
+  - df-pnアルゴリズム
+  - 二重カウント
+  - GHI問題
+  - TCA
+  - 余詰探索
+  - Garbage Collection
 title: 高速な詰将棋ソルバー『KomoringHeights』v0.4.0を公開した
 relpermalink: blog/komoring-heights-v040/
 url: blog/komoring-heights-v040/

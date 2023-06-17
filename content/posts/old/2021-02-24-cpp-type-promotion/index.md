@@ -1,12 +1,13 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-02-24T14:10:13+09:00"
 tags:
   - C/C++
-  - integer types
+keywords:
+  - 型昇格
+  - 整数
 title: C++の整数演算における型の昇格
 relpermalink: blog/cpp-type-promotion/
 url: blog/cpp-type-promotion/

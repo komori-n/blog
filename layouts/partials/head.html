@@ -17,7 +17,7 @@
   {{ with (.Params.Summary | default .Params.Description) | default .Site.Params.description -}}
   <meta name="description" content="{{ . }}" />
   {{- end }}
-  {{ with  .Params.Tags | default .Params.keywords | default .Site.Params.keywords -}}
+  {{ with (union .Params.Tags .Params.keywords) | default .Site.Params.keywords -}}
   <meta name="keywords" content="{{ range . }}{{ . }}, {{ end -}}" />
   {{- end }}
   {{ with .Site.Params.robots }}

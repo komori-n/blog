@@ -1,12 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - explanation
+  - 技術解説
 date: "2020-10-11T20:38:50+09:00"
 tags:
-  - C/C++
+  - C++
   - STL
+keywords:
+  - function
+  - c++11
+  - libstdc++
 title: libstdc++のstd::functionの実装を眺める
 relpermalink: blog/libstd-function-impl/
 url: blog/libstd-function-impl/

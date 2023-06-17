@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2022-03-31T22:48:33+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - 型推論
+  - ビルドエラー
+  - template
+  - 失敗
+  - deprecated
 title: C++で型推論結果を手っ取り早く知りたいとき
 relpermalink: blog/cpp-template-deduction/
 url: blog/cpp-template-deduction/

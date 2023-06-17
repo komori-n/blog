@@ -1,14 +1,19 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - 将棋
+  - やってみた
+  - ポエム
 date: "2021-07-08T22:56:14+09:00"
 permalink: blog/komoring-heights/
 tags:
-  - C/C++
-  - df-pn algorithm
+  - C++
+  - 将棋
+  - KomoringHeights
+keywords:
+  - df-pnアルゴリズム
   - 詰将棋
+  - ミクロコスモス
+  - やねうら王
 title: オープンソースの詰将棋エンジン「KomoringHeights」を作った
 url: blog/komoring-heights/
 description: オープンソースの詰将棋エンジンを公開した

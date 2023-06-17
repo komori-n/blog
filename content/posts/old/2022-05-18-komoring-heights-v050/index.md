@@ -1,13 +1,21 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - 将棋
+  - ポエム
+  - 技術解説
 date: "2022-05-18T20:16:26+09:00"
 tags:
-  - C/C++
-  - df-pn algorithm
+  - C++
+  - 将棋
+  - KomoringHeights
+keywords:
+  - df-pnアルゴリズム
   - 詰将棋
+  - 高速
+  - 難解
+  - 合流検出
+  - 合駒
+  - 余詰
 title: 難解作品が解ける詰め将棋エンジン KomoringHeights v0.5.0 を公開した
 relpermalink: blog/komoring-heights-v050/
 url: blog/komoring-heights-v050/

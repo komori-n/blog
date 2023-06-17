@@ -1,15 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
-  - ポエム
-  - 将棋
+  - 技術解説
 date: "2022-02-14T21:48:55+09:00"
 tags:
-  - C/C++
-  - df-pn algorithm
+  - 将棋
+keywords:
+  - df-pnアルゴリズム
+  - 二重カウント
   - 詰将棋
+  - 合流
+  - SNDA
 title: 詰将棋探索における簡易的な二重カウント対策
 relpermalink: blog/proof-number-double-count/
 url: blog/proof-number-double-count/

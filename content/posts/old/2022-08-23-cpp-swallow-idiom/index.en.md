@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - Programming
+  - Techniques
 date: "2022-08-23T22:01:00+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - swallow
+  - pack expansion
+  - C++17
+  - anything
 title: Throw away pack expansion results in C++
 relpermalink: /en/blog/cpp-swallow-idiom/
 url: blog/cpp-swallow-idiom/

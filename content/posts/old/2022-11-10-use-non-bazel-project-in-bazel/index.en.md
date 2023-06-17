@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - Programming
+  - Techniques
 date: "2022-11-10T22:02:00+09:00"
 tags:
   - Bazel
+keywords:
+  - new_local_repository
+  - local environment
+  - Git
+  - OpenSSL
 title: Use non-Bazel Libraries in Bazel Project
 permalink: /en/blog/use-non-bazel-libraries-in-bazel-project/
 url: blog/use-non-bazel-libraries-in-bazel-project/

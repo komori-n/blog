@@ -1,11 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-02-28T17:11:22+09:00"
 tags:
   - Rust
+keywords:
+  - serde
+  - "null"
+  - 値なし
+  - カスタムシリアライザ
+  - deserialize_with
+  - json
 title: serdeのDeserializeでnullと値なしを区別する
 relpermalink: blog/serde-option-deserialize/
 url: blog/serde-option-deserialize/

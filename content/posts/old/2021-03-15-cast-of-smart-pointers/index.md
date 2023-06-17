@@ -1,12 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-03-15T21:22:02+09:00"
 tags:
-  - C/C++
+  - C++
+  - STL
+keywords:
   - スマートポインタ
+  - unique_ptr
+  - shared_ptr
+  - dynamic_cast
+  - dynamic_pointer_cast
 title: スマートポインタをdynamic_castしたい
 relpermalink: blog/cast-of-smart-pointers/
 url: blog/cast-of-smart-pointers/

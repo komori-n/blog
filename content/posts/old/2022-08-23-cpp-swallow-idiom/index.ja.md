@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2022-08-23T22:01:00+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - swallow
+  - 捨てる
+  - パック展開
+  - C++17
+  - anything
 title: C++で行儀よくパック展開結果を捨てる
 relpermalink: blog/cpp-swallow-idiom/
 url: blog/cpp-swallow-idiom/

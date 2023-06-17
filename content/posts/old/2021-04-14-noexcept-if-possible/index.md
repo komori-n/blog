@@ -1,12 +1,14 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - 技術解説
 date: "2021-04-14T21:34:37+09:00"
 tags:
   - C/C++
+keywords:
   - noexcept
+  - 例外仕様
+  - 演算子
 title: 他関数に応じてnoexceptにしたりしなかったりする
 relpermalink: blog/noexcept-if-possible/
 url: blog/noexcept-if-possible/

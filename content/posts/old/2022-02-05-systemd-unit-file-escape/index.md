@@ -1,9 +1,14 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - 技術解説
 date: "2022-02-05T15:36:52+09:00"
+keywords:
+  - Docker
+  - systemd
+  - エスケープ
+  - Proxy
+  - HTTP_PROXY
 title: systemd unit fileでは%のエスケープが必要
 relpermalink: blog/systemd-unit-file-escape/
 url: blog/systemd-unit-file-escape/

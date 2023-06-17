@@ -1,11 +1,12 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - Math
+  - Mathematics
 date: "2022-10-29T21:01:00+09:00"
 tags:
   - Algorithm
+keywords:
+  - integer sequence
 title: Compute Exclusive OR(xor) of Consecutive Integers
 relpermalink: /en/blog/compute-xor-of-consecutive-integers/
 url: blog/compute-xor-of-consecutive-integers/

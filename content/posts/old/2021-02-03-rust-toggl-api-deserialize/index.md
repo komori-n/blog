@@ -1,12 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - やってみた
 date: "2021-02-03T17:00:12+09:00"
 tags:
   - Rust
   - Toggl Track
+keywords:
+  - Toggl Reports API v2
+  - RESTful API
+  - serde
 title: RustでToggl Reports API v2を叩いてdeserializeする
 relpermalink: blog/rust-toggl-api-deserialize/
 url: blog/rust-toggl-api-deserialize/

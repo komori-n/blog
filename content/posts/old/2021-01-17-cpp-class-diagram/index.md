@@ -1,13 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 date: "2021-01-17T10:13:16+09:00"
 tags:
-  - C/C++
-  - Docker
+  - C++
   - Python
+keywords:
+  - Docker
+  - クラス図
+  - 自動化
+  - hpp2plantuml
+  - PlantUML
 title: C++のクラス図を楽して自動生成する
 relpermalink: blog/cpp-class-diagram/
 url: blog/cpp-class-diagram/

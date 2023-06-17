@@ -1,12 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-01-17T11:09:43+09:00"
 tags:
-  - C/C++
-  - Algorithm
+  - C++
+  - STL
+keywords:
+  - move-only
+  - queue
+  - ファンクター
+  - unique_function
+  - Lambda式
 title: move-onlyなlambda式のTaskQueueを作る
 relpermalink: blog/move-onlylambda-task-queue/
 url: blog/move-onlylambda-task-queue/

@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - Programming
+  - Techniques
 date: "2022-12-19T19:39:47+09:00"
 tags:
-  - C/C++
+  - C
+  - C++
+keywords:
+  - loop unrolling
+  - macro
+  - unroller
+  - pragma
 title: Unroll for-loops in C++
 relpermalink: en/blog/unroll-cpp-code-en/
 url: blog/unroll-cpp-code-en/

@@ -1,12 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-11-04T20:59:50+09:00"
 tags:
-  - C/C++
+  - C++
   - SFINAE
+keywords:
+  - C++11
+  - function
+  - onetime_function
 title: 一度きりしか呼べないファンクターを管理したい
 relpermalink: blog/post-593/
 url: blog/post-593/

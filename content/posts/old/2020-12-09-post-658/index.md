@@ -1,12 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-12-09T20:34:12+09:00"
 tags:
-  - C/C++
-  - std::recursive_mutex
+  - C++
+  - STL
+keywords:
+  - recursive_mutex
+  - コールバック
+  - dead lock
+  - マルチスレッド
 title: std::recursive_mutexを使う
 relpermalink: blog/post-658/
 url: blog/post-658/

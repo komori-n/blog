@@ -1,11 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-08-31T22:13:11+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - インクルードガード
+  - 予約語
+  - 識別子
+  - アンダースコア
+  - コンパイラ
+  - 命名
 title: C++のインクルードガードの命名
 relpermalink: blog/include-guards/
 url: blog/include-guards/

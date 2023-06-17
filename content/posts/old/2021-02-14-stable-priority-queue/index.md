@@ -1,12 +1,18 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 canonical: https://komorinfo.com/blog/post-979/
 date: "2021-02-14T22:44:15+09:00"
 tags:
-  - C/C++
+  - C++
+  - STL
+keywords:
+  - C++14
+  - priority_queue
+  - 安定
+  - stable_priority_queue
+  - multiset
 title: 安定な優先順位付きキュー（stable_priority_queue）を作る
 relpermalink: blog/stable-priority-queue/
 url: blog/stable-priority-queue/

@@ -1,16 +1,20 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 canonical: https://komorinfo.com/blog/pointer-and-big-endian/
 date: "2020-07-08T19:31:21+09:00"
 tags:
-  - C/C++
+  - C言語
+keywords:
+  - エンディアン
+  - ビッグエンディアン
+  - リトルエンディアン
+  - バグ
 title: ポインタのキャストでエンディアンを意識しないとバグる例
 relpermalink: blog/pointer-cast-and/
 url: blog/pointer-cast-and/
-description: C言語でエンディアンの異なる環境で挙動が代わる例について解説する。
+description: C言語プログラムのエンディアン問題の検証コード。ビッグエンディアン環境で実行した場合、変数への格納と取り出しはセットにしないとバグってしまう。
 ---
 
 常識だと思っていたことがあまり知られていなかったっぽいのでメモを兼ねて共有する。

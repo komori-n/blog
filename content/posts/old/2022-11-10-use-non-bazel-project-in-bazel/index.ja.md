@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2022-11-10T22:01:00+09:00"
 tags:
   - Bazel
+keywords:
+  - new_local_repository
+  - ローカル
+  - Git
+  - OpenSSL
 title: Bazelで管理されていないライブラリをBazelで使う
 relpermalink: blog/use-non-bazel-project-in-bazel/
 url: blog/use-non-bazel-project-in-bazel/

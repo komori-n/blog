@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - 技術解説
 date: "2023-05-31T22:30:32+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - C++17
+  - Copy Elision
+  - Return Value Optimization
+  - RVO
 title: C++17におけるコピー省略（Copy Elision）
 relpermalink: blog/copy-elision-in-cpp17/
 url: blog/copy-elision-in-cpp17/

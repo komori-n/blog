@@ -1,12 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - 技術解説
 date: "2021-09-30T22:19:23+09:00"
 tags:
   - Rust
+keywords:
   - Tetris
+  - テトリス
+  - Cold Clear
+  - パフェ
+  - Bag System
+  - Super Rotation System
 title: テトリスAI『Cold Clear』の思考部を眺める
 relpermalink: blog/cold-clear-search-algorithm/
 url: blog/cold-clear-search-algorithm/

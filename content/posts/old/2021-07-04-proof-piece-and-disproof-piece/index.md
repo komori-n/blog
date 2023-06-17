@@ -1,12 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - 将棋
+  - 技術解説
 date: "2021-07-04T16:50:43+09:00"
 tags:
-  - df-pn algorithm
+  - 将棋
+keywords:
+  - df-pnアルゴリズム
   - 詰将棋
+  - 証明駒
+  - 反証駒
+  - 優等局面
+  - やねうら王
 title: 詰将棋探索における証明駒／反証駒の活用方法
 relpermalink: blog/proof-piece-and-disproof-piece/
 url: blog/proof-piece-and-disproof-piece/

@@ -1,11 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-03-28T22:30:18+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - C++11
+  - 生文字列リテラル
+  - Raw String Literals
+  - 使い方
+  - json
+  - エスケープ
 title: 生文字列リテラル（Raw String Literals）の使い方メモ
 relpermalink: blog/post-1089/
 url: blog/post-1089/

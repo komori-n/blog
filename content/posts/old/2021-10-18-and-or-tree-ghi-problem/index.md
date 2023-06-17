@@ -1,13 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
-  - 将棋
+  - 技術解説
 date: "2021-10-18T23:56:58+09:00"
 tags:
-  - df-pn algorithm
+  - 将棋
+keywords:
+  - df-pnアルゴリズム
   - 詰将棋
+  - GHI問題
+  - 経路
+  - 置換表
+  - KomoringHeights
 title: 詰将棋ソルバーにおけるGHI問題対策
 relpermalink: blog/and-or-tree-ghi-problem/
 url: blog/and-or-tree-ghi-problem/

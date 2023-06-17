@@ -1,12 +1,14 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-06-18T23:03:15+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
   - const
+  - ポインタ
+  - 参照
 title: C/C++でconstの位置に迷うときの考え方
 relpermalink: blog/cpp-const-position/
 url: blog/cpp-const-position/

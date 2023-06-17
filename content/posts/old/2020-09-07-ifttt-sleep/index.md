@@ -1,12 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 date: "2020-09-07T20:50:19+09:00"
 tags:
   - IFTTT
+keywords:
   - Assistant Computer Control(ACC)
+  - Windows
+  - NFCタグ
+  - Automate
+  - OneDrive
 title: IFTTTからPCをスリープにする
 relpermalink: blog/ifttt-sleep/
 url: blog/ifttt-sleep/

@@ -1,13 +1,18 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 date: "2021-03-14T17:14:23+09:00"
 tags:
-  - C/C++
+  - C++
   - GoogleTest
+keywords:
+  - GoogleMock
   - Git
+  - cmake
+  - 単体テスト
+  - モック
+  - 導入
 title: GoogleTest/GoogleMockをsubmoduleで管理する
 relpermalink: blog/add-gtest-and-gmock-into-your-project/
 url: blog/add-gtest-and-gmock-into-your-project/

@@ -1,9 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - ポエム
 date: "2021-03-05T21:25:31+09:00"
+tags:
+  - 城
+keywords:
+  - 日本城郭検定
+  - シロっぷ
+  - オンライン入門級
+  - 受験
 title: 日本城郭検定オンライン入門級 受験のススメ
 relpermalink: blog/castle-test-online/
 url: blog/castle-test-online/

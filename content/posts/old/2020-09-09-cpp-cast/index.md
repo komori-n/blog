@@ -1,11 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-09-09T20:56:53+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - static_cast
+  - dynamic_cast
+  - reinterpret_cast
+  - キャスト
 title: static_cast, dynamic_cast, reinterpret_castで結果が変わる例
 relpermalink: blog/cpp-cast/
 url: blog/cpp-cast/

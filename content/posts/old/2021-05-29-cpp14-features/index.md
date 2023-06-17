@@ -1,13 +1,19 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-05-29T16:56:08+09:00"
 tags:
-  - C/C++
+  - C++
+  - STL
+keywords:
   - C++11
   - C++14
+  - 差分
+  - constexpr
+  - Lambda式
+  - 初期化キャプチャ
+  - 2進数リテラル
 title: c++14でできてc++11ではできないことまとめ
 relpermalink: blog/cpp14-features/
 url: blog/cpp14-features/

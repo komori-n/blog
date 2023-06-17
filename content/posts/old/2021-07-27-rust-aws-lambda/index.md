@@ -1,12 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - プログラミング
+  - やってみた
 date: "2021-07-27T22:20:36+09:00"
 tags:
-  - AWS Lambda
   - Rust
+keywords:
+  - AWS
+  - Lambda
+  - クロスコンパイル
+  - aws-lambda-rust-runtime
+  - ビルド
+  - AWS CLI
 title: Rust で AWS Lambda を利用する手順まとめ
 relpermalink: blog/rust-aws-lambda/
 url: blog/rust-aws-lambda/

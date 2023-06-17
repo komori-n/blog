@@ -1,11 +1,17 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - Programming
+  - Tips
 date: "2022-04-30T15:45:55+09:00"
 tags:
-  - C/C++
+  - C++
+  - SFINAE
+keywords:
+  - C++17
+  - Constraints
+  - enable_if
+  - nullptr
+keywords:
 title: "`Constraints` improves readability of SFINAE code"
 relpermalink: en/blog/sfinae-constraints/
 url: blog/sfinae-constraints/

@@ -1,16 +1,18 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - 将棋
-  - アルゴリズム
+  - やってみた
 series:
-  - "利かずの駒並べ"
+  - 利かずの駒並べ
 series_order: 2
 date: "2020-07-25T17:11:23+09:00"
 tags:
-  - C/C++
+  - C++
   - パズル
+  - 将棋
+keywords:
+  - 利かずの駒並べ
+  - 局面図
 title: 利かずの駒並べ｜実践編
 relpermalink: blog/shogi-piece-placement-result/
 url: blog/shogi-piece-placement-result/

@@ -1,11 +1,13 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-11-30T22:57:06+09:00"
 tags:
   - Bash
+keywords:
+  - 変数
+  - 入れ子
 title: Bashで変数の変数を参照する
 relpermalink: blog/bash-variable-of-variable/
 url: blog/bash-variable-of-variable/

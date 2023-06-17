@@ -1,15 +1,21 @@
 ---
 author: komori-n
-draft: true
 date: "2022-12-30T19:39:37+09:00"
 categories:
-  - プログラミング
   - ポエム
-  - 将棋
+  - 技術解説
 tags:
-  - C/C++
-  - df-pn algorithm
+  - C++
+  - 将棋
+  - KomoringHeights
+keywords:
   - 詰将棋
+  - df-pnアルゴリズム
+  - 安定
+  - 1.0.0
+  - 無駄合
+  - GoogleTest
+  - Doxygen
 title: 安定性が向上した詰将棋エンジン『KomoringHeights v1.0.0』を公開した
 relpermalink: blog/komoring-heights-v1/
 url: blog/komoring-heights-v1/

@@ -1,12 +1,19 @@
 ---
 author: komori-n
-draft: true
 categories:
+  - やってみた
   - ポエム
 date: "2021-02-27T00:00:00+09:00"
 tags:
   - 22/7
   - Rust
+keywords:
+  - ナナニジ
+  - ジェネレータ
+  - 33-4
+  - AWS Lambda
+  - 分解効率
+  - 事前計算
 title: ナナニジ算ジェネレータを作った
 relpermalink: blog/nananiji-generator/
 url: blog/nananiji-generator/

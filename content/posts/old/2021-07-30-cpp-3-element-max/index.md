@@ -1,11 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-07-30T22:42:17+09:00"
 tags:
-  - C/C++
+  - C++
+  - STL
+keywords:
+  - min
+  - max
+  - initializer_list
+  - c++11
 title: 3要素以上のstd::min, std::maxを取る
 relpermalink: blog/cpp-3-element-max/
 url: blog/cpp-3-element-max/

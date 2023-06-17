@@ -1,11 +1,14 @@
 ---
 author: komori-n
-draft: true
 categories:
   - ポエム
 date: "2020-12-26T09:57:39+09:00"
 tag:
-  - 体験記
+  - 試験
+keywords:
+  - エンベデッドシステムスペシャリスト
+  - 高度情報処理技術者試験
+  - 勉強方法
 title: エンベデッドシステムスペシャリスト試験 受験記
 relpermalink: blog/es-poet/
 url: blog/es-poet/

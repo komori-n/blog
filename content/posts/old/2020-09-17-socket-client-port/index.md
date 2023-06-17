@@ -1,12 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-09-17T21:26:35+09:00"
 tags:
-  - C/C++
-  - BSD socket
+  - C++
+keywords:
+  - Socket
+  - TCP
+  - USP
+  - ポート番号
 title: BSD socketでclient側のport番号を固定する
 relpermalink: blog/socket-client-port/
 url: blog/socket-client-port/

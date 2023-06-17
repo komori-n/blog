@@ -1,12 +1,12 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2020-07-09T21:19:49+09:00"
 tags:
-  - C/C++
-  - C Preprocessor Macro
+  - C言語
+keywords:
+  - Cプリプロセッサマクロ
 relpermalink: blog/change-macro-function-definition/
 url: blog/change-macro-function-definition/
 title: 値に応じて中身が変わるマクロ関数

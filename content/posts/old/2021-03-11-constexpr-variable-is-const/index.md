@@ -1,12 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - 技術解説
 date: "2021-03-11T18:21:04+09:00"
 tags:
-  - C/C++
+  - C++
+keywords:
+  - C++11
   - constexpr
+  - const
+  - コンパイル時
+  - 位置
 title: constexpr宣言された変数は暗黙的にconstになる
 permalink: blog/constexpr-variable-is-const/
 url: blog/constexpr-variable-is-const/

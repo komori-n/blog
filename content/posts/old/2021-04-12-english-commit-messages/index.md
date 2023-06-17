@@ -1,15 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 canonical: https://komorinfo.com/blog/post-1099/
 date: "2021-04-12T23:10:54+09:00"
-tags:
+keywords:
   - Git
-  - English
-  - commit message
+  - 英語
+  - コミットメッセージ
   - あいまい検索
+  - fzf
 title: 英語コミットメッセージの使用例をサッと検索する
 relpermalink: blog/english-commit-messages/
 url: blog/english-commit-messages/

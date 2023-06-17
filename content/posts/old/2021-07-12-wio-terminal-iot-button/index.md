@@ -1,13 +1,16 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 date: "2021-07-12T23:53:48+09:00"
 tags:
-  - C/C++
+  - C言語
+keywords:
   - SwitchBot
   - Wio Terminal
+  - 組み込み
+  - IoTデバイス
+  - Wi-Fi
 title: 4000円で画面つきIoTボタンを作る（Wio Terminal）
 relpermalink: blog/wio-terminal-iot-button/
 url: blog/wio-terminal-iot-button/

@@ -1,12 +1,15 @@
 ---
 author: komori-n
-draft: true
 categories:
-  - tips
+  - やってみた
 date: "2020-12-13T17:20:05+09:00"
 tags:
   - Python
   - Toggl Track
+keywords:
+  - Toggl Reports API
+  - LINE
+  - heroku
 title: togglの日報をLINEに送る
 relpermalink: blog/toggl-report-to-line-notify/
 url: blog/toggl-report-to-line-notify/
