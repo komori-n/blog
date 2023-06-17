@@ -2,37 +2,29 @@
 author: komori-n
 draft: true
 categories:
-  - プログラミング
+  - tips
 date: "2021-07-12T23:53:48+09:00"
-enclosure:
-  - "https://komorinfo.com/wp-content/uploads/2021/07/VID_20210704_093012.mp4
-
-    37640299
-
-    video/mp4
-
-    "
-guid: https://komorinfo.com/blog/?p=1311
-id: 1311
-image: https://komorinfo.com/wp-content/uploads/2021/07/image-1.png
-og_img:
-  - https://komorinfo.com/wp-content/uploads/2021/07/image-1.png
-permalink: /wio-terminal-iot-button/
 tags:
   - C/C++
   - SwitchBot
   - Wio Terminal
 title: 4000円で画面つきIoTボタンを作る（Wio Terminal）
-url: wio-terminal-iot-button/
+relpermalink: blog/wio-terminal-iot-button/
+url: blog/wio-terminal-iot-button/
+description: 4000円で手に入る画面付きマイコンWio Terminalを用いて、IoTボタンを自作する方法について説明する。
 ---
 
-2021年7月現在、wifiに接続できるIoTボタンは意外と高い。単純にWiFiに接続してボタンを押すだけの SORACOM LTE-M Button<span class="easy-footnote-margin-adjust" id="easy-footnote-1-1311"></span><span class="easy-footnote">[<sup>1</sup>](https://komorinfo.com/blog/wio-terminal-iot-button/#easy-footnote-bottom-1-1311 "旧AWS IoT Button")</span> でも、7980 円もする。Raspberry Piや格安スマホが1万円程度で買えることを考えると、かなり高く感じてしまう。
+2021年7月現在、wifiに接続できるIoTボタンは意外と高い。単純にWiFiに接続してボタンを押すだけの SORACOM LTE-M Button（旧AWS IoT Button）でも、7980 円もする。Raspberry Piや格安スマホが1万円程度で買えることを考えると、かなり高く感じてしまう。
 
 そこで、安く買える組み込みデバイスである Wio Terminal を IoT Button 化する手順について説明する。
 
 ## Wio Terminal
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2021/07/image-1.png)</figure>Wio Terminalは、seeed studioの画面つきデバイスである。販売価格は4000円前後と安いが、以下の特徴を備えている<span class="easy-footnote-margin-adjust" id="easy-footnote-2-1311"></span><span class="easy-footnote">[<sup>2</sup>](https://komorinfo.com/blog/wio-terminal-iot-button/#easy-footnote-bottom-2-1311 "より詳しいスペックは<a rel="noreferrer noopener" href="https://wiki.seeedstudio.com/jp/Wio-Terminal-Getting-Started/" data-type="URL" data-id="https://wiki.seeedstudio.com/jp/Wio-Terminal-Getting-Started/" target="_blank">公式wikiの仕様</a>を参照")</span>。
+![Wio Terminal](featured.png)
+
+Wio Terminalは、seeed studioの画面つきデバイスである。販売価格は4000円前後と安いが、以下の特徴を備えている[^1]：
+
+[^1]: [公式wikiの仕様](https://wiki.seeedstudio.com/jp/Wio-Terminal-Getting-Started/)を参照
 
 - ユーザー定義ボタン（画面上部の3つ）
 - 5方向スイッチ（上下左右と押し込み）
@@ -41,9 +33,13 @@ url: wio-terminal-iot-button/
 - マイク
 - ブザー
 
-特に、5GHz帯のWi-Fiに繋がったりLCDスクリーンを搭載していたりと IoT Button を作るには十分すぎる機能がついている。昨今のIoTボタンは安くても5000円以上もすることを考えると、非常にお得なデバイスである<span class="easy-footnote-margin-adjust" id="easy-footnote-3-1311"></span><span class="easy-footnote">[<sup>3</sup>](https://komorinfo.com/blog/wio-terminal-iot-button/#easy-footnote-bottom-3-1311 "IoTボタンの例としては <a href="https://www.amazon.co.jp/dp/B07L59ZFVF/">SORACOM LTE-M Button powered by AWS | SORACOM</a> や <a href="https://www.amazon.co.jp/dp/B00ZQCSSSS/">SONY MESH Button(ボタン)タグ MESH-100BU</a> などがある。なお、スマホに通知を飛ばすだけのデバイスなら <a href="https://qiita.com/optimisuke/items/a9f4dc65559a7a5eadef">IoTボタンを安く手に入れてノーコードでWeb APIを叩く方法 &#8211; Qiita</a> のように300円で作れる")</span>。
+特に、5GHz帯のWi-Fiに繋がったりLCDスクリーンを搭載していたりと IoT Button を作るには十分すぎる機能がついている。昨今のIoTボタンは安くても5000円以上もすることを考えると、非常にお得なデバイスである[^2]。
 
-さらに、Rustを用いてWio Terminalを操作して組み込みプログラミングの基礎を学ぶ本も存在している<span class="easy-footnote-margin-adjust" id="easy-footnote-4-1311"></span><span class="easy-footnote">[<sup>4</sup>](https://komorinfo.com/blog/wio-terminal-iot-button/#easy-footnote-bottom-4-1311 "<a href="https://www.amazon.co.jp/dp/B0931ZLSYN/">基礎から学ぶ 組込みRust | 中林智之, 井田健太 | 工学 | Kindleストア | Amazon</a>")</span>。ただし、RustのドライバではHTTP通信できないなどの制約がいくつかあるので、RustでWio Terminalを触ろうとしている方は注意が必要である。
+[^2]: [SORACOM LTE-M Button powered by AWS | SORACOM](https://www.amazon.co.jp/dp/B07L59ZFVF/)や[https://www.amazon.co.jp/dp/B00ZQCSSSS/](SONY MESH Button(ボタン)タグ MESH-100BU)などがある。なお、スマホに通知を飛ばすだけのデバイスなら[IoTボタンを安く手に入れてノーコードでWeb APIを叩く方法 - Qiita](https://qiita.com/optimisuke/items/a9f4dc65559a7a5eadef)のように300円で作れる
+
+さらに、Rustを用いてWio Terminalを操作して組み込みプログラミングの基礎を学ぶ本も存在している[^3]。ただし、RustのドライバではHTTP通信できないなどの制約がいくつかあるので、RustでWio Terminalを触ろうとしている方は注意が必要である。
+
+[^3]: [基礎から学ぶ 組込みRust | 中林智之, 井田健太 | 工学 | Kindleストア | Amazon](https://komorinfo.com/blog/wio-terminal-iot-button/#easy-footnote-bottom-4-1311)
 
 ## セットアップ手順
 
@@ -55,13 +51,15 @@ url: wio-terminal-iot-button/
 
 SwitchBot Hub Miniを用いて部屋の電気のON/OFFしてみる。
 
-<figure class="wp-block-image size-large">![](https://komorinfo.com/wp-content/uploads/2021/07/WioSystem.jpg)</figure>Wio Terminalのボタンが押されたらSwitchBotApiを叩き、部屋に設置しているSwitchBot Hub Miniを介して部屋の電気を介してつけたり消したりする。SwitchBot は Hub Mini をコントロールするための REST API を公開しており、[OpenWonderLabs/SwitchBotAPI: SwitchBot API Documents](https://github.com/OpenWonderLabs/SwitchBotAPI) に従ってAPIを叩けば機器へ指示を出せる。
+![システム構成図](WioSystem.jpg)
+
+Wio Terminalのボタンが押されたらSwitchBotApiを叩き、部屋に設置しているSwitchBot Hub Miniを介して部屋の電気を介してつけたり消したりする。SwitchBot は Hub Mini をコントロールするための REST API を公開しており、[OpenWonderLabs/SwitchBotAPI: SwitchBot API Documents](https://github.com/OpenWonderLabs/SwitchBotAPI) に従ってAPIを叩けば機器へ指示を出せる。
 
 ### コードを書く
 
 [Wi-Fi – Seeed Wiki](https://wiki.seeedstudio.com/Wio-Terminal-Wi-Fi/) を参考に、SwitchBotApiサーバーへPOSTを打つコードを書く。SwitchBotApiサーバーはHTTPS対応が必須のようなので、`WiFiClient` ではなく `WiFiClientSecure` を用いる。
 
-```
+```c
 #include <WiFiClientSecure.h>;
 #include "Free_Fonts.h"  //include the header file
 #include "TFT_eSPI.h"
@@ -246,17 +244,19 @@ bool post_light_request(bool turn_on) {
 
 以下のパラメータは各自の環境に合わせて書き換える必要がある。
 
-<figure class="wp-block-table">| SSID | Wi-FiのSSID |
-|---|---|
-| PASSWORD | Wi-Fiのパスワード |
-| LIGHT\_DEVICE\_ID | ON/OFFしたい電気のDevice ID。[](https://github.com/OpenWonderLabs/SwitchBotAPI)[OpenWonderLabs/SwitchBotAPI: SwitchBot API Documents](https://github.com/OpenWonderLabs/SwitchBotAPI#get-device-list) を参照。 |
-| AUTHORIZATION\_KEY | SwitchBotの認証コード。SwitchBotのスマホアプリの開発者向けオプションから取得する。 |
+| SSID              | Wi-FiのSSID                                                                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| PASSWORD          | Wi-Fiのパスワード                                                                                                                                            |
+| LIGHT_DEVICE_ID   | ON/OFFしたい電気のDevice ID。[OpenWonderLabs/SwitchBotAPI: SwitchBot API Documents](https://github.com/OpenWonderLabs/SwitchBotAPI#get-device-list) を参照。 |
+| AUTHORIZATION_KEY | SwitchBotの認証コード。SwitchBotのスマホアプリの開発者向けオプションから取得する。                                                                           |
 
-</figure>なお、SwitchBotApiサーバーはHTTPの判定がシビアのため、`client.print("...\r\n")` ではなく `client.println("...")` と書くとエラーになるので注意が必要である。（一敗）
+なお、SwitchBotApiサーバーはHTTPの判定がシビアのため、`client.print("...\r\n")` ではなく `client.println("...")` と書くとエラーになるので注意が必要である。（一敗）
 
 ### 動作結果
 
-<figure class="wp-block-video"><video controls="" src="https://komorinfo.com/wp-content/uploads/2021/07/VID_20210704_093012.mp4"></video><figcaption>動作結果<span class="easy-footnote-margin-adjust" id="easy-footnote-5-1311"></span><span class="easy-footnote">[<sup>5</sup>](https://komorinfo.com/blog/wio-terminal-iot-button/#easy-footnote-bottom-5-1311 "付箋で隠している箇所にはSSIDが表示されている")</span></figcaption></figure>ボタンBを押すと部屋の電気が消え、ボタンCを押すと部屋の電気がついた。いったん SwitchBot サーバーを経由してから Mini Hub に指示が飛んでくるため、反応に2~3秒かっている。
+{{< video src="VID_20210704_093012.mov" >}}
+
+ボタンBを押すと部屋の電気が消え、ボタンCを押すと部屋の電気がついた。いったん SwitchBot サーバーを経由してから Mini Hub に指示が飛んでくるため、反応に2~3秒かっている。
 
 POSTの状況を画面に表示できるのも便利だ。WiFiの状態やPOSTの進捗状況を画面に表示することで、どこでエラーになっているか簡単に分かる。これは、画面なしのIoTボタンでは得られないメリットである。
 
