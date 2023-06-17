@@ -15,6 +15,7 @@ title: C++で行儀よくパック展開結果を捨てる
 relpermalink: blog/cpp-swallow-idiom/
 url: blog/cpp-swallow-idiom/
 description: C++でパラメータパックのパック展開結果をお行儀よく捨てる方法のまとめ。
+background: cpp.jpg
 ---
 
 C++でパラメータパックのパック展開結果をお行儀よく捨てる方法のまとめ。
