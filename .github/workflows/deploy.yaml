@@ -33,7 +33,7 @@ jobs:
         run: hugo -D --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Prepare internal link check
-        uses: |
+        run: |
           mkdir tmp
           cp -r public tmp/blog
 
