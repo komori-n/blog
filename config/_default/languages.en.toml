@@ -1,22 +1,26 @@
 languageCode = "en"
 languageName = "English"
 weight = 1
-title = "Blowfish"
+title = "komori-n's ULTRAsound"
 
 [params]
   displayName = "EN"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
-  # logo = "img/logo.png"
+  logo = "img/site_logo_new.png"
   # secondaryLogo = "img/secondary-logo.png"
-  # description = "My awesome website"
+  description = "A personal memo about C/C++/Rust"
   # copyright = "Copy, _right?_ :thinking_face:"
 
 [author]
   name = "komori-n"
-#  image = "img/blowfish_logo.png"
-#  headline = "I'm only human"
+  image = "img/author.png"
+  headline = "Embedded software engineer"
+  links = [
+    { github = "https://github.com/komori-n" },
+    { linkedin = "https://linkedin.com/in/toshinori-tsuboi" },
+  ]
 #  bio = "A little bit about you"
 #   links = [
 #     { email = "mailto:hello@your_domain.com" },

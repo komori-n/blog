@@ -19,10 +19,7 @@
 {{ $showMoreLinkDest = .Site.Params.homepage.showMoreLinkDest }}
 {{ end }}
 
-{{ $baseURL := .Site.BaseURL }}
-{{ if not (strings.HasSuffix $baseURL "/") }}
-  {{ $baseURL = delimit (slice $baseURL "/") "" }}
-{{ end }}
+{{ $baseURL := (relLangURL "") }}
 <div class="mt-10 flex justify-center">
   <a href="{{ delimit (slice $baseURL $showMoreLinkDest) "" }}">
     <button
