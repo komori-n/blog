@@ -1,40 +1,8 @@
 # コウモリのちょーおんぱ（Hugo版）
 
-WordPress版から移行お試し中。
+[![pre-commit Check](https://github.com/komori-n/blog/actions/workflows/pre-commit.yaml/badge.svg?branch=main)](https://github.com/komori-n/blog/actions/workflows/pre-commit.yaml)
+[![Deploy](https://github.com/komori-n/blog/actions/workflows/deploy.yaml/badge.svg?branch=main)](https://github.com/komori-n/blog/actions/workflows/deploy.yaml)
 
-## ToDo
+技術ブログ兼ポエム置き場。
 
-まずは記事の移行を優先。その後でDesignを調整する。
-
-### Design
-
-- トップページにも記事を表示する
-- サイドバーまたはトップバーに最近の記事を表示する
-- サイドバーまたはトップバーにカテゴリ一覧とタグ一覧を表示する
-- アイコンをちゃんと設定する
-- 色をWordPress版と同様に水色／オレンジに変える
-- タグとカテゴリの区別をつくようにする
-- 文字数と読むのにかかる時間はバグっているので消す
-- 関連ページを表示する
-- TwitterとかのShareボタンを設置する
-- HugoとかBlowfishとかのマニュアルをちゃんと読んで設定可能項目を確認する
-
-### Text
-
-- oldの1つずつ確認して`draft: true`を外す
-  - code blockの言語を目視で設定する
-  - 必要ならHugoのハイライトつきコードブロックに置き換える
-  - 壊れたfootnoteを直す
-  - 見るに堪えない記事をそっと消す
-  - QEMUのような頻度の低いタグを消す
-  - 短い記事はtipsに入れる
-  - relpermalink と url を設定してURLが変わらないようにする
-- お行儀よく多言語対応する
-- Aboutページを書く
-- Authorページを書く
-- Descriptionなどのメタデータを埋める
-
-### Site Management
-
-- Google Analyticsを置く
-- 広告をつける（？）
+旧ブログ（WordPress版）の記事は `content/posts/old` 以下に格納されている。
