@@ -9,27 +9,57 @@
     weight = 15
 
 [[main]]
+    name = "技術解説"
+    parent = "カテゴリ"
+    pageRef = "/categories/技術解説"
+    weight = 10
+
+[[main]]
+    name = "やってみた"
+    parent = "カテゴリ"
+    pageRef = "/categories/やってみた"
+    weight = 20
+
+[[main]]
+    name = "ポエム"
+    parent = "カテゴリ"
+    pageRef = "/categories/ポエム"
+    weight = 20
+
+[[main]]
     name = "タグ"
     pageRef = "/tags"
     weight = 20
 
 [[main]]
-    name = "C/C++"
+    name = "C言語"
     parent = "タグ"
-    pageRef = "/tags/c/c++"
+    pageRef = "/tags/C言語"
+    weight = 5
+
+[[main]]
+    name = "C++"
+    parent = "タグ"
+    pageRef = "/tags/c++"
     weight = 10
 
 [[main]]
     name = "Rust"
     parent = "タグ"
     pageRef = "/tags/rust"
-    weight = 10
+    weight = 15
 
 [[main]]
-    name = "詰将棋エンジン"
-    pageRef = "/tags/詰将棋"
+    name = "将棋"
+    pageRef = "/tags/将棋"
     parent = "タグ"
-    weight = 10
+    weight = 105
+
+[[main]]
+    name = "KmoringHeights"
+    pageRef = "/tags/KomoringHeights"
+    parent = "タグ"
+    weight = 110
 
 [[main]]
   identifier = "github"

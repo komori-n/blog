@@ -9,9 +9,39 @@
     weight = 15
 
 [[main]]
+    name = "Techniques"
+    pageRef = "/categories/techniques"
+    parent = "Category"
+    weight = 5
+
+[[main]]
+    name = "Mathematics"
+    pageRef = "/categories/mathematics"
+    parent = "Category"
+    weight = 10
+
+[[main]]
     name = "Tag"
     pageRef = "/tags"
     weight = 20
+
+[[main]]
+    name = "C"
+    pageRef = "/tags/c"
+    parent = "Tag"
+    weight = 5
+
+[[main]]
+    name = "C++"
+    pageRef = "/tags/c++"
+    parent = "Tag"
+    weight = 10
+
+[[main]]
+    name = "Bazel"
+    pageRef = "/tags/bazel"
+    parent = "Tag"
+    weight = 15
 
 [[main]]
   identifier = "github"

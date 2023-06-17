@@ -1,7 +1,7 @@
 ---
 author: komori-n
 categories:
-  - Tips
+  - Techniques
 date: "2022-04-30T15:45:55+09:00"
 tags:
   - C++
