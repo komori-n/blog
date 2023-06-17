@@ -12,3 +12,9 @@
     name = "Tag"
     pageRef = "/tags"
     weight = 20
+
+[[main]]
+  identifier = "github"
+  pre = "github"
+  url = "https://github.com/komori-n/blog"
+  weight = 100

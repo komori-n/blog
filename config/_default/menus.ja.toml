@@ -30,3 +30,9 @@
     pageRef = "/tags/詰将棋"
     parent = "タグ"
     weight = 10
+
+[[main]]
+  identifier = "github"
+  pre = "github"
+  url = "https://github.com/komori-n/blog"
+  weight = 100
