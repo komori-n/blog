@@ -62,6 +62,12 @@
     weight = 110
 
 [[main]]
+    name = "その他"
+    pageRef = "/tags"
+    parent = "タグ"
+    weight = 1000
+
+[[main]]
   identifier = "github"
   pre = "github"
   url = "https://github.com/komori-n/blog"
