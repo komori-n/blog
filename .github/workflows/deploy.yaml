@@ -23,7 +23,7 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: "0.110.0"
-          # extended: true
+          extended: true
 
       - name: Setup GitHub Pages
         id: pages
