@@ -74,7 +74,7 @@ smartTOC = true
   showAuthorsBadges = false
   showWordCount = true
   showSummary = true
-  sharingLinks = [ "twitter", "linkedin", "reddit", "pinterest", "facebook"]
+  sharingLinks = [ "twitter", "linkedin", "reddit", "facebook"]
 
 [list]
   showHero = false
