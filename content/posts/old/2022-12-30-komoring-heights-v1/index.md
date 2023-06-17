@@ -1,5 +1,8 @@
 ---
 author: komori-n
+series:
+  - KomoringHeightsリリース
+series_order: 4
 date: "2022-12-30T19:39:37+09:00"
 categories:
   - ポエム

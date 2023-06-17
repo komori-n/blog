@@ -3,6 +3,9 @@ author: komori-n
 categories:
   - やってみた
   - ポエム
+series:
+  - KomoringHeightsリリース
+series_order: 1
 date: "2021-07-08T22:56:14+09:00"
 permalink: blog/komoring-heights/
 tags:

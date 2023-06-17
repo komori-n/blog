@@ -3,6 +3,9 @@ author: komori-n
 categories:
   - ポエム
   - 技術解説
+series:
+  - KomoringHeightsリリース
+series_order: 2
 date: "2022-01-11T22:59:52+09:00"
 tags:
   - C++
