@@ -17,12 +17,6 @@ repos:
       - id: prettier
         exclude: layouts
 
-  - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 3.0.0
-    hooks:
-      - id: markdownlint
-        exclude: content/posts/old
-
   - repo: https://github.com/google/yamlfmt
     rev: v0.8.0
     hooks:

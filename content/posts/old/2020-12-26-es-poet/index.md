@@ -57,7 +57,7 @@ ES試験は、高度試験にも関わらず専門知識をあまり問われな
 
 ES試験を受験するにあたり以下の書籍で勉強を進めた。
 
-<iframe allowfullscreen="" frameborder="0" height="550" loading="lazy" src="https://read.amazon.com.au/kp/card?preview=inline&linkCode=kpd&ref_=k4w_oembed_nSEkroZY9FfDor&asin=B08DXD4LCY&tag=kpembed-20" style="max-width:100%" title="情報処理教科書 エンベデッドシステムスペシャリスト 2021～2022年版" type="text/html" width="500"></iframe>
+[情報処理教科書 エンベデッドシステムスペシャリスト 2021～2022年版（牧 隆史 松原 敬二）｜翔泳社の本](https://www.shoeisha.co.jp/book/detail/9784798167787)
 
 ### 午前試験
 

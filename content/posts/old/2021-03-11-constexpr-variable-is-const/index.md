@@ -74,7 +74,7 @@ int main(void) {
 - `constexpr` 宣言された変数は自動的に `const` 宣言されたことになる
 - ただし、ポインタや参照が絡む場合、指す先の値を書き換えることはできる
 
-**参考**
+## 参考
 
 - [c++ – constexpr const vs constexpr variables? – Stack Overflow](https://stackoverflow.com/questions/28845058/constexpr-const-vs-constexpr-variables)
 - [c++ – Difference between `constexpr` and `const` – Stack Overflow](https://stackoverflow.com/questions/14116003/difference-between-constexpr-and-const)
