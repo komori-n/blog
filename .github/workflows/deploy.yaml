@@ -32,15 +32,10 @@ jobs:
       - name: Build
         run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
-      - name: Prepare internal link check
-        run: |
-          mkdir tmp
-          cp -r public tmp/blog
-
       - name: Check internal link
         uses: untitaker/hyperlink@0.1.29
         with:
-          args: tmp/
+          args: public/
 
       - name: Upload to GitHub Pages
         uses: actions/upload-pages-artifact@v1
