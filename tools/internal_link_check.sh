@@ -1,9 +1,5 @@
 #!/bin/bash
 
-hugo -D --ignoreCache --baseURL http://localhost/blog
+hugo -D --baseURL http://localhost/
 
-rm -rf tmp
-mkdir tmp
-mv public tmp/blog
-
-hyperlink tmp
+hyperlink public
