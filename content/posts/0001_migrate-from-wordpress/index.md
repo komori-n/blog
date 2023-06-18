@@ -1,9 +1,8 @@
 ---
 author: komori-n
-draft: true
 categories:
   - やってみた
-date: 2023-06-17T18:00:26+09:00
+date: 2023-06-18T11:22:52+09:00
 tags:
   - HTML
   - Markdown
@@ -16,7 +15,7 @@ keywords:
 title: ブログをWordPressからHugoへ移行した
 relpermalink: blog/migrate-from-wordpress/
 url: blog/migrate-from-wordpress/
-decription: TBD
+decription: ブログをWordPress on AWSからHugo on GitHub Pagesへ移行した。
 ---
 
 ## 背景
@@ -43,7 +42,7 @@ Hugoはシンプルながらカスタマイズが容易なフレームワーク�
 Markdownベースのジェネレータなので、他のフレームワークへの乗り換えも容易に行える。
 このような理由からHugoへの乗り換えを決めた。
 
-![Hugoのロゴ](hugo-logo-wide.svg)
+![Hugoのロゴ](hugo-logo.png)
 
 ## 乗り換え方法
 
@@ -144,13 +143,13 @@ Markdown拡張によりこんなボックスを出すこともできる。
 ## 速度比較
 
 狙い通りページ読み込み速度が向上したかどうか調べるために、
-[PageSpeed Insights](https://pagespeed.web.dev/)でページ読み込み速度の比較を行った。
+[PageSpeed Insights](https://pagespeed.web.dev/)でモバイル版トップページのページ読み込み速度の比較を行った。
 
 ![移行前のパフォーマンス測定結果](2023-06-17-20-15-50.png "移行前（WordPress on AWS Lightsail）")
 
-![移行後のパフォーマンス測定結果](2023-06-17-20-13-30.png "移行後（Hugo on GitHub Pages）")
+![移行後のパフォーマンス測定結果](2023-06-18-08-37-47.png "移行後（Hugo on GitHub Pages）")
 
-Hugo版への移植により、パフォーマンスが70から89に向上した。
+Hugo版への移植により、パフォーマンスが70から100に向上した。
 体感的にも、旧サイト特有のもっさり感が薄まり、ページ読み込みが爆速になったと感じる。
 
 ## まとめ
@@ -158,3 +157,5 @@ Hugo版への移植により、パフォーマンスが70から89に向上した
 WordPress on AWSからHugo on GitHub Pagesへの移行を行った。
 サーバー保守の必要がなくなり、しかもページ読み込み速度がかなり向上した。
 さらに、Hugoの機能によりシンプルでモダンな見た目の良いサイトになった。
+
+{{< github repo="komori-n/blog" >}}
