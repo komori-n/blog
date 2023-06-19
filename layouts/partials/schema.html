@@ -37,10 +37,14 @@
     {{ with .PublishDate }}"datePublished": "{{ .Format $iso8601 }}",{{ end }}
     {{ with .ExpiryDate }}"expires": "{{ .Format $iso8601 }}",{{ end }}
     {{ with .Lastmod }}"dateModified": "{{ .Format $iso8601 }}",{{ end }}
-    {{ if .Keywords }}
-    {{ with .Keywords }}"keywords": {{ . }},{{ end }}
+    {{ $Keywords := slice }}
+    {{ if $.Params.tags }}
+      {{ $Keywords = $Keywords | append $.Params.tags }}
     {{ end }}
-    {{ with .Params.tags }}"keywords": {{ . }},{{ end }}
+    {{ if .Keywords }}
+      {{ $Keywords = $Keywords | append .Keywords }}
+    {{ end }}
+    "keywords": {{ $Keywords }},
     "mainEntityOfPage": "true",
     "wordCount": "{{ .WordCount }}"
   }]
