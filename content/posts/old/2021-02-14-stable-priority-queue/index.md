@@ -133,7 +133,7 @@ private:
 
 以下のように、Keyの型に応じて実装の切り替えを行っている。要素がcopyableでないときは`std::multiset<Key>`を、copyableのときは`std::map<Key, std::queue<Key>>`を用いる[^1]。
 
-[^1]: c++11以降では<code>std::multiset</code>に格納された同値な要素は、挿入順に並べられることが保証されている。
+[^1]: c++11以降では`std::multiset`に格納された同値な要素は、挿入順に並べられることが保証されている。
 
 ```cpp
   template <typename Key,

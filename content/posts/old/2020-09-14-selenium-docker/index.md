@@ -29,6 +29,6 @@ docker run -d -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone
 ポート5900がGUIデバッグ用。Ultra VNC[^1]などのVNCクライアントからコンテナに接続すれば、コンテナ内のデスクトップ画面が表示できる[^2]。
 
 [^1]: <https://forest.watch.impress.co.jp/library/software/ultravnc/>
-[^2]: PWは<code>secret</code>。
+[^2]: PWは`secret`。
 
 ![実行結果](image-4.png "実行結果")

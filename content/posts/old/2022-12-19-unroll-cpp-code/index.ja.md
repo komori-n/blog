@@ -143,7 +143,7 @@ int main() {
 
 3つめの方法はコンパイラにすべて任せる方法である。
 
-最近のコンパイラは、プログラムの高速化のために自動でループのアンロールを行うことがある。また、コード中の Pragma ディレクティブ（`#pragma`）や Pragma 演算子（`_Pragma()`）を通じてアンロールの指示を与えられるコンパイラも多い[^2]。例えば、GCCでは `#pragma GCC unroll <var>n</var>` （`Pragma("GCC unroll n")`）、clangでは `#pragma unroll n` （`Pragma("unroll n")`）によりアンロールの指示を与えられる。
+最近のコンパイラは、プログラムの高速化のために自動でループのアンロールを行うことがある。また、コード中の Pragma ディレクティブ（`#pragma`）や Pragma 演算子（`_Pragma()`）を通じてアンロールの指示を与えられるコンパイラも多い[^2]。例えば、GCCでは `#pragma GCC unroll n` （`Pragma("GCC unroll n")`）、clangでは `#pragma unroll n` （`Pragma("unroll n")`）によりアンロールの指示を与えられる。
 
 [^2]: [Pragma演算子](https://cpprefjp.github.io/lang/cpp11/pragma_operator.html)はC++11で追加された記法で、従来の Pragma ディレクティブで難しかったプリプロセッサ処理が可能になっている。
 
