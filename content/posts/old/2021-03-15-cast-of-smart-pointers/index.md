@@ -45,7 +45,7 @@ public:
 
 shread_ptrの場合、ズバリ `std::dynamic_pointer_cast` という関数が使える[^1]。
 
-[^1]: 詳しい解説は[dynamic_pointer_cast &#8211; cpprefjp C++日本語リファレンス](https://cpprefjp.github.io/reference/memory/shared_ptr/dynamic_pointer_cast=".html) を参照
+[^1]: 詳しい解説は[dynamic_pointer_cast - cpprefjp C++日本語リファレンス](https://cpprefjp.github.io/reference/memory/shared_ptr/dynamic_pointer_cast)を参照
 
 ```cpp
 std::shared_ptr<Derived> derived = std::make_shared<Derived>();

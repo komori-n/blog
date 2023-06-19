@@ -22,7 +22,7 @@ This page introduces the `Constraints` pattern, which can reduce the complexity 
 
 In C++17, in order to switch function declaration according to input types, typical C++ programmers write codes like the following.[^1]
 
-[^1]: See [Entry is not found - Secret Garden(Instrumental)](https://secret-garden.hatenablog.com/entry/2016/12/22/032008%22)(Japanese) and [std::enable_ifを使ってオーバーロードする時、enablerを使う？ - Qiita](https://qiita.com/kazatsuyu/items/203584ef4cb8b9e52462)(Japanese) to understand why C++ programmers often use `std::enable_if` and `std::nullptr_t`
+[^1]: See [Entry is not found - Secret Garden(Instrumental)](https://secret-garden.hatenablog.com/entry/2016/12/22/032008)(Japanese) and [std::enable_ifを使ってオーバーロードする時、enablerを使う？ - Qiita](https://qiita.com/kazatsuyu/items/203584ef4cb8b9e52462)(Japanese) to understand why C++ programmers often use `std::enable_if` and `std::nullptr_t`
 
 ```cpp
 template <typename T,
