@@ -3,6 +3,8 @@ author: komori-n
 categories:
   - 技術解説
 canonical: https://komorinfo.com/blog/pointer-and-big-endian/
+aliases:
+  - /blog/pointer-and-big-endian/
 date: "2020-07-08T19:31:21+09:00"
 tags:
   - C言語

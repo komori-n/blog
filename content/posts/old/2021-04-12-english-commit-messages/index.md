@@ -3,6 +3,8 @@ author: komori-n
 categories:
   - やってみた
 canonical: https://komorinfo.com/blog/post-1099/
+aliases:
+  - /blog/post-1099/
 date: "2021-04-12T23:10:54+09:00"
 keywords:
   - Git

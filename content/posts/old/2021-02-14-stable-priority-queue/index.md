@@ -3,6 +3,8 @@ author: komori-n
 categories:
   - 技術解説
 canonical: https://komorinfo.com/blog/post-979/
+aliases:
+  - /blog/post-979/
 date: "2021-02-14T22:44:15+09:00"
 tags:
   - C++
