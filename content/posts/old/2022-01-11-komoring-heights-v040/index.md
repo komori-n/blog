@@ -190,11 +190,9 @@ Small Tree GCの実装により、詰将棋を解くために最低限必要な�
 - M1 Mac用のコンパイルオプションの追加
 - deep df-pn[^10]（性能が良くないのでデフォルトOFF）
 
-1番目だけ軽く触れておくと、v0.2.1とv0.4.0では探索局面のカウント方法が変更になっている。npsを比較するとv0.4.0のほうが2倍近く高速化されているように見えるかもしれないが、実際には30%程度しか高速化できていない。v0.2.1では、末端局面の固定深さ探索が探索局面数に反映できていなかった。v0.4.0では、`Node::DoMove()`をコールするたびに探索局面数を加算するシンプルな方式に変更することで、より実態にあった局面数が出力されるようになった。
+1番目だけ軽く触れておくと、v0.2.1とv0.4.0では探索局面のカウント方法が変更になっている。npsを比較するとv0.4.0のほうが2倍近く高速化されているように見えるかもしれないが、実際には30%程度しか高速化できていない。v0.2.1では、末端局面の固定深さ探索が探索局面数に反映できていなかった。v0.4.0では、`Node::DoMove()`をコールするたびに探索局面数を加算するシンプルな方式に変更することで、より実態にあった局面数が出力されるようになった。旧バージョンとnpsや探索局面の比較を行う場合は注意していただきたい。
 
-[^10]:
-    Zhang, Song, Hiroyuki Iida, and H. Jaap van den Herik. “Deep df-pn and its efficient implementations.” Advances in Computer Games. Springer, Cham, 2017.
-    旧バージョンとnpsや探索局面の比較を行う場合は注意していただきたい。
+[^10]: Zhang, Song, Hiroyuki Iida, and H. Jaap van den Herik. “Deep df-pn and its efficient implementations.” Advances in Computer Games. Springer, Cham, 2017.
 
 ## まとめと今後の展望
 
