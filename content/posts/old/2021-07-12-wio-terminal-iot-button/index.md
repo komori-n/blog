@@ -257,7 +257,7 @@ bool post_light_request(bool turn_on) {
 
 ### 動作結果
 
-{{< video src="VID_20210704_093012.mov" >}}
+{{< video src="VID_20210704_093012.mov" poster="thumbnail.png" >}}
 
 ボタンBを押すと部屋の電気が消え、ボタンCを押すと部屋の電気がついた。いったん SwitchBot サーバーを経由してから Mini Hub に指示が飛んでくるため、反応に2~3秒かっている。
 
