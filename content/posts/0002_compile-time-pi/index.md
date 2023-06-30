@@ -157,16 +157,13 @@ FFTによる高速化の恩恵を受けつつ整数の世界でフーリエ変�
 
 NTTを用いた多倍長整数乗算の実現方法にはいくつか選択肢があるが、
 本ページでの計算ではSchönhage-Strassen Algorithm（SSA）を用いて実装を行った。
-SSAの詳しい理論については[^ssa]を参照。
+SSAの詳しい理論については[^ssa] [^ssa2]を参照。
 
-[^ssa]: <https://tonjanee.home.xs4all.nl/SSAdescription.pdf>
+[^ssa]:
 
-{{< alert >}}
-
-- SSAの文献を貼る
-- NTTの文献を貼る
-
-{{< /alert >}}
+A. Schönhage and V. Strassen, "Schnelle Multiplikation großer Zahlen", Computing 7 (1971), pp. 281–292.
+[^ssa2]:
+<https://tonjanee.home.xs4all.nl/SSAdescription.pdf>
 
 #### Karatsuba法とSSAの比較
 
