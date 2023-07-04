@@ -13,7 +13,7 @@ keywords:
   - コンパイル時
   - 円周率
   - 100万桁
-title: コンパイル時に円周率100万を桁計算する
+title: コンパイル時に円周率100万桁を計算する
 relpermalink: blog/compile-time-pi
 url: blog/compile-time-pi
 ---
