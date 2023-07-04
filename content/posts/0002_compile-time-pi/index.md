@@ -1,9 +1,9 @@
 ---
 author: komori-n
-draft: true
 categories:
   - 技術解説
-date: 2023-07-03T23:03:17+09:00
+  - やってみた
+date: 2023-07-04T20:38:53+09:00
 tags:
   - C++
 keywords:
