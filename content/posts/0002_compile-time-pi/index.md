@@ -13,14 +13,14 @@ keywords:
   - コンパイル時
   - 円周率
   - 100万桁
-title: コンパイル時に円周率を100万桁計算する
+title: コンパイル時に円周率100万を桁計算する
 relpermalink: blog/compile-time-pi
 url: blog/compile-time-pi
 ---
 
 {{< katex >}}
 
-C++20でconstexprの制限が緩和されたことを利用して、コンパイル時に円周率を100万桁計算した。
+C++20でconstexprの制限が緩和されたことを利用して、コンパイル時に円周率100万桁まで計算した。
 
 ## はじめに
 
