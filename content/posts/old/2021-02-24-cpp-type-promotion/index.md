@@ -4,7 +4,7 @@ categories:
   - 技術解説
 date: "2021-02-24T14:10:13+09:00"
 tags:
-  - C/C++
+  - C++
 keywords:
   - 型昇格
   - 整数

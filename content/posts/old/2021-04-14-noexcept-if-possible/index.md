@@ -4,7 +4,7 @@ categories:
   - 技術解説
 date: "2021-04-14T21:34:37+09:00"
 tags:
-  - C/C++
+  - C++
 keywords:
   - noexcept
   - 例外仕様
