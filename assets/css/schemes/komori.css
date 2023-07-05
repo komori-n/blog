@@ -31,3 +31,7 @@
   --color-secondary-800: 21, 94, 117;
   --color-secondary-900: 22, 78, 99;
 }
+
+html {
+  scroll-padding-top: 3.34rem;
+}
