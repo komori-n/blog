@@ -56,10 +56,8 @@ description: 暗黒通信団『間違いだらけの円周率1,000,000桁表』�
 ## 間違い探しの方針
 
 本文を文字に起こす際は[Tesseract OCR](https://github.com/tesseract-ocr/tesseract)を使用した。
-
-{{< alert >}}
-Tesseractの説明
-{{< /alert >}}
+TesseractはオープンソースのOCR（Optical Character Recognition/Reader, 光学的文字認識）エンジンである。
+英語にとどまらず、日本語やギリシャ語など数多くの言語のテキストを精度良く認識することができる。
 
 ただし、Tesseractへ丸投げするだけでは読み取り精度があまり良くない。
 そのため、Tesseractに画像を渡す前に、[OpenCV](https://opencv.org)で画像の前処理を行う必要がある。
