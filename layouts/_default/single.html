@@ -28,7 +28,7 @@
     {{ if or (and (.Params.showTableOfContents | default (.Site.Params.article.showTableOfContents | default false)) (in
     .TableOfContents "<ul")) (.Site.Params.article.showRelatedPosts | default false) }} <div
       class="order-first sm:max-w-prose lg:ml-auto px-0 lg:order-last lg:max-w-xs ltr:lg:pl-8 rtl:lg:pr-8">
-      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky {{ if eq .Site.Params.header.layout " fixed" }}
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky {{ if hasPrefix .Site.Params.header.layout " fixed" }}
         lg:top-[140px] {{ else }} lg:top-10 {{ end }}">
 
         {{ if and (.Params.showTableOfContents | default (.Site.Params.article.showTableOfContents | default false)) (in
@@ -36,11 +36,16 @@
           default false }} sd {{ end }} </div>
       </div>
       {{ end }}
-      <div class="min-w-0 min-h-0 max-w-prose">
+      <div class="min-w-0 min-h-0 max-w-fit">
         {{ partial "series.html" . }}
-        {{ replace (replace .Content "、\n" "、") "。\n" "。" | emojify }}
+        <div class="max-w-prose mb-20">
+          {{ replace (replace .Content "、\n" "、") "。\n" "。" | emojify }}
+        </div>
         </br></br>
         {{ partial "series-closed.html" . }}
+        {{ partial "author.html" . }}
+        {{ partial "sharing-links.html" . }}
+        {{ partial "related.html" . }}
       </div>
 
      <script>
@@ -55,9 +60,6 @@
 
     </section>
   <footer class="pt-8 max-w-prose print:hidden">
-
-    {{ partial "author.html" . }}
-
     {{ $authorsData := .Site.Data.authors }}
     {{ $taxonomies := .Site.Taxonomies.authors }}
     {{ $baseURL := .Site.BaseURL }}
@@ -80,10 +82,6 @@
     {{ partial "author-extra.html" (dict "context" . "data" $authorData "link" $taxonomyLink) }}
     {{- end -}}
     {{ end }}
-
-    {{ partial "sharing-links.html" . }}
-
-    {{ partial "related.html" . }}
 
     {{ partial "article-pagination.html" . }}
     {{ if .Params.showComments | default (.Site.Params.article.showComments | default false) }}
