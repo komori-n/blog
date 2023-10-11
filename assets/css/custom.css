@@ -1,0 +1,3 @@
+.prose :where(h4):not(:where([class~="not-prose"], [clas~="not-prose"] *)) {
+  font-size: 1.125em;
+}
