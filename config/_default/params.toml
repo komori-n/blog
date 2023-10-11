@@ -73,7 +73,6 @@ smartTOC = true
   showTaxonomies = true
   showAuthorsBadges = false
   showWordCount = true
-  showSummary = true
   sharingLinks = [ "twitter", "linkedin", "reddit", "facebook"]
 
 [list]
