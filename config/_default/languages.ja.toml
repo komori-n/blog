@@ -17,7 +17,7 @@ title = "コウモリのちょーおんぱ"
 [author]
   name = "komori-n"
   image = "img/author.png"
-  headline = "組み込みソフトエンジニアです"
+  headline = "C++とRustがちょっとできます"
   # bio = "組み込みソフトエンジニアです"
   links = [
     { github = "https://github.com/komori-n" },
