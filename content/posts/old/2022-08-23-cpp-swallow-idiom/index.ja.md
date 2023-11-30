@@ -29,7 +29,7 @@ template <int... Indices>
 constexpr void Clear(Array& arr) noexcept {
   arr[Indices] = 0...;
   // ↑ error!
-  // パラメータパックを何もないところで展開することはできない。
+  // パラメータパックを何もないところで展開することはできない
 }
 ```
 
@@ -70,7 +70,7 @@ template <int... Indices>
 constexpr void Clear(Array& arr) noexcept {
      ConsumeValues((arr[Indices] = 0)...);
      // ↑ このコード自体は問題ないが、あまりおすすめしない
-     // 引数の評価順序が規定されていないため。
+     // 引数の評価順序が規定されていないため
 }
 ```
 
@@ -90,7 +90,7 @@ struct Anything {
 /// ```
 /// ConsumeValues({/* 式1 */, /* 式2 */, ...});
 /// ```
-/// の要領で値を虚無に捨てることができる。
+/// の要領で値を虚無に捨てることができる
 constexpr void ConsumeValues(std::initializer_list<Anything>) noexcept {}
 ````
 
