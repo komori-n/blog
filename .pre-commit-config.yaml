@@ -11,12 +11,6 @@ repos:
       - id: sort-simple-yaml
       - id: trailing-whitespace
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: 6fd1ced85fc139abd7f5ab4f3d78dab37592cd5e
-    hooks:
-      - id: prettier
-        exclude: layouts
-
   - repo: https://github.com/google/yamlfmt
     rev: v0.8.0
     hooks:
