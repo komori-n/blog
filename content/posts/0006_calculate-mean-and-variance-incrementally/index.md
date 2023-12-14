@@ -59,7 +59,7 @@ description: 丸め誤差を最小限に抑えながら平均や分散を計算�
 分散の定義より、
 
 \\begin{align}
-m\sigma.m^2 &= \sum_{i=1}^{m} (x_i - \mu_m)^2 \notag \\\\
+m\sigma_m^2 &= \sum_{i=1}^{m} (x_i - \mu_m)^2 \notag \\\\
 &= \sum_{i=1}^m x_i^2 - m\mu_m^2 \notag
 \\end{align}
 
