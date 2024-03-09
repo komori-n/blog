@@ -5,3 +5,9 @@
 .katex-display {
   overflow: hidden hidden !important;
 }
+
+/* title */
+body > div.fixed.inset-x-0.pl-\[24px\].pr-\[24px\] > div.relative.max-w-\[64rem\].ml-auto.mr-auto > div > div.flex.flex-1.items-center.justify-between > nav.flex.space-x-3 > a {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
