@@ -11,3 +11,18 @@ body > div.fixed.inset-x-0.pl-\[24px\].pr-\[24px\] > div.relative.max-w-\[64rem\
   font-size: 1.3rem;
   font-weight: 800;
 }
+
+/* listing */
+.prose :where(li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top:0.35em;
+  margin-bottom:0.35em
+}
+
+/* inline code */
+.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-weight:normal;
+  font-size: 85%;
+  padding: 0.2em 0.4em;
+  margin: 0.2em;
+  border-radius:4px;
+}
