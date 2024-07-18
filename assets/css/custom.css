@@ -22,7 +22,5 @@ body > div.fixed.inset-x-0.pl-\[24px\].pr-\[24px\] > div.relative.max-w-\[64rem\
 .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
   font-weight:normal;
   font-size: 85%;
-  padding: 0.2em 0.4em;
-  margin: 0.2em;
   border-radius:4px;
 }
