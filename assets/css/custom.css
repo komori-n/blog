@@ -18,9 +18,37 @@ body > div.fixed.inset-x-0.pl-\[24px\].pr-\[24px\] > div.relative.max-w-\[64rem\
   margin-bottom:0.35em
 }
 
-/* inline code */
-.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
-  font-weight:normal;
+/* inline code (light mode only) */
+html:not(.dark) .prose :where(code:not(pre code)):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-weight: normal;
   font-size: 85%;
-  border-radius:4px;
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+  background-color: rgba(var(--color-neutral-100), 1);
+}
+
+/* dark mode code block background */
+.dark .prose .highlight pre,
+.dark .prose .highlight pre > code,
+.dark .prose .chroma,
+.dark .prose .chroma:not(:is(table *)) > code {
+  background-color: rgba(var(--color-neutral-700), 1) !important;
+}
+
+/* dark mode keyword color */
+.dark .prose .chroma .k,
+.dark .prose .chroma .kc,
+.dark .prose .chroma .kd,
+.dark .prose .chroma .kn,
+.dark .prose .chroma .kp,
+.dark .prose .chroma .kr,
+.dark .prose .chroma .kt,
+.dark .prose .chroma .nd,
+.dark .prose .chroma .nf,
+.dark .prose .chroma .fm,
+.dark .prose .chroma .nn,
+.dark .prose .chroma .nc,
+.dark .prose .chroma .o,
+.dark .prose .chroma .ow {
+  color: rgba(var(--color-primary-300), 1) !important;
 }

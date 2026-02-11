@@ -2,6 +2,7 @@ languageCode = "ja-jp"
 languageName = "Japanese"
 weight = 1
 title = "コウモリのちょーおんぱ"
+hasCJKLanguage = true
 
 [params]
   displayName = "Japanese"
@@ -14,7 +15,7 @@ title = "コウモリのちょーおんぱ"
   copyright = "Copyright © 2020-{ year } コウモリのちょーおんぱ All Rights Reserved."
   keywords = ["C言語", "C++", "Rust", "詰将棋", "KomoringHeights"]
 
-[author]
+[params.author]
   name = "komori-n"
   image = "img/author.png"
   headline = "C++とRustがちょっとできます"
