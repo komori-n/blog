@@ -1,6 +1,7 @@
 /public/
 /resources/_gen
 .vscode/
+.cache/
 tmp/
 /old/
 __pycache__/
