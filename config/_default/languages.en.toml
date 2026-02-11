@@ -13,7 +13,7 @@ title = "komori-n's ULTRAsound"
   description = "A personal memo about C/C++/Rust"
   copyright = "Copyright © 2020-{ year } komori-n's ULTRAsound All Rights Reserved."
 
-[author]
+[params.author]
   name = "komori-n"
   image = "img/author.png"
   headline = "Embedded software engineer"

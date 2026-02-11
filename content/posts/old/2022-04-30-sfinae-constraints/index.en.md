@@ -11,7 +11,6 @@ keywords:
   - Constraints
   - enable_if
   - nullptr
-keywords:
 title: "`Constraints` improves readability of SFINAE code"
 relpermalink: en/blog/sfinae-constraints/
 url: blog/sfinae-constraints/

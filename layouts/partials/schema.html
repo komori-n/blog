@@ -1,3 +1,4 @@
+{{ $authorName := .Site.Params.Author.name | default .Site.Title }}
 {{ if .IsHome -}}
   <script type="application/ld+json">
   {
@@ -11,7 +12,7 @@
     {{ with .Site.Params.keywords }}"keywords": {{ . }},{{ end }}
     "publisher" : {
       "@type": "Person",
-      "name": "{{ .Site.Author.name | safeJS }}"
+      "name": "{{ $authorName | safeJS }}"
     }
   }
   </script>
@@ -30,7 +31,7 @@
     "url" : "{{ .Permalink }}",
     "author" : {
       "@type": "Person",
-      "name": "{{ .Site.Author.name | safeJS }}"
+      "name": "{{ $authorName | safeJS }}"
     },
     {{ with .PublishDate }}"copyrightYear": "{{ .Format "2006" }}",{{ end }}
     {{ with .Date }}"dateCreated": "{{ .Format $iso8601 }}",{{ end }}

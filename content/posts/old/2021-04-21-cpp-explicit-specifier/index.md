@@ -74,7 +74,7 @@ Test fuga(void) {
 }
 ```
 
-有名なCoding Styleのひとつである [Google Coding Style](<http://Google C++ Style Guide>) では、引数が1変数のコンストラクタ（コピーコンストラクタ、ムーブコンストラクタ以外）には必ず `excplit` を付与するルールになっている。
+有名なCoding Styleのひとつである [Google Coding Style](https://google.github.io/styleguide/cppguide.html) では、引数が1変数のコンストラクタ（コピーコンストラクタ、ムーブコンストラクタ以外）には必ず `excplit` を付与するルールになっている。
 
 ## c++11
 
@@ -112,7 +112,7 @@ int main() {
 }
 ```
 
-c++11以降で型変換演算子を定義する場合、よっぽど特別な理由がない限りは必ず `explicit` を付与すべきである。上述の [Google Coding Style](http://google%20c++%20style%20guide/) でも、型変換演算子を独自定義する場合は必ず `explicit` 指定するルールが記載されている。
+c++11以降で型変換演算子を定義する場合、よっぽど特別な理由がない限りは必ず `explicit` を付与すべきである。上述の [Google Coding Style](https://google.github.io/styleguide/cppguide.html) でも、型変換演算子を独自定義する場合は必ず `explicit` 指定するルールが記載されている。
 
 ### 2個以上引数を取るコンストラクタ
 
@@ -144,7 +144,7 @@ ina main() {
 
 機能としては1変数の場合と同様で、コピー初期化や暗黙の型変換を封じる効果がある。
 
-2個以上の引数を取るコンストラクタについて `explicit` を付与するかどうかは個人の感覚に依るところが大きいと思う。実際、[Google Coding Style](http://google%20c++%20style%20guide/) では特に規定がされていない。判断基準は「`return {a, b}` と書けたほうがよいか？」ということだけである。
+2個以上の引数を取るコンストラクタについて `explicit` を付与するかどうかは個人の感覚に依るところが大きいと思う。実際、[Google Coding Style](https://google.github.io/styleguide/cppguide.html) では特に規定がされていない。判断基準は「`return {a, b}` と書けたほうがよいか？」ということだけである。
 
 ```cpp
 Test hoge() {
