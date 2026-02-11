@@ -10,7 +10,6 @@ This is a personal blog site repository built with Hugo.
 - `layouts/` and `layouts/shortcodes/`: template and shortcode overrides.
 - `assets/`: processed assets (for Hugo Pipes).
 - `static/`: files copied to the output as-is.
-- `py/`: small Python helper scripts.
 - `tools/`: utility shell scripts (for example link checks).
 
 Generated output lives in `public/` and `resources/_gen/`; do not edit generated files manually.
