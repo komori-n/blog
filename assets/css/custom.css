@@ -52,3 +52,10 @@ html:not(.dark) .prose :where(code:not(pre code)):not(:where([class~="not-prose"
 .dark .prose .chroma .ow {
   color: rgba(var(--color-primary-300), 1) !important;
 }
+
+/* Widen article text column when TOC is shown on wide screens */
+@media (min-width: 1024px) {
+  article section.prose > .order-first + .min-w-0.min-h-0.max-w-fit .article-content.max-w-prose {
+    max-width: 78ch;
+  }
+}
