@@ -1,6 +1,6 @@
 # Blowfish Override Catalog
 
-最終更新: 2026-02-11  
+最終更新: 2026-02-11
 対象テーマ: `themes/blowfish` (`v2.97.0`)
 
 このドキュメントは、次回 Blowfish 更新時に衝突しやすい「ローカル override」を把握するためのメモです。
