@@ -5,6 +5,10 @@
 [goldmark.renderer]
   unsafe = true
 
+[goldmark.extensions.cjk]
+  enable = true
+  eastAsianLineBreaks = true
+
 [highlight]
   noClasses = false
 
