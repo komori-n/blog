@@ -53,9 +53,18 @@ html:not(.dark) .prose :where(code:not(pre code)):not(:where([class~="not-prose"
   color: rgba(var(--color-primary-300), 1) !important;
 }
 
-/* Widen article text column when TOC is shown on wide screens */
+/* Article/TOC width tuning on wide screens */
 @media (min-width: 1024px) {
-  article section.prose > .order-first + .min-w-0.min-h-0.max-w-fit .article-content.max-w-prose {
-    max-width: 78ch;
+  /* Widen the TOC column itself (single article pages).
+     This is more stable than enlarging #TOCView > div directly. */
+  article section.prose > .order-first {
+    flex: 0 0 19rem; /* 308px */
+    max-width: 19rem;
+  }
+
+  /* #single_header.max-w-prose, */
+  article .article-content.max-w-prose,
+  article > footer.max-w-prose {
+    max-width: 70ch;
   }
 }
