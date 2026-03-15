@@ -23,11 +23,10 @@
 {{ $showMoreLink := delimit (slice $baseURL $showMoreLinkDest) "/" }}
 {{ $showMoreLink = replace $showMoreLink "//" "/" }}
 <div class="mt-10 flex justify-center">
-  <a href="{{ $showMoreLink }}">
-    <button
-      class="bg-transparent hover:text-primary-500 prose dark:prose-invert font-semibold hover:text-white py-2 px-4 border border-primary-500 hover:border-transparent rounded">
-      {{ i18n "recent.show_more" | markdownify | emojify }}
-    </button>
+  <a
+    href="{{ $showMoreLink }}"
+    class="recent-more-link inline-flex items-center rounded px-4 py-2 font-semibold">
+    {{ i18n "recent.show_more" | markdownify | emojify }}
   </a>
 </div>
 {{ end }}

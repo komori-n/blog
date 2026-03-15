@@ -18,13 +18,52 @@ body > div.fixed.inset-x-0.pl-\[24px\].pr-\[24px\] > div.relative.max-w-\[64rem\
   margin-bottom:0.35em
 }
 
+/* prose links */
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: rgba(var(--color-primary-600), 1);
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-decoration-color: rgba(var(--color-primary-300), 0.95);
+  text-underline-offset: 0.18em;
+}
+
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+  color: rgba(var(--color-primary-700), 1);
+  text-decoration-color: rgba(var(--color-primary-500), 1);
+}
+
+.dark .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: rgba(var(--color-primary-300), 1);
+  text-decoration-color: rgba(var(--color-primary-500), 0.95);
+}
+
+.dark .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+  color: rgba(var(--color-primary-200), 1);
+  text-decoration-color: rgba(var(--color-primary-300), 1);
+}
+
 /* inline code (light mode only) */
 html:not(.dark) .prose :where(code:not(pre code)):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   font-weight: normal;
   font-size: 85%;
   border-radius: 4px;
   padding: 0.15em 0.35em;
-  background-color: rgba(var(--color-neutral-100), 1);
+  color: rgba(var(--color-primary-700), 1);
+  background-color: rgba(var(--color-primary-50), 1);
+  border: 1px solid rgba(var(--color-primary-200), 1);
+}
+
+/* inline code (dark mode only) */
+.dark .prose :where(code:not(pre code)):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: rgba(var(--color-primary-300), 1);
+  border-radius: 4px;
+  padding: 0.15em 0.35em;
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--color-primary-900), 1) 24%,
+    rgba(var(--color-neutral-800), 1)
+  );
+  border: 1px solid rgba(var(--color-primary-800), 1);
 }
 
 /* dark mode code block background */
@@ -51,6 +90,157 @@ html:not(.dark) .prose :where(code:not(pre code)):not(:where([class~="not-prose"
 .dark .prose .chroma .o,
 .dark .prose .chroma .ow {
   color: rgba(var(--color-primary-300), 1) !important;
+}
+
+/* accent surfaces */
+.meta-badge {
+  background-color: rgba(var(--color-primary-50), 0.65);
+}
+
+.dark .meta-badge {
+  color: rgba(var(--color-primary-200), 1) !important;
+  border-color: rgba(var(--color-primary-500), 1) !important;
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--color-primary-900), 1) 42%,
+    transparent
+  );
+}
+
+.heading-anchor-link {
+  color: rgba(var(--color-secondary-400), 1);
+  transition: color 150ms ease;
+}
+
+.heading-anchor-link:hover {
+  color: rgba(var(--color-secondary-500), 1);
+}
+
+.dark .heading-anchor-link {
+  color: rgba(var(--color-secondary-400), 1);
+}
+
+.dark .heading-anchor-link:hover {
+  color: rgba(var(--color-secondary-300), 1);
+}
+
+.recent-more-link {
+  border: 1px solid rgba(var(--color-secondary-500), 1);
+  background-color: rgba(var(--color-secondary-50), 1);
+  color: rgba(var(--color-secondary-700), 1);
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.recent-more-link:hover {
+  background-color: rgba(var(--color-secondary-500), 1);
+  border-color: rgba(var(--color-secondary-500), 1);
+  color: rgba(var(--color-neutral), 1);
+}
+
+.dark .recent-more-link {
+  border-color: rgba(var(--color-secondary-400), 1);
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--color-secondary-900), 1) 28%,
+    transparent
+  );
+  color: rgba(var(--color-secondary-200), 1);
+}
+
+.dark .recent-more-link:hover {
+  background-color: rgba(var(--color-secondary-400), 1);
+  border-color: rgba(var(--color-secondary-400), 1);
+  color: rgba(var(--color-neutral-900), 1);
+}
+
+.copy-button:hover,
+.copy-button:focus,
+.copy-button:active,
+.copy-button:active:hover {
+  background-color: rgba(var(--color-secondary-100), 1) !important;
+  color: rgba(var(--color-secondary-800), 1);
+}
+
+.dark .copy-button:hover,
+.dark .copy-button:focus,
+.dark .copy-button:active,
+.dark .copy-button:active:hover {
+  background-color: rgba(var(--color-secondary-700), 1) !important;
+  color: rgba(var(--color-neutral-50), 1);
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  border-inline-start-color: rgba(var(--color-secondary-500), 1);
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--color-secondary-50), 1) 80%,
+    transparent
+  );
+  border-radius: 0.75rem;
+  padding-block: 0.85rem;
+  padding-inline-end: 1rem;
+}
+
+.dark .prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  border-inline-start-color: rgba(var(--color-secondary-400), 1);
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--color-secondary-900), 1) 22%,
+    transparent
+  );
+}
+
+.toc a {
+  color: rgba(var(--color-neutral-700), 1);
+  text-decoration: none;
+  font-weight: 400;
+  border-inline-start: 2px solid transparent;
+  padding-inline-start: 0.65rem;
+  margin-inline-start: -0.65rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.dark .toc a {
+  color: rgba(var(--color-neutral-300), 1);
+}
+
+.toc a:hover {
+  color: rgba(var(--color-secondary-700), 1);
+  background-color: rgba(var(--color-secondary-50), 0.9);
+}
+
+.dark .toc a:hover {
+  color: rgba(var(--color-secondary-200), 1);
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--color-secondary-900), 1) 24%,
+    transparent
+  );
+}
+
+#TableOfContents a.active {
+  color: rgba(var(--color-secondary-700), 1);
+  font-weight: 600;
+  text-decoration: none;
+  border-inline-start-color: rgba(var(--color-secondary-500), 1);
+  background-color: rgba(var(--color-secondary-50), 1);
+}
+
+.dark #TableOfContents a.active {
+  color: rgba(var(--color-secondary-200), 1);
+  border-inline-start-color: rgba(var(--color-secondary-400), 1);
+  background-color: color-mix(
+    in srgb,
+    rgba(var(--color-secondary-900), 1) 30%,
+    transparent
+  );
 }
 
 /* Article/TOC width tuning on wide screens */
