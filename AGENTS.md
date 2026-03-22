@@ -4,7 +4,8 @@ This is a personal blog site repository built with Hugo.
 
 ## Structure
 
-- `content/posts/<####_slug>/index.md`: post content (page bundle style).
+- `content/posts/<####_slug>/index.md`: post content for single-language posts (page bundle style).
+- `content/posts/<####_slug>/index.<lang>.md`: post content for multilingual posts. In current practice, use `index.ja.md` and `index.en.md` as a pair.
 - `content/posts/<####_slug>/feature.png` (and related images): post assets.
 - `config/_default/`: Hugo configuration.
 - `layouts/` and `layouts/shortcodes/`: template and shortcode overrides.
@@ -26,8 +27,10 @@ Note: this site uses a GitHub shortcode that fetches repository metadata at buil
 ## Coding Style & Naming Conventions
 
 - Use page bundles for posts: `content/posts/0007_example-post/index.md`.
+- For multilingual posts, follow the existing `index.ja.md` / `index.en.md` naming convention rather than mixing `index.md` with localized variants.
 - Keep slugs kebab-case; keep numeric prefixes zero-padded.
 - Write front matter in YAML and keep key naming consistent (`title`, `date`, `tags`, `keywords`, `description`, `url`).
+- Commit binary assets such as images without executable bits. Normalize file mode to non-executable before committing when needed.
 - Respect pre-commit formatting rules: YAML normalization (`yamlfmt`), no trailing whitespace, and consistent line endings.
 
 ## Testing Guidelines
